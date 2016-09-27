@@ -3,8 +3,6 @@
     class ProcessLines
     {
         private string[] editedLines;
-        private char[] delimiters;
-        private string[] value;
 
         // Overloaded constructor
         public ProcessLines(string[] inLines)
@@ -25,12 +23,6 @@
                 editedLines[i] = inLines[i].Replace("\"", string.Empty);
                 System.Console.WriteLine(editedLines[i]);
             }
-        }
-
-        // Split values for each line
-        public string[] splitValues()
-        {
-
         }
     }
 }
