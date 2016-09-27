@@ -1,0 +1,44 @@
+﻿using System.IO;
+
+namespace FileReadWrite
+{
+    class ReadEditWriteLines
+    {
+        static void Main(string[] args)
+        {
+            // Look for file & read as string
+            //string stText = System.IO.File.ReadAllText(@"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\rawData.csv");
+
+            //// Display file contents
+            //System.Console.WriteLine("Data from \"CSV\" file:\n{0}", stText + "\n");
+
+            // Read each line of the file into a string array
+            string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
+            string csvFileName = "rawData.csv"; //string csvFileName = Path.GetFileName(csvPath);
+            string csvNewFileName = "newData.csv";
+            string[] lines = System.IO.File.ReadAllLines(csvPath + csvFileName);
+            string[] editedLines = new string[lines.Length];
+
+            // Display original quoted lines
+            System.Console.WriteLine("Input from: {0}\n", csvFileName);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                System.Console.WriteLine(lines[i]);
+            }
+
+            System.Console.WriteLine("\n...Process: Delete quotation...\n");
+
+            // Display new lines without quotation
+            for (int i = 0; i < lines.Length; i++)
+            {
+                editedLines[i] = lines[i].Replace("\"", string.Empty);
+                System.Console.WriteLine(editedLines[i]);
+            }
+            System.Console.WriteLine();
+            System.Console.WriteLine("Lines written to ouput file: {0}\n", csvNewFileName);
+
+            // Create new file and write lines
+            System.IO.File.WriteAllLines("C:\\Users\\FISH-1\\Documents\\MS_Workspace\\FileReadWrite\\FileReadWrite\\Assets\\" + csvNewFileName, editedLines);
+        }
+    }
+}
