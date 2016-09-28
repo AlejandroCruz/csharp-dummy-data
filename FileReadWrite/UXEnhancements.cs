@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FileReadWrite
@@ -16,29 +13,23 @@ namespace FileReadWrite
         public UXEnhancements()
         {
             time = 2000;
-            addDelay();
+            text = null;
+            loop = 0;
         }
         public UXEnhancements(int inTime)
         {
             time = inTime;
-            addDelay();
-        }
-        public UXEnhancements(int inTime, string inText)
-        {
-            time = inTime;
-            text = inText;
-            addDelay();
-        }
-        public UXEnhancements(int inTime, string inText, int repeat)
-        {
-            time = inTime;
-            text = inText;
-            loop = repeat;
-            addDelay();
+            text = null;
+            loop = 0;
+            addDelay(time, text, loop);
         }
 
-        public void addDelay()
+        public void addDelay(int inTime, string inText, int inLoop)
         {
+            time = inTime;
+            text = inText;
+            loop = inLoop;
+
             if (!String.IsNullOrEmpty(text) && loop > 1)
             {
                 int i = 0;

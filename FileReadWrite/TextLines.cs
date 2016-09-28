@@ -23,14 +23,16 @@ namespace FileReadWrite
             }
 
             // User experience enhancement: add delay time and message.
-            // - Constructor takes 0 to 3 values
-            // - Values & order: time, message, repeat
+            // - Constructor takes optional time
+            // - Method 'addDelay' parameters: inTime, inText, inLoop
             System.Console.WriteLine("\n>>> Processing: Delete quotation");
-            UXEnhancements uxEnhance = new UXEnhancements(1000, "... ", 3);
+            UXEnhancements uxEnhance = new UXEnhancements();
+            uxEnhance.addDelay(2000, "... ", 3);
             System.Console.WriteLine("\n");
-            // Actual deletion
-            string[]  processedLines = linesData.deleteQuotes(textLines);
 
+            // Delete characters
+            string aChar= "\"";
+            string[]  processedLines = linesData.deleteChars(textLines, aChar);
             System.Console.WriteLine("\nOuput file: {0}\n", csvNewFileName);
 
             // Show split values from each line
@@ -46,8 +48,7 @@ namespace FileReadWrite
             updateVal.updateUniqueValue(linesData);
 
             // Wait before exit in debug mode
-            Task.Delay(1000).Wait(); System.Console.Write("\nExit... ");
-            Task.Delay(2000).Wait();
+            uxEnhance.addDelay(1000, "\nExit... ", 1);
         }
     }
 }

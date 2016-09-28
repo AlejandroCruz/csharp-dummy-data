@@ -30,11 +30,13 @@ namespace FileReadWrite
         }
 
         // Display new lines to console without quotation
-        public string[] deleteQuotes(string[] inLines)
+        public string[] deleteChars(string[] inLines, string deleteC)
         {
+            string c = deleteC;
+
             for (int i = 0; i < editedLines.Length; i++)
             {
-                editedLines[i] = inLines[i].Replace("\"", string.Empty);
+                editedLines[i] = inLines[i].Replace(c, string.Empty);
                 System.Console.WriteLine(editedLines[i]);
             }
             return editedLines;
