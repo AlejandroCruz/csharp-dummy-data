@@ -10,6 +10,7 @@ namespace FileReadWrite
             string csvFileName = "rawData.csv";
             string csvNewFileName = "newData.csv";
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
+            char[] valueDelimiters = { ',' };
             string[] textLines = System.IO.File.ReadAllLines(csvPath + csvFileName);
             ProcessLines rawData = new ProcessLines(textLines);
             CreateTextFile newCSV = new CreateTextFile(csvNewFileName);
@@ -27,13 +28,16 @@ namespace FileReadWrite
             Task.Delay(1500).Wait(); System.Console.Write("... ");
             Task.Delay(1500).Wait(); System.Console.Write("...");
             Task.Delay(1500).Wait(); System.Console.WriteLine("\n");
-
-            rawData.deleteQuotes(textLines);
+            // Actual deletion
+            string[]  processedLines = rawData.deleteQuotes(textLines);
 
             System.Console.WriteLine("\nOuput file: {0}\n", csvNewFileName);
 
+            // Show split values from each line
+            rawData.splitValues(processedLines, valueDelimiters);
+
             // Create new file and write lines
-            string[] processedLines = rawData.TextLines;
+            //processedLines = rawData.TextLines;
             newCSV.createFile(csvPath, processedLines);
 
             // Wait before exit in debug mode
