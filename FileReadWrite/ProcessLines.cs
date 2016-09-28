@@ -1,4 +1,6 @@
-﻿namespace FileReadWrite
+﻿using System.Threading.Tasks;
+
+namespace FileReadWrite
 {
     class ProcessLines
     {
@@ -6,7 +8,9 @@
         private char[] delimiters;
         private string[] values;
 
-        // Overloaded constructor
+        // Constructors
+        public ProcessLines()
+        { }
         public ProcessLines(string[] inLines)
         {
             editedLines = new string[inLines.Length];
@@ -15,6 +19,14 @@
         public string[] TextLines
         {
             get { return editedLines; }
+        }
+        public string getValue(int index)
+        {
+            return values[index];
+        }
+        public void setValue(int index, string newVal)
+        {
+            values[index] = newVal;
         }
 
         // Display new lines to console without quotation
@@ -36,13 +48,16 @@
                 delimiters = inDelimiters;
                 values = inLines[i].Split(delimiters);
                 ///TEST
-                System.Console.WriteLine("\nNumber of values: {0}", values.Length);
-                foreach(string s in values)
+                System.Console.WriteLine("\nNumber of values in each line: {0}", values.Length);
+                Task.Delay(1000).Wait();
+                int displayIndex = 1;
+                foreach (string s in values)
                 {
-                    System.Console.WriteLine(s);
+                    System.Console.WriteLine(displayIndex++ + ". " + s);
                 }
             }
-            
+
         }
+
     }
 }

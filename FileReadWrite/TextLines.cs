@@ -12,7 +12,7 @@ namespace FileReadWrite
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             char[] valueDelimiters = { ',' };
             string[] textLines = System.IO.File.ReadAllLines(csvPath + csvFileName);
-            ProcessLines rawData = new ProcessLines(textLines);
+            ProcessLines linesData = new ProcessLines(textLines);
             CreateTextFile newCSV = new CreateTextFile(csvNewFileName);
 
             // Display original quoted lines
@@ -29,16 +29,21 @@ namespace FileReadWrite
             Task.Delay(1500).Wait(); System.Console.Write("...");
             Task.Delay(1500).Wait(); System.Console.WriteLine("\n");
             // Actual deletion
-            string[]  processedLines = rawData.deleteQuotes(textLines);
+            string[]  processedLines = linesData.deleteQuotes(textLines);
 
             System.Console.WriteLine("\nOuput file: {0}\n", csvNewFileName);
 
             // Show split values from each line
-            rawData.splitValues(processedLines, valueDelimiters);
+            linesData.splitValues(processedLines, valueDelimiters);
 
             // Create new file and write lines
-            //processedLines = rawData.TextLines;
             newCSV.createFile(csvPath, processedLines);
+
+            // Display updated value
+            int elementIndex = 1;
+            string updateString = "00000000";            
+            UpdateLineValues updateVal = new UpdateLineValues(elementIndex, updateString);
+            updateVal.updateUniqueValue(linesData);
 
             // Wait before exit in debug mode
             Task.Delay(1000).Wait(); System.Console.Write("\nExit... ");
