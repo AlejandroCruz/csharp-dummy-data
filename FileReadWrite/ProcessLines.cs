@@ -6,7 +6,7 @@ namespace FileReadWrite
     {
         private string[] editedLines;
         private char[] delimiters;
-        private string[] values;
+        private string[][] values;
 
         // Constructors
         public ProcessLines()
