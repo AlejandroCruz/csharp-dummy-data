@@ -6,11 +6,11 @@ namespace FileReadWrite
     {
         static void Main(string[] args)
         {
-            // Read each line of the file into a string array
             string csvFileName = "rawData.csv";
             string csvNewFileName = "newData.csv";
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             char[] valueDelimiters = { ',' };
+            
             string[] textLines = System.IO.File.ReadAllLines(csvPath + csvFileName);
             ProcessLines linesData = new ProcessLines(textLines);
             CreateTextFile newCSV = new CreateTextFile(csvNewFileName);
@@ -22,12 +22,12 @@ namespace FileReadWrite
                 System.Console.WriteLine(textLines[i]);
             }
 
-            // Pure nonesense... but kind of cool
+            // User experience enhancement: add delay time and message.
+            // - Constructor takes 0 to 3 values
+            // - Values & order: time, message, repeat
             System.Console.WriteLine("\n>>> Processing: Delete quotation");
-            Task.Delay(1500).Wait(); System.Console.Write("... ");
-            Task.Delay(1500).Wait(); System.Console.Write("... ");
-            Task.Delay(1500).Wait(); System.Console.Write("...");
-            Task.Delay(1500).Wait(); System.Console.WriteLine("\n");
+            UXEnhancements uxEnhance = new UXEnhancements(1000, "... ", 3);
+            System.Console.WriteLine("\n");
             // Actual deletion
             string[]  processedLines = linesData.deleteQuotes(textLines);
 

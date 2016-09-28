@@ -48,13 +48,11 @@
     <Compile Include="TextLines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateLineValues.cs" />
+    <Compile Include="UXEnhancements.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Assets\rawData.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TextLines.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
