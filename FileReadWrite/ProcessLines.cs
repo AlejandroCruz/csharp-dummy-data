@@ -16,20 +16,25 @@ namespace FileReadWrite
             editedLines = new string[inLines.Length];
         }
 
+        // Accessors
         public string[] TextLines
         {
-            get { return editedLines; }
+            get { return editedLines; }    // All lines
         }
-        public string getValue(int index)
+        public string[] getValues()
         {
-            return values[index];
+            return values;                 // All values in line
+        }
+        public string getValues(int index)
+        {
+            return values[index];          // Single value within line
         }
         public void setValue(int index, string newVal)
         {
             values[index] = newVal;
         }
 
-        // Display new lines to console without quotation
+        // Delete quotation
         public string[] deleteChars(string[] inLines, string deleteC)
         {
             string c = deleteC;
@@ -37,27 +42,19 @@ namespace FileReadWrite
             for (int i = 0; i < editedLines.Length; i++)
             {
                 editedLines[i] = inLines[i].Replace(c, string.Empty);
-                System.Console.WriteLine(editedLines[i]);
             }
             return editedLines;
         }
 
         // Split values for each line
-        public void splitValues(string[] inLines, char[] inDelimiters)
+        public string[] splitValues(string[] inLines, char[] inDelimiters)
         {
             for (int i = 0; i < inLines.Length; i++)
             {
                 delimiters = inDelimiters;
                 values = inLines[i].Split(delimiters);
-                ///TEST
-                System.Console.WriteLine("\nNumber of values in each line: {0}", values.Length);
-                Task.Delay(1000).Wait();
-                int displayIndex = 1;
-                foreach (string s in values)
-                {
-                    System.Console.WriteLine(displayIndex++ + ". " + s);
-                }
             }
+            return values;
 
         }
 

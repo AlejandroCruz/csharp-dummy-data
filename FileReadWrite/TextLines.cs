@@ -1,4 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿/*
+ * Console application: FileReadWrite
+ * Date: 9/2016
+ * Description: Training purpose application to learn I/O process in C#
+ *  The application reads lines of text from file in specified dir. path
+ *  and displays to console. It deletes special characters and rewrites
+ *  the data to new file.
+ *  Added delay functions are for end user experience.
+ */
 
 namespace FileReadWrite
 {
@@ -22,29 +30,44 @@ namespace FileReadWrite
                 System.Console.WriteLine(textLines[i]);
             }
 
-            // User experience enhancement: add delay time and message.
-            // - Constructor takes optional time
+            // UX enhancement:
+            // - Deafult constructor takes optional time argument
             // - Method 'addDelay' parameters: inTime, inText, inLoop
             System.Console.WriteLine("\n>>> Processing: Delete quotation");
             UXEnhancements uxEnhance = new UXEnhancements();
-            uxEnhance.addDelay(2000, "... ", 3);
+            uxEnhance.addDelay(1500, ". ", 3);
             System.Console.WriteLine("\n");
 
-            // Delete characters
+            // Delete characters & display
             string aChar= "\"";
             string[]  processedLines = linesData.deleteChars(textLines, aChar);
+            for (int i = 0; i < processedLines.Length; i++)
+            {
+                System.Console.WriteLine(processedLines[i]);
+            }
             System.Console.WriteLine("\nOuput file: {0}\n", csvNewFileName);
 
             // Show split values from each line
-            linesData.splitValues(processedLines, valueDelimiters);
+            string[] splittedValues = linesData.splitValues(processedLines, valueDelimiters);
+            ///TEST: Confirm split values by display
+            System.Console.WriteLine("\nNumber of values in each line: {0}, {1}", splittedValues[0].Length, splittedValues[1].Length);
+            uxEnhance.addDelay(1000, "", 1);
+            int numberedList = 1;
+            for (int i = 0; i < processedLines.Length; i++)
+            {
+                foreach(string s in splittedValues)
+                {
+                    System.Console.WriteLine(numberedList++ + ". " + s);
+                }
+            }
 
-            // Create new file and write lines
+            // Create new file with processed lines
             newCSV.createFile(csvPath, processedLines);
 
             // Display updated value
             int elementIndex = 1;
-            string updateString = "00000000";            
-            UpdateLineValues updateVal = new UpdateLineValues(elementIndex, updateString);
+            string newStringVal = "00000000";            
+            UpdateLineValues updateVal = new UpdateLineValues(elementIndex, newStringVal);
             updateVal.updateUniqueValue(linesData);
 
             // Wait before exit in debug mode

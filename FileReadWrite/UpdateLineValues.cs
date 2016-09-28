@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace FileReadWrite
 {
@@ -19,14 +17,14 @@ namespace FileReadWrite
         // Update
         public void updateUniqueValue(ProcessLines inLinesData)
         {
-            oldString = inLinesData.getValue(index);
+            oldString = inLinesData.getValues(index);
             inLinesData.setValue(index, newString);
 
             System.Console.WriteLine();
             System.Console.WriteLine("\n>>> Processing: Update value");
             Task.Delay(2000).Wait();
             System.Console.WriteLine();
-            System.Console.WriteLine("\nOld string value \"{0}\" updated to \"{1}\"", oldString, inLinesData.getValue(index));
+            System.Console.WriteLine("\nOld string value \"{0}\" updated to \"{1}\"", oldString, inLinesData.getValues(index));
         }
     }
 }
