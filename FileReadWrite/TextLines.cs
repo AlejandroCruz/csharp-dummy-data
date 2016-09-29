@@ -30,12 +30,14 @@ namespace FileReadWrite
                 System.Console.WriteLine(textLines[i]);
             }
 
-            // UX enhancement:
-            // - Deafult constructor takes optional time argument
-            // - Method 'addDelay' parameters: inTime, inText, inLoop
+            /*
+             * UX enhancement:
+             * - Deafult constructor takes optional time argument
+             * - Method 'addDelay' parameters: inTime, inText, inLoop
+             */
             System.Console.WriteLine("\n>>> Processing: Delete quotation");
             UXEnhancements uxEnhance = new UXEnhancements();
-            uxEnhance.addDelay(1500, ". ", 3);
+            uxEnhance.addDelay(1000, "... ", 1);
             System.Console.WriteLine("\n");
 
             // Delete characters & display
@@ -46,6 +48,9 @@ namespace FileReadWrite
                 System.Console.WriteLine(processedLines[i]);
             }
             System.Console.WriteLine("\nOuput file: {0}\n", csvNewFileName);
+
+            // Split lines into separate objects
+
 
             // Show split values from each line
             string[] splittedValues = linesData.splitValues(processedLines, valueDelimiters);

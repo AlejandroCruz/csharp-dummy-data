@@ -6,7 +6,11 @@ namespace FileReadWrite
     {
         private string[] editedLines;
         private char[] delimiters;
-        private string[][] values;
+        private string[][] uniqueRow;
+
+        private string[] values;
+        private string[] fieldLine;
+        private string[][] valueLines;
 
         // Constructors
         public ProcessLines()
@@ -46,16 +50,14 @@ namespace FileReadWrite
             return editedLines;
         }
 
-        // Split values for each line
+        // Split values for field-line and value-lines
         public string[] splitValues(string[] inLines, char[] inDelimiters)
         {
             for (int i = 0; i < inLines.Length; i++)
             {
                 delimiters = inDelimiters;
-                values = inLines[i].Split(delimiters);
+                uniqueRow[i] = inLines[i].Split(delimiters);
             }
-            return values;
-
         }
 
     }
