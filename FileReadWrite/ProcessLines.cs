@@ -1,16 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FileReadWrite
 {
     class ProcessLines
     {
         private string[] editedLines;
-        private char[] delimiters;
-        private string[][] uniqueRow;
-
-        private string[] values;
-        private string[] fieldLine;
-        private string[][] valueLines;
+        private string[][] tabularRow;
 
         // Constructors
         public ProcessLines()
@@ -23,19 +19,11 @@ namespace FileReadWrite
         // Accessors
         public string[] TextLines
         {
-            get { return editedLines; }    // All lines
+            get { return editedLines; }
         }
-        public string[] getValues()
+        public string[][] TabularRow
         {
-            return values;                 // All values in line
-        }
-        public string getValues(int index)
-        {
-            return values[index];          // Single value within line
-        }
-        public void setValue(int index, string newVal)
-        {
-            values[index] = newVal;
+            get { return tabularRow; }
         }
 
         // Delete quotation
@@ -50,15 +38,19 @@ namespace FileReadWrite
             return editedLines;
         }
 
-        // Split values for field-line and value-lines
-        public string[] splitValues(string[] inLines, char[] inDelimiters)
+        // Split values for field-lines
+        public void splitValues(string[] inLines, char inDelimiters)
         {
-            for (int i = 0; i < inLines.Length; i++)
+            string[] values;
+            char delimiters = inDelimiters;
+            tabularRow = new string[inLines.Length][];
+
+            for (int i = 0; i < tabularRow.Length; i++)
             {
-                delimiters = inDelimiters;
-                uniqueRow[i] = inLines[i].Split(delimiters);
+                values = inLines[i].Split(delimiters);
+                tabularRow[i] = values;
             }
         }
 
-    }
+    } // END Class
 }

@@ -24,6 +24,11 @@ namespace FileReadWrite
             addDelay(time, text, loop);
         }
 
+        public void addDelay()
+        {
+            Task.Delay(time).Wait();
+        }
+
         public void addDelay(int inTime, string inText, int inLoop)
         {
             time = inTime;

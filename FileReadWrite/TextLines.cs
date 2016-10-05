@@ -17,9 +17,9 @@ namespace FileReadWrite
             string csvFileName = "rawData.csv";
             string csvNewFileName = "newData.csv";
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
-            char[] valueDelimiters = { ',' };
-            
             string[] textLines = System.IO.File.ReadAllLines(csvPath + csvFileName);
+            char valueDelimiters = ',';
+
             ProcessLines linesData = new ProcessLines(textLines);
             CreateTextFile newCSV = new CreateTextFile(csvNewFileName);
 
@@ -36,8 +36,8 @@ namespace FileReadWrite
              * - Method 'addDelay' parameters: inTime, inText, inLoop
              */
             System.Console.WriteLine("\n>>> Processing: Delete quotation");
-            UXEnhancements uxEnhance = new UXEnhancements();
-            uxEnhance.addDelay(1000, "... ", 1);
+            UXEnhancements uxEnhance1 = new UXEnhancements();
+            uxEnhance1.addDelay(1000, "... ", 1);
             System.Console.WriteLine("\n");
 
             // Delete characters & display
@@ -49,26 +49,27 @@ namespace FileReadWrite
             }
             System.Console.WriteLine("\nOuput file: {0}\n", csvNewFileName);
 
-            // Split lines into separate objects
+            // Split values from each line
+            linesData.splitValues(processedLines, valueDelimiters);
+            System.Console.WriteLine(">>> Fetching values");
+            uxEnhance1.addDelay(500, ".", 5);
+            System.Console.WriteLine("Ready\n");
+            UXEnhancements uxEnhance2 = new UXEnhancements();
+            uxEnhance2.addDelay();
 
 
-            // Show split values from each line
-            string[] splittedValues = linesData.splitValues(processedLines, valueDelimiters);
-            ///TEST: Confirm split values by display
-            System.Console.WriteLine("\nNumber of values in each line: {0}, {1}", splittedValues[0].Length, splittedValues[1].Length);
-            uxEnhance.addDelay(1000, "", 1);
-            int numberedList = 1;
-            for (int i = 0; i < processedLines.Length; i++)
+            // Show numbered list of values
+            int numberedList = 0;
+            for (int i = 0; i < linesData.TabularRow[0].Length; i++)
             {
-                foreach(string s in splittedValues)
-                {
-                    System.Console.WriteLine(numberedList++ + ". " + s);
-                }
+                ++numberedList;
+                System.Console.WriteLine("{0}. {1} : {2}", numberedList, linesData.TabularRow[0][i], linesData.TabularRow[1][i]);
             }
+            System.Console.WriteLine();
 
             // Create new file with processed lines
             newCSV.createFile(csvPath, processedLines);
-
+/*            
             // Display updated value
             int elementIndex = 1;
             string newStringVal = "00000000";            
@@ -77,6 +78,7 @@ namespace FileReadWrite
 
             // Wait before exit in debug mode
             uxEnhance.addDelay(1000, "\nExit... ", 1);
+*/
         }
     }
 }
