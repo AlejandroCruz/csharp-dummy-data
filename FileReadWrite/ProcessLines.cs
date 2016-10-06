@@ -24,6 +24,7 @@ namespace FileReadWrite
         public string[][] TabularRow
         {
             get { return tabularRow; }
+            set { tabularRow = value; }
         }
 
         // Delete quotation

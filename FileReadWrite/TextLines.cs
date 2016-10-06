@@ -49,6 +49,9 @@ namespace FileReadWrite
             }
             System.Console.WriteLine("\nOuput file: {0}\n", csvNewFileName);
 
+            // Create new file with processed lines
+            newCSV.createFile(csvPath, processedLines);
+
             // Split values from each line
             linesData.splitValues(processedLines, valueDelimiters);
             System.Console.WriteLine(">>> Fetching values");
@@ -57,8 +60,7 @@ namespace FileReadWrite
             UXEnhancements uxEnhance2 = new UXEnhancements();
             uxEnhance2.addDelay();
 
-
-            // Show numbered list of values
+            // Show numbered list of values in column format
             int numberedList = 0;
             for (int i = 0; i < linesData.TabularRow[0].Length; i++)
             {
@@ -67,18 +69,12 @@ namespace FileReadWrite
             }
             System.Console.WriteLine();
 
-            // Create new file with processed lines
-            newCSV.createFile(csvPath, processedLines);
-/*            
-            // Display updated value
+            // Display updated value (TransactionNumber:50322311)
             int elementIndex = 1;
             string newStringVal = "00000000";            
             UpdateLineValues updateVal = new UpdateLineValues(elementIndex, newStringVal);
-            updateVal.updateUniqueValue(linesData);
-
-            // Wait before exit in debug mode
-            uxEnhance.addDelay(1000, "\nExit... ", 1);
-*/
+            updateVal.updateLine(linesData);
+            //System.Console.WriteLine("Value for '{0}' is {1}", linesData.TabularRow[0][elementIndex], linesData.TabularRow[1][elementIndex]);
         }
     }
 }
