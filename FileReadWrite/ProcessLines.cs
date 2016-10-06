@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Text;
+using System;
 
 namespace FileReadWrite
 {
@@ -7,6 +9,9 @@ namespace FileReadWrite
     {
         private string[] editedLines;
         private string[][] tabularRow;
+        private string updatedLine;
+        private ProcessLines nLine;
+        private StringBuilder strBuild;
 
         // Constructors
         public ProcessLines()
@@ -51,6 +56,20 @@ namespace FileReadWrite
                 values = inLines[i].Split(delimiters);
                 tabularRow[i] = values;
             }
+        }
+
+        // Connect splitted values into one string
+        public void connectValues()
+        {
+            strBuild = new StringBuilder();
+            nLine = new ProcessLines();
+            nLine = this;
+
+            for(int i = 0; i < nLine.TabularRow[1].Length; i++)
+            {
+                strBuild.Append(nLine.TabularRow[1][i] + ",");
+            }
+            updatedLine = strBuild.ToString().Trim( new char[] { ' ', ',' } );
         }
 
     } // END Class

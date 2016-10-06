@@ -8,26 +8,31 @@
  *  Added delay functions are for end user experience.
  */
 
+using System;
+
 namespace FileReadWrite
 {
     class TextLines
     {
         static void Main(string[] args)
         {
-            string csvFileName = "rawData.csv";
-            string csvNewFileName = "newData.csv";
+            string csvRawFileName = "rawData.csv";
+            string csvProcessedFileName = "processedData.csv";
+            string csvUpdatedFileName = "updatedData.csv";
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
-            string[] textLines = System.IO.File.ReadAllLines(csvPath + csvFileName);
+            string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
+            string[] processedLines;
+            string charToDelete = "\"";
             char valueDelimiters = ',';
 
-            ProcessLines linesData = new ProcessLines(textLines);
-            CreateTextFile newCSV = new CreateTextFile(csvNewFileName);
+            ProcessLines objProcessLines = new ProcessLines(rawLines);
+            CreateTextFile newCSV = new CreateTextFile(csvProcessedFileName);
 
             // Display original quoted lines
-            System.Console.WriteLine("Input from: {0}\n", csvFileName);
-            for (int i = 0; i < textLines.Length; i++)
+            System.Console.WriteLine("Input from: {0}\n", csvRawFileName);
+            for (int i = 0; i < rawLines.Length; i++)
             {
-                System.Console.WriteLine(textLines[i]);
+                System.Console.WriteLine(rawLines[i]);
             }
 
             /*
@@ -40,20 +45,19 @@ namespace FileReadWrite
             uxEnhance1.addDelay(1000, "... ", 1);
             System.Console.WriteLine("\n");
 
-            // Delete characters & display
-            string aChar= "\"";
-            string[]  processedLines = linesData.deleteChars(textLines, aChar);
+            // Delete characters & display data lines
+            processedLines = objProcessLines.deleteChars(rawLines, charToDelete);
             for (int i = 0; i < processedLines.Length; i++)
             {
                 System.Console.WriteLine(processedLines[i]);
             }
-            System.Console.WriteLine("\nOuput file: {0}\n", csvNewFileName);
+            System.Console.WriteLine("\nOuput file: {0}\n", csvProcessedFileName);
 
             // Create new file with processed lines
             newCSV.createFile(csvPath, processedLines);
 
             // Split values from each line
-            linesData.splitValues(processedLines, valueDelimiters);
+            objProcessLines.splitValues(processedLines, valueDelimiters);
             System.Console.WriteLine(">>> Fetching values");
             uxEnhance1.addDelay(500, ".", 5);
             System.Console.WriteLine("Ready\n");
@@ -62,10 +66,10 @@ namespace FileReadWrite
 
             // Show numbered list of values in column format
             int numberedList = 0;
-            for (int i = 0; i < linesData.TabularRow[0].Length; i++)
+            for (int i = 0; i < objProcessLines.TabularRow[0].Length; i++)
             {
                 ++numberedList;
-                System.Console.WriteLine("{0}. {1} : {2}", numberedList, linesData.TabularRow[0][i], linesData.TabularRow[1][i]);
+                System.Console.WriteLine("{0}. {1} : {2}", numberedList, objProcessLines.TabularRow[0][i], objProcessLines.TabularRow[1][i]);
             }
             System.Console.WriteLine();
 
@@ -73,8 +77,14 @@ namespace FileReadWrite
             int elementIndex = 1;
             string newStringVal = "00000000";            
             UpdateLineValues updateVal = new UpdateLineValues(elementIndex, newStringVal);
-            updateVal.updateLine(linesData);
-            //System.Console.WriteLine("Value for '{0}' is {1}", linesData.TabularRow[0][elementIndex], linesData.TabularRow[1][elementIndex]);
+            updateVal.updateLine(objProcessLines);
+
+            // Create new line with updated value and write to new file
+            objProcessLines.connectValues();
+
+            // Keep the console window open in debug mode.
+            Console.WriteLine("\n>>> Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }
