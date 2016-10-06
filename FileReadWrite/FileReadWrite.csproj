@@ -47,6 +47,7 @@
     <Compile Include="ProcessLines.cs" />
     <Compile Include="TextLines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateLineValues.cs" />
     <Compile Include="UXEnhancements.cs" />
   </ItemGroup>
   <ItemGroup>
