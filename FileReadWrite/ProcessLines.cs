@@ -59,7 +59,7 @@ namespace FileReadWrite
         }
 
         // Connect splitted values into one string
-        public void connectValues()
+        public string connectValues()
         {
             strBuild = new StringBuilder();
             nLine = new ProcessLines();
@@ -70,6 +70,8 @@ namespace FileReadWrite
                 strBuild.Append(nLine.TabularRow[1][i] + ",");
             }
             updatedLine = strBuild.ToString().Trim( new char[] { ' ', ',' } );
+
+            return updatedLine;
         }
 
     } // END Class

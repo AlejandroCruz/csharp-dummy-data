@@ -22,6 +22,7 @@ namespace FileReadWrite
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
             string[] processedLines;
+            string updatedLine;
             string charToDelete = "\"";
             char valueDelimiters = ',';
 
@@ -42,7 +43,7 @@ namespace FileReadWrite
              */
             System.Console.WriteLine("\n>>> Processing: Delete quotation");
             UXEnhancements uxEnhance1 = new UXEnhancements();
-            uxEnhance1.addDelay(1000, "... ", 1);
+            uxEnhance1.addDelay(1500, "... ", 1);
             System.Console.WriteLine("\n");
 
             // Delete characters & display data lines
@@ -75,12 +76,16 @@ namespace FileReadWrite
 
             // Display updated value (TransactionNumber:50322311)
             int elementIndex = 1;
-            string newStringVal = "00000000";            
+            string newStringVal = "12345678";            
             UpdateLineValues updateVal = new UpdateLineValues(elementIndex, newStringVal);
             updateVal.updateLine(objProcessLines);
 
             // Create new line with updated value and write to new file
-            objProcessLines.connectValues();
+            updatedLine = objProcessLines.connectValues();
+            System.Console.Write("\n>>> Creating new data line");
+            uxEnhance1.addDelay(300, ".", 9);
+            System.Console.WriteLine();
+            System.Console.WriteLine("\nUpdated data line with trimmed ends:\n{0}", updatedLine);
 
             // Keep the console window open in debug mode.
             Console.WriteLine("\n>>> Press any key to exit.");
