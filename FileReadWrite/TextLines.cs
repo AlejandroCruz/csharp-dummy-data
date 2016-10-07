@@ -22,18 +22,19 @@ namespace FileReadWrite
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
             string[] processedLines;
-            string updatedLine;
+            string[] updatedLines;
             string charToDelete = "\"";
             char valueDelimiters = ',';
 
-            ProcessLines objProcessLines = new ProcessLines(rawLines);
-            CreateTextFile newCSV = new CreateTextFile(csvProcessedFileName);
+            ProcessLines objProcessLines;
+            CreateTextFile processedCSV;
+            CreateTextFile updatedCSV;
 
             // Display original quoted lines
-            System.Console.WriteLine("Input from: {0}\n", csvRawFileName);
+            Console.WriteLine("Input from: {0}\n", csvRawFileName);
             for (int i = 0; i < rawLines.Length; i++)
             {
-                System.Console.WriteLine(rawLines[i]);
+                Console.WriteLine(rawLines[i]);
             }
 
             /*
@@ -41,27 +42,29 @@ namespace FileReadWrite
              * - Deafult constructor takes optional time argument
              * - Method 'addDelay' parameters: inTime, inText, inLoop
              */
-            System.Console.WriteLine("\n>>> Processing: Delete quotation");
+            Console.WriteLine("\n>>> Processing: Delete quotation");
             UXEnhancements uxEnhance1 = new UXEnhancements();
             uxEnhance1.addDelay(1500, "... ", 1);
-            System.Console.WriteLine("\n");
+            Console.WriteLine("\n");
 
             // Delete characters & display data lines
+            objProcessLines = new ProcessLines(rawLines);
             processedLines = objProcessLines.deleteChars(rawLines, charToDelete);
             for (int i = 0; i < processedLines.Length; i++)
             {
-                System.Console.WriteLine(processedLines[i]);
+                Console.WriteLine(processedLines[i]);
             }
-            System.Console.WriteLine("\nOuput file: {0}\n", csvProcessedFileName);
+            Console.WriteLine("\nOuput file: {0}\n", csvProcessedFileName);
 
             // Create new file with processed lines
-            newCSV.createFile(csvPath, processedLines);
+            processedCSV = new CreateTextFile(csvProcessedFileName);
+            processedCSV.createFile(csvPath, processedLines);
 
             // Split values from each line
             objProcessLines.splitValues(processedLines, valueDelimiters);
-            System.Console.WriteLine(">>> Fetching values");
+            Console.WriteLine(">>> Fetching values");
             uxEnhance1.addDelay(500, ".", 5);
-            System.Console.WriteLine("Ready\n");
+            Console.WriteLine("Ready\n");
             UXEnhancements uxEnhance2 = new UXEnhancements();
             uxEnhance2.addDelay();
 
@@ -70,9 +73,9 @@ namespace FileReadWrite
             for (int i = 0; i < objProcessLines.TabularRow[0].Length; i++)
             {
                 ++numberedList;
-                System.Console.WriteLine("{0}. {1} : {2}", numberedList, objProcessLines.TabularRow[0][i], objProcessLines.TabularRow[1][i]);
+                Console.WriteLine("{0}. {1} : {2}", numberedList, objProcessLines.TabularRow[0][i], objProcessLines.TabularRow[1][i]);
             }
-            System.Console.WriteLine();
+            Console.WriteLine();
 
             // Display updated value (TransactionNumber:50322311)
             int elementIndex = 1;
@@ -81,13 +84,19 @@ namespace FileReadWrite
             updateVal.updateLine(objProcessLines);
 
             // Create new line with updated value and write to new file
-            updatedLine = objProcessLines.connectValues();
-            System.Console.Write("\n>>> Creating new data line");
+            updatedLines = objProcessLines.connectValues();
+            Console.Write("\n>>> Creating new data line");
             uxEnhance1.addDelay(300, ".", 9);
-            System.Console.WriteLine();
-            System.Console.WriteLine("\nUpdated data line with trimmed ends:\n{0}", updatedLine);
+            Console.WriteLine();
+            Console.WriteLine("\nUpdated data line:\n{0}", updatedLines);
 
+            // Create new file with updated line data
+            processedCSV = new CreateTextFile(csvUpdatedFileName);
+            processedCSV.createFile(csvPath, updatedLines);
+
+            //
             // Keep the console window open in debug mode.
+            //
             Console.WriteLine("\n>>> Press any key to exit.");
             Console.ReadKey();
         }

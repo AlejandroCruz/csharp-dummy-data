@@ -9,7 +9,7 @@ namespace FileReadWrite
     {
         private string[] editedLines;
         private string[][] tabularRow;
-        private string updatedLine;
+        private string[] updatedLines;
         private ProcessLines nLine;
         private StringBuilder strBuild;
 
@@ -25,6 +25,10 @@ namespace FileReadWrite
         public string[] TextLines
         {
             get { return editedLines; }
+        }
+        public string[] UpdatedLines
+        {
+            get { return updatedLines; }
         }
         public string[][] TabularRow
         {
@@ -59,19 +63,23 @@ namespace FileReadWrite
         }
 
         // Connect splitted values into one string
-        public string connectValues()
+        public string[] connectValues()
         {
-            strBuild = new StringBuilder();
-            nLine = new ProcessLines();
-            nLine = this;
+            int lineCount = this.TabularRow.Length;
+            updatedLines = new string[lineCount];
 
-            for(int i = 0; i < nLine.TabularRow[1].Length; i++)
+            for (int i = 0; i < lineCount; i++)
             {
-                strBuild.Append(nLine.TabularRow[1][i] + ",");
-            }
-            updatedLine = strBuild.ToString().Trim( new char[] { ' ', ',' } );
+                strBuild = new StringBuilder();
 
-            return updatedLine;
+                for (int x= 0; x < this.TabularRow[i].Length; x++)
+                {
+                    strBuild.Append(this.TabularRow[i][x] + ",");
+                }
+                updatedLines[i] = strBuild.ToString().Trim(new char[] { ' ', ',' });
+                //strBuild.AppendLine();
+            }
+            return updatedLines;
         }
 
     } // END Class

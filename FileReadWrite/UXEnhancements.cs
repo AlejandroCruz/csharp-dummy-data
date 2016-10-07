@@ -40,14 +40,14 @@ namespace FileReadWrite
                 int i = 0;
                 while ( i < loop)
                 {
-                    Task.Delay(time).Wait(); System.Console.Write(text);
+                    Task.Delay(time).Wait(); Console.Write(text);
                     i++;
                 }
                 Task.Delay(time).Wait();
             }
             else if(!String.IsNullOrEmpty(text))
             {
-                Task.Delay(time).Wait(); System.Console.Write(text); Task.Delay(time).Wait();
+                Task.Delay(time).Wait(); Console.Write(text); Task.Delay(time).Wait();
             }
             else
             {
