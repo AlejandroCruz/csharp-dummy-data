@@ -10,7 +10,6 @@ namespace FileReadWrite
         private string[] editedLines;
         private string[][] tabularRow;
         private string[] updatedLines;
-        private ProcessLines nLine;
         private StringBuilder strBuild;
 
         // Constructors
@@ -77,7 +76,6 @@ namespace FileReadWrite
                     strBuild.Append(this.TabularRow[i][x] + ",");
                 }
                 updatedLines[i] = strBuild.ToString().Trim(new char[] { ' ', ',' });
-                //strBuild.AppendLine();
             }
             return updatedLines;
         }
