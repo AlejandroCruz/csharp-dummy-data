@@ -79,7 +79,9 @@ namespace FileReadWrite
             // Update value and display (TransactionNumber:50322311) 12345678
             int[] elementIndex = { 0, 1 };
             string[] newStringVal = { "HOME DEPOT", "00000000" };
+            bool incrementVal = true;
             UpdateLineValues updateVal = new UpdateLineValues(objProcessLines, elementIndex, newStringVal);
+            updateVal.updateLine(incrementVal);
 
             // Create new line concatenating updated values
             string[] updatedLines = objProcessLines.connectValues();
