@@ -4,24 +4,33 @@ namespace FileReadWrite
 {
     class UpdateLineValues
     {
-        private int index;
-        private string oldString;
-        private string newString;
+        private int[] indexArray;
+        private string[] oldString;
+        private string[] updateArray;
         private ProcessLines objUpdate;
 
-        public UpdateLineValues(ProcessLines inProcLine, int selectedIndex, string userProvidedString)
+        public UpdateLineValues()
+        { }
+        public UpdateLineValues(ProcessLines inProcLine, int[] indexes, string[] inUpdateArray)
         {
             objUpdate = new ProcessLines();
             objUpdate = inProcLine;
-            index = selectedIndex;
-            newString = userProvidedString;
+            indexArray = indexes;
+            updateArray = inUpdateArray;
             updateLine();
         }
 
         public void updateLine()
         {
-            oldString = objUpdate.TabularRow[1][index];
-            objUpdate.TabularRow[1][index] = newString;
+            int loopCount = updateArray.Length;
+            oldString = new string[loopCount];
+
+            for(int i = 0; i < loopCount; i++)
+            {
+                int iA = indexArray[i];
+                oldString[i] = objUpdate.TabularRow[1][iA];
+                objUpdate.TabularRow[1][iA] = updateArray[i];
+            }
         }
-    }
+    } // END Class
 }
