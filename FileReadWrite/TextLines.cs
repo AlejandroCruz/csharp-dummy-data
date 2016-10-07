@@ -22,13 +22,12 @@ namespace FileReadWrite
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
             string[] processedLines;
-            string[] updatedLines;
             string charToDelete = "\"";
             char valueDelimiters = ',';
+            bool overwrite = false;
 
             ProcessLines objProcessLines;
             CreateTextFile processedCSV;
-            CreateTextFile updatedCSV;
 
             // Display original quoted lines
             Console.WriteLine("Input from: {0}\n", csvRawFileName);
@@ -58,7 +57,7 @@ namespace FileReadWrite
 
             // Create new file with processed lines
             processedCSV = new CreateTextFile(csvProcessedFileName);
-            processedCSV.createFile(csvPath, processedLines);
+            processedCSV.createFile(csvPath, processedLines, overwrite);
 
             // Split values from each line
             objProcessLines.splitValues(processedLines, valueDelimiters);
@@ -72,27 +71,27 @@ namespace FileReadWrite
             int numberedList = 0;
             for (int i = 0; i < objProcessLines.TabularRow[0].Length; i++)
             {
-                ++numberedList;
                 Console.WriteLine("{0}. {1} : {2}", numberedList, objProcessLines.TabularRow[0][i], objProcessLines.TabularRow[1][i]);
+                numberedList++;
             }
             Console.WriteLine();
 
-            // Display updated value (TransactionNumber:50322311)
-            int elementIndex = 1;
-            string newStringVal = "12345678";            
-            UpdateLineValues updateVal = new UpdateLineValues(elementIndex, newStringVal);
-            updateVal.updateLine(objProcessLines);
+            // Display updated value (TransactionNumber:50322311) 12345678
+            int elementIndex = 0;
+            string newStringVal = "HOME DEPOT";            
+            UpdateLineValues updateVal = new UpdateLineValues(objProcessLines, elementIndex, newStringVal);
 
-            // Create new line with updated value and write to new file
-            updatedLines = objProcessLines.connectValues();
+            // Create new line concatenating updated values
+            string[]  updatedLines = objProcessLines.connectValues();
             Console.Write("\n>>> Creating new data line");
             uxEnhance1.addDelay(300, ".", 9);
             Console.WriteLine();
-            Console.WriteLine("\nUpdated data line:\n{0}", updatedLines);
+            Console.WriteLine("\nUpdated data line:\n{0}", updatedLines[1]);
 
             // Create new file with updated line data
+            overwrite = true;
             processedCSV = new CreateTextFile(csvUpdatedFileName);
-            processedCSV.createFile(csvPath, updatedLines);
+            processedCSV.createFile(csvPath, updatedLines, overwrite);
 
             //
             // Keep the console window open in debug mode.

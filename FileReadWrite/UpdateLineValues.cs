@@ -9,21 +9,19 @@ namespace FileReadWrite
         private string newString;
         private ProcessLines objUpdate;
 
-        public UpdateLineValues(int selectedIndex, string userProvidedString)
+        public UpdateLineValues(ProcessLines inProcLine, int selectedIndex, string userProvidedString)
         {
+            objUpdate = new ProcessLines();
+            objUpdate = inProcLine;
             index = selectedIndex;
             newString = userProvidedString;
-            objUpdate = new ProcessLines();
+            updateLine();
         }
 
-        public void updateLine(ProcessLines thisProcLine)
+        public void updateLine()
         {
-            objUpdate = thisProcLine;
             oldString = objUpdate.TabularRow[1][index];
             objUpdate.TabularRow[1][index] = newString;
-
-            System.Console.WriteLine("\nValue of 'oldString' is {0}", oldString);
-            System.Console.WriteLine("\nUpdated value of '{0}' is {1}", objUpdate.TabularRow[0][index], objUpdate.TabularRow[1][index]);
         }
     }
 }

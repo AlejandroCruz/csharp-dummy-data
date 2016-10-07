@@ -11,9 +11,12 @@
         }
 
         // Create new file and write lines
-        public void createFile(string inPath, string[] inLines)
+        public void createFile(string inPath, string[] inLines, bool inOverwrite)
         {
-            System.IO.File.WriteAllLines(inPath + nFile, inLines);
+            if(inOverwrite == false)
+                System.IO.File.AppendAllLines(inPath + nFile, inLines);
+            else
+                System.IO.File.WriteAllLines(inPath + nFile, inLines);
         }
     }
 }
