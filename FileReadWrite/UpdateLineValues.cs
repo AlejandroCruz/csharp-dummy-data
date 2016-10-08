@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -46,15 +47,24 @@ namespace FileReadWrite
         {
             string uStr = inUpdateStr;
             int tmpInt;
+            DateTime tmpDt;
 
             if(Int32.TryParse(uStr, out tmpInt))
             {
                 tmpInt++;
                 uStr = Convert.ToString(tmpInt);
             }
+            else if(DateTime.TryParse(uStr, out tmpDt))
+            {
+                DateTime tD = tmpDt.AddDays(1);
+                uStr = Convert.ToString(tD);
+                DateTime exactD;
+                DateTime.TryParseExact(uStr, "yyyy-M-d", null, DateTimeStyles.None, out exactD);
+                uStr = Convert.ToString(exactD);
+            }
             else
             {
-                uStr += "*ABC*";
+                uStr = "AA-" + uStr;
             }
             return uStr;
         }

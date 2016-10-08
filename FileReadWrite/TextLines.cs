@@ -77,8 +77,8 @@ namespace FileReadWrite
             Console.WriteLine();
 
             // Update value and display (TransactionNumber:50322311) 12345678
-            int[] elementIndex = { 0, 1 };
-            string[] newStringVal = { "HOME DEPOT", "10000000" };
+            int[] elementIndex = { 0, 1, 2 };
+            string[] newStringVal = { "HOME DEPOT", "10000000", "2016-10-07" };
             bool incrementVal = true;
             UpdateLineValues updateVal = new UpdateLineValues(objProcessLines, elementIndex, newStringVal);
             updateVal.updateLine(incrementVal);
