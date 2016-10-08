@@ -57,10 +57,8 @@ namespace FileReadWrite
             else if(DateTime.TryParse(uStr, out tmpDt))
             {
                 DateTime tD = tmpDt.AddDays(1);
-                uStr = Convert.ToString(tD);
-                DateTime exactD;
-                DateTime.TryParseExact(uStr, "yyyy-M-d", null, DateTimeStyles.None, out exactD);
-                uStr = Convert.ToString(exactD);
+                string format = "yyyy-M-d";
+                uStr = tD.ToString(format);
             }
             else
             {
