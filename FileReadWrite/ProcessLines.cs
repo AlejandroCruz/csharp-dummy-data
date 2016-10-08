@@ -35,7 +35,6 @@ namespace FileReadWrite
             set { tabularRow = value; }
         }
 
-        // Delete quotation
         public string[] deleteChars(string[] inLines, string deleteC)
         {
             string c = deleteC;
@@ -47,7 +46,6 @@ namespace FileReadWrite
             return editedLines;
         }
 
-        // Split values for field-lines
         public void splitValues(string[] inLines, char inDelimiters)
         {
             string[] values;
@@ -61,7 +59,6 @@ namespace FileReadWrite
             }
         }
 
-        // Connect splitted values into one string
         public string[] connectValues()
         {
             int lineCount = this.TabularRow.Length;
