@@ -36,28 +36,27 @@ namespace FileReadWrite
                 oldString[i] = objUpdate.TabularRow[1][iA];
 
                 if (incrementTrigger)
-                    updateArray = incrementDataValue(updateArray);
+                    updateArray[i] = incrementDataValue(updateArray[i]);
 
                 objUpdate.TabularRow[1][iA] = updateArray[i];
             }
         }
 
-        protected string[] incrementDataValue(string[] inUpdateArray)
+        protected string incrementDataValue(string inUpdateStr)
         {
-            string[] localUpdateArray = inUpdateArray;
-            int localTempInt;
-            for(int i = 0; i < localUpdateArray.Length; i++)
+            string uStr = inUpdateStr;
+            int tmpInt;
+
+            if(Int32.TryParse(uStr, out tmpInt))
             {
-                if (localUpdateArray[i].Any(x => !char.IsLetter(x)))
-                    localUpdateArray[i] += "*ABC*";
-                else
-                {
-                    localTempInt = Convert.ToInt32(localUpdateArray[i], 10);
-                    localTempInt++;
-                    localUpdateArray[i] = Convert.ToString(localTempInt);
-                }
+                tmpInt++;
+                uStr = Convert.ToString(tmpInt);
             }
-            return localUpdateArray;
+            else
+            {
+                uStr += "*ABC*";
+            }
+            return uStr;
         }
 
     }
