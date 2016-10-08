@@ -9,9 +9,7 @@ namespace FileReadWrite
     class UpdateLineValues
     {
         private int[] indexArray;
-        private string[] oldString;
         private string[] updateArray;
-        private string[] incrementedArray;
         private ProcessLines objUpdate;
 
         public UpdateLineValues()
@@ -28,8 +26,8 @@ namespace FileReadWrite
         {
             bool incrementTrigger = inTrigger;
             int loopCount = updateArray.Length;
-            oldString = new string[loopCount];
-            incrementedArray = new string[updateArray.Length];
+            string[] oldString = new string[loopCount];
+            string[] incrementedArray = new string[updateArray.Length];
 
             for(int i = 0; i < loopCount; i++)
             {
@@ -43,7 +41,7 @@ namespace FileReadWrite
             }
         }
 
-        protected string incrementDataValue(string inUpdateStr)
+        private string incrementDataValue(string inUpdateStr)
         {
             string uStr = inUpdateStr;
             int tmpInt;
