@@ -1,44 +1,43 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace FileReadWrite
 {
     class UpdateLineValues
     {
+        private int loopCount;
+        private int amountLines;
         private int[] indexArray;
+        private string[] oldString;
         private string[] updateArray;
+        private string[] incrementedArray;
         private ProcessLines objUpdate;
 
         public UpdateLineValues()
         { }
-        public UpdateLineValues(ProcessLines inProcLine, int[] indexes, string[] inUpdateArray)
+        public UpdateLineValues(ProcessLines inProcLine)
         {
             objUpdate = new ProcessLines();
             objUpdate = inProcLine;
-            indexArray = indexes;
-            updateArray = inUpdateArray;
         }
 
-        public void updateLine(bool inTrigger)
+        public void updateLine(string[] inStringVal, int[] indexes, int inAmountLines)
         {
-            bool incrementTrigger = inTrigger;
-            int loopCount = updateArray.Length;
-            string[] oldString = new string[loopCount];
-            string[] incrementedArray = new string[updateArray.Length];
+            updateArray = inStringVal;
+            indexArray = indexes;
+            amountLines = inAmountLines;
+            loopCount = updateArray.Length;
+            oldString = new string[loopCount];
+            incrementedArray = new string[updateArray.Length];
 
             for(int i = 0; i < loopCount; i++)
             {
                 int iA = indexArray[i];
                 oldString[i] = objUpdate.TabularRow[1][iA];
 
-                if (incrementTrigger)
-                    updateArray[i] = incrementDataValue(updateArray[i]);
-
+                updateArray[i] = incrementDataValue(updateArray[i]);
                 objUpdate.TabularRow[1][iA] = updateArray[i];
             }
+
         }
 
         private string incrementDataValue(string inUpdateStr)

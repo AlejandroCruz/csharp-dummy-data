@@ -79,23 +79,24 @@ namespace FileReadWrite
             // Update value (TransactionNumber:50322311 | 12345678)
             int[] elementIndex = { 0, 1, 2 };
             string[] newStringVal = { "HOME DEPOT", "10000000", "2016-10-07" };
-            bool incrementVal = true;
-            UpdateLineValues updateVal = new UpdateLineValues(objProcessLines, elementIndex, newStringVal);
-            updateVal.updateLine(incrementVal);
+            int amountOfLines = 2;
+            UpdateLineValues updateLineVal = new UpdateLineValues(objProcessLines);
+            updateLineVal.updateLine(newStringVal, elementIndex, amountOfLines);
 
-            // Concatenate updated values into a line(string) of data
+            // Concatenate updated values into a line(string) of data; repeat n times
             string[] updatedLines = objProcessLines.appendValues();
             Console.Write("\n>>> Creating new data line");
             uxEnhance1.addDelay(300, ".", 9);
             Console.WriteLine();
-            Console.WriteLine("\nUpdated data line:\n{0}", updatedLines[1]);
+            for(int i = 1; i < updatedLines.Length; i++)
+            {
+                Console.WriteLine("\nUpdated data line:\n{0}", updatedLines[i]);
+            }
 
             // Create one or multiple unique lines & write to new fiel
-            int amountOfLines = 1;
-            overwrite = true;
-            //objProcessLines.appendLine(amountOfLines);
-            processedCSV = new CreateTextFile(csvUpdatedFileName);
-            processedCSV.createFile(csvPath, updatedLines, overwrite);
+            //overwrite = true;
+            //processedCSV = new CreateTextFile(csvUpdatedFileName);
+            //processedCSV.createFile(csvPath, updatedLines, overwrite);
 
             //
             // Keep the console window open in debug mode.
