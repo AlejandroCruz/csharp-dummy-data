@@ -22,10 +22,9 @@ namespace FileReadWrite
             updateArray = inUpdateArray;
         }
 
-        public void updateLine(bool inTrigger, int inAmountLines)
+        public void updateLine(bool inTrigger)
         {
             bool incrementTrigger = inTrigger;
-            int amountLines = inAmountLines;
             int loopCount = updateArray.Length;
             string[] oldString = new string[loopCount];
             string[] incrementedArray = new string[updateArray.Length];

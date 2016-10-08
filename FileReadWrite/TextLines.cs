@@ -55,7 +55,7 @@ namespace FileReadWrite
             }
             Console.WriteLine("\nOuput file: {0}\n", csvProcessedFileName);
 
-            // Create new file with processed lines
+            // Create file with processed lines
             processedCSV = new CreateTextFile(csvProcessedFileName);
             processedCSV.createFile(csvPath, processedLines, overwrite);
 
@@ -80,19 +80,20 @@ namespace FileReadWrite
             int[] elementIndex = { 0, 1, 2 };
             string[] newStringVal = { "HOME DEPOT", "10000000", "2016-10-07" };
             bool incrementVal = true;
-            int amountOfLines = 1;
             UpdateLineValues updateVal = new UpdateLineValues(objProcessLines, elementIndex, newStringVal);
-            updateVal.updateLine(incrementVal, amountOfLines);
+            updateVal.updateLine(incrementVal);
 
-            // Create new line concatenating updated values
-            string[] updatedLines = objProcessLines.connectValues();
+            // Concatenate updated values into a line(string) of data
+            string[] updatedLines = objProcessLines.appendValues();
             Console.Write("\n>>> Creating new data line");
             uxEnhance1.addDelay(300, ".", 9);
             Console.WriteLine();
             Console.WriteLine("\nUpdated data line:\n{0}", updatedLines[1]);
 
-            // Create new file with updated line data
+            // Create one or multiple unique lines & write to new fiel
+            int amountOfLines = 1;
             overwrite = true;
+            //objProcessLines.appendLine(amountOfLines);
             processedCSV = new CreateTextFile(csvUpdatedFileName);
             processedCSV.createFile(csvPath, updatedLines, overwrite);
 

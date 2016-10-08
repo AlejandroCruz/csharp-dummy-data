@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Assets\newData.csv" />
     <None Include="Assets\processedData.csv" />
     <None Include="Assets\rawData.csv" />
     <None Include="Assets\updatedData.csv" />

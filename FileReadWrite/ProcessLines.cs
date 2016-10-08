@@ -9,7 +9,7 @@ namespace FileReadWrite
     {
         private string[] editedLines;
         private string[][] tabularRow;
-        private string[] updatedLines;
+        private string[] updateLines;
         private StringBuilder strBuild;
 
         // Constructors
@@ -27,7 +27,7 @@ namespace FileReadWrite
         }
         public string[] UpdatedLines
         {
-            get { return updatedLines; }
+            get { return updateLines; }
         }
         public string[][] TabularRow
         {
@@ -59,10 +59,10 @@ namespace FileReadWrite
             }
         }
 
-        public string[] connectValues()
+        public string[] appendValues()
         {
             int lineCount = this.TabularRow.Length;
-            updatedLines = new string[lineCount];
+            updateLines = new string[lineCount];
 
             for (int i = 0; i < lineCount; i++)
             {
@@ -72,10 +72,16 @@ namespace FileReadWrite
                 {
                     strBuild.Append(this.TabularRow[i][x] + ",");
                 }
-                updatedLines[i] = strBuild.ToString().Trim(new char[] { ' ', ',' });
+                updateLines[i] = strBuild.ToString().Trim(new char[] { ' ', ',' });
             }
-            return updatedLines;
+            return updateLines;
         }
+
+        //public void appendLine(int inAmountLines)
+        //{
+        //    int amountLines = inAmountLines;
+
+        //}
 
     } // END Class
 }
