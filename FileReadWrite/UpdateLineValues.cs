@@ -4,16 +4,14 @@ namespace FileReadWrite
 {
     class UpdateLineValues
     {
-        private int loopCount;
         private int amountLines;
         private int[] indexArray;
         private string[] oldString;
         private string[] updateArray;
-        private string[] incrementedArray;
+        private string[] incrementedArr;
+        private string[][] tabRows;
         private ProcessLines objUpdate;
 
-        public UpdateLineValues()
-        { }
         public UpdateLineValues(ProcessLines inProcLine)
         {
             objUpdate = new ProcessLines();
@@ -25,28 +23,40 @@ namespace FileReadWrite
             updateArray = inStringVal;
             indexArray = indexes;
             amountLines = inAmountLines;
-            loopCount = updateArray.Length;
-            oldString = new string[loopCount];
-            incrementedArray = new string[updateArray.Length];
+            oldString = new string[indexArray.Length];
+            incrementedArr = new string[updateArray.Length];
+            int iA;
 
-            for(int i = 0; i < loopCount; i++)
+            if (amountLines == 1)
             {
-                int iA = indexArray[i];
-                oldString[i] = objUpdate.TabularRow[1][iA];
+                iA = indexArray[1];
+                oldString[1] = objUpdate.TabularRow[1][iA];
 
-                updateArray[i] = incrementDataValue(updateArray[i]);
-                objUpdate.TabularRow[1][iA] = updateArray[i];
+                string incrementedStr = incrementDataValue(updateArray[1]);
+                objUpdate.TabularRow[1][iA] = incrementedStr;
             }
+            else
+            {
+                tabRows = new string[amountLines][];
 
+                for(int x = 0; x < amountLines; x++)
+                {
+                    for (int i = 0; i < updateArray.Length; i++)
+                    {
+                        incrementedArr[i] = incrementDataValue(updateArray[i]);
+                        tabRows[x][i] = incrementedArr[i];
+                    }
+                }
+            } // END else
         }
 
         private string incrementDataValue(string inUpdateStr)
         {
-            string uStr = inUpdateStr;
             int tmpInt;
+            string uStr = inUpdateStr;
             DateTime tmpDt;
 
-            if(Int32.TryParse(uStr, out tmpInt))
+            if (Int32.TryParse(uStr, out tmpInt))
             {
                 tmpInt++;
                 uStr = Convert.ToString(tmpInt);

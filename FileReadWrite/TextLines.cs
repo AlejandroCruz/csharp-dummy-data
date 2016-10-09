@@ -84,16 +84,18 @@ namespace FileReadWrite
             updateLineVal.updateLine(newStringVal, elementIndex, amountOfLines);
 
             // Concatenate updated values into a line(string) of data; repeat n times
-            string[] updatedLines = objProcessLines.appendValues();
+            string[] updatedLine = objProcessLines.appendValues();
             Console.Write("\n>>> Creating new data line");
             uxEnhance1.addDelay(300, ".", 9);
             Console.WriteLine();
-            for(int i = 1; i < updatedLines.Length; i++)
+            for(int i = 1; i < updatedLine.Length; i++)
             {
-                Console.WriteLine("\nUpdated data line:\n{0}", updatedLines[i]);
+                Console.WriteLine("\nUpdated data line:\n{0}", updatedLine[i]);
             }
 
             // Create one or multiple unique lines & write to new fiel
+            //UpdateFileLines fileLine = new UpdateFileLines();
+            //fileLine.appendLine(updatedLine);
             //overwrite = true;
             //processedCSV = new CreateTextFile(csvUpdatedFileName);
             //processedCSV.createFile(csvPath, updatedLines, overwrite);

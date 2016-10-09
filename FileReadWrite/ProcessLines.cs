@@ -17,7 +17,7 @@ namespace FileReadWrite
         { }
         public ProcessLines(string[] inLines)
         {
-            editedLines = new string[inLines.Length];
+            editedLines = inLines;
         }
 
         // Accessors
