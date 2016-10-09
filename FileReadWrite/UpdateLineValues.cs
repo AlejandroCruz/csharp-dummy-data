@@ -11,6 +11,10 @@ namespace FileReadWrite
         //private string[] incrementedArr;
         private string[][] tabRows;
         private ProcessLines objUpdate;
+        protected char letter = 'A';
+        private int charAddCounter = 0;
+        private int updateArrayLength = 0;
+        private string originUpdateArray;
 
         public UpdateLineValues(ProcessLines inProcLine)
         {
@@ -79,7 +83,21 @@ namespace FileReadWrite
             }
             else
             {
-                uStr = "AA-" + uStr;
+                switch (charAddCounter)
+                {
+                    case 0:
+                        updateArrayLength = uStr.Length;
+                        charAddCounter++;
+                        break;
+                    case 1:
+                        originUpdateArray = uStr.Substring((uStr.Length - updateArrayLength), updateArrayLength);
+                        uStr = originUpdateArray;
+                        break;
+                    default:
+                        break;
+                }
+                uStr = letter + uStr;
+                letter++;
             }
             return uStr;
         }

@@ -43,7 +43,7 @@ namespace FileReadWrite
              */
             Console.WriteLine("\n>>> Processing: Delete quotation");
             UXEnhancements uxEnhance1 = new UXEnhancements();
-            uxEnhance1.addDelay(1500, "... ", 1);
+            uxEnhance1.addDelay(500, "... ", 1);
             Console.WriteLine("\n");
 
             // Delete characters & display data lines
@@ -62,7 +62,7 @@ namespace FileReadWrite
             // Split values from each line
             objProcessLines.splitValues(processedLines, valueDelimiters);
             Console.WriteLine(">>> Fetching values");
-            uxEnhance1.addDelay(500, ".", 5);
+            uxEnhance1.addDelay(100, ".", 5);
             Console.WriteLine("Ready\n");
             UXEnhancements uxEnhance2 = new UXEnhancements();
             uxEnhance2.addDelay();
@@ -79,7 +79,7 @@ namespace FileReadWrite
             // Update value (TransactionNumber:50322311 | 12345678)
             int[] elementIndex = { 0, 1, 2 };
             string[] newStringVal = { "HOME DEPOT", "10000000", "2016-10-07" };
-            int amountOfLines = 2;
+            int amountOfLines = 4;
             string[][] tabularLines;
             UpdateLineValues updateLineVal = new UpdateLineValues(objProcessLines);
             tabularLines = updateLineVal.updateLine(newStringVal, elementIndex, amountOfLines);
