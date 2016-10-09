@@ -80,22 +80,26 @@ namespace FileReadWrite
             int[] elementIndex = { 0, 1, 2 };
             string[] newStringVal = { "HOME DEPOT", "10000000", "2016-10-07" };
             int amountOfLines = 2;
-            string[][] 
+            string[][] tabularLines;
             UpdateLineValues updateLineVal = new UpdateLineValues(objProcessLines);
-            updateLineVal.updateLine(newStringVal, elementIndex, amountOfLines);
+            tabularLines = updateLineVal.updateLine(newStringVal, elementIndex, amountOfLines);
 
-            // Concatenate updated values into a line(string) of data; repeat n times
-            string[] updatedLine = objProcessLines.appendValues();
-            Console.Write("\n>>> Creating new data line");
-            uxEnhance1.addDelay(300, ".", 9);
-            Console.WriteLine();
-            for(int i = 1; i < updatedLine.Length; i++)
-            {
-                Console.WriteLine("\nUpdated data line:\n{0}", updatedLine[i]);
-            }
+            // Concatenate updated values into a line(string) of data
+            //string[] updatedLine = objProcessLines.appendValues();
+            //Console.Write("\n>>> Creating new data line");
+            //uxEnhance1.addDelay(300, ".", 9);
+            //Console.WriteLine();
+            //for(int i = 1; i < updatedLine.Length; i++)
+            //{
+            //    Console.WriteLine("\nUpdated data line:\n{0}", updatedLine[i]);
+            //}
 
             // Create one or multiple unique lines & write to new fiel
-            UpdateLineValues updateFileLines = new UpdateLineValues();
+            for (int i = 0; i < tabularLines.Length; i++)
+            {
+                foreach(string s in tabularLines[i])
+                Console.WriteLine("\nEach value in 'tabularLines[{0}]': {1}", i, s);
+            }
 
 
             //UpdateFileLines fileLine = new UpdateFileLines();

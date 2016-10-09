@@ -23,7 +23,7 @@ namespace FileReadWrite
             get { return tabRows; }
         }
 
-        public void updateLine(string[] inStringVal, int[] indexes, int inAmountLines)
+        public string[][] updateLine(string[] inStringVal, int[] indexes, int inAmountLines)
         {
             updateArray = inStringVal;
             indexArray = indexes;
@@ -39,6 +39,8 @@ namespace FileReadWrite
 
                 string incrementedStr = incrementDataValue(updateArray[1]);
                 objUpdate.TabularRow[1][iA] = incrementedStr;
+
+                return null;
             }
             else
             {
@@ -46,12 +48,15 @@ namespace FileReadWrite
 
                 for(int x = 0; x < amountLines; x++)
                 {
+                    tabRows[x] = new string[updateArray.Length];
+
                     for (int i = 0; i < updateArray.Length; i++)
                     {
                         incrementedArr[i] = incrementDataValue(updateArray[i]);
-                        tabRows[x] = new string[1] { incrementedArr[i] };
+                        tabRows[x][i] = incrementedArr[i];
                     }
                 }
+                return tabRows;
             } // END else
         }
 
