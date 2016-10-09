@@ -80,6 +80,7 @@ namespace FileReadWrite
             int[] elementIndex = { 0, 1, 2 };
             string[] newStringVal = { "HOME DEPOT", "10000000", "2016-10-07" };
             int amountOfLines = 2;
+            string[][] 
             UpdateLineValues updateLineVal = new UpdateLineValues(objProcessLines);
             updateLineVal.updateLine(newStringVal, elementIndex, amountOfLines);
 
@@ -94,6 +95,9 @@ namespace FileReadWrite
             }
 
             // Create one or multiple unique lines & write to new fiel
+            UpdateLineValues updateFileLines = new UpdateLineValues();
+
+
             //UpdateFileLines fileLine = new UpdateFileLines();
             //fileLine.appendLine(updatedLine);
             //overwrite = true;

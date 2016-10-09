@@ -18,6 +18,11 @@ namespace FileReadWrite
             objUpdate = inProcLine;
         }
 
+        public string[][] TabRow
+        {
+            get { return tabRows; }
+        }
+
         public void updateLine(string[] inStringVal, int[] indexes, int inAmountLines)
         {
             updateArray = inStringVal;
@@ -44,7 +49,7 @@ namespace FileReadWrite
                     for (int i = 0; i < updateArray.Length; i++)
                     {
                         incrementedArr[i] = incrementDataValue(updateArray[i]);
-                        tabRows[x][i] = incrementedArr[i];
+                        tabRows[x] = new string[1] { incrementedArr[i] };
                     }
                 }
             } // END else
