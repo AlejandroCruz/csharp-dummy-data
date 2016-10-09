@@ -77,9 +77,9 @@ namespace FileReadWrite
             Console.WriteLine();
 
             // Update value (TransactionNumber:50322311 | 12345678)
-            int[] elementIndex = { 0, 1, 2 };
-            string[] newStringVal = { "HOME DEPOT", "10000000", "2016-10-07" };
-            int amountOfLines = 4;
+            int[] elementIndex = { 0, 1, 2, 7 };
+            string[] newStringVal = { "Business", "10000000", "2016-10-07", "90" };
+            int amountOfLines = 3;
             string[][] tabularLines;
             UpdateLineValues updateLineVal = new UpdateLineValues(objProcessLines);
             tabularLines = updateLineVal.updateLine(newStringVal, elementIndex, amountOfLines);

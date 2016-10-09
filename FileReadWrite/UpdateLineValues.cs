@@ -4,17 +4,17 @@ namespace FileReadWrite
 {
     class UpdateLineValues
     {
+        private char letter = 'A';
         private int amountLines;
+        private int charAddCounter = 0;
+        private int updateArrayLength = 0;
+        private string originUpdateArray;
         private int[] indexArray;
         private string[] oldString;
         private string[] updateArray;
         //private string[] incrementedArr;
         private string[][] tabRows;
         private ProcessLines objUpdate;
-        protected char letter = 'A';
-        private int charAddCounter = 0;
-        private int updateArrayLength = 0;
-        private string originUpdateArray;
 
         public UpdateLineValues(ProcessLines inProcLine)
         {
@@ -33,12 +33,10 @@ namespace FileReadWrite
             indexArray = indexes;
             amountLines = inAmountLines;
             oldString = new string[indexArray.Length];
-            //incrementedArr = new string[updateArray.Length];
-            int iA;
 
             if (amountLines == 1)
             {
-                iA = indexArray[1];
+                int iA = indexArray[1];
                 oldString[1] = objUpdate.TabularRow[1][iA];
 
                 string incrementedStr = incrementDataValue(updateArray[1]);
@@ -61,7 +59,7 @@ namespace FileReadWrite
                     }
                 }
                 return tabRows;
-            } // END else
+            }
         }
 
         private string incrementDataValue(string inUpdateStr)
