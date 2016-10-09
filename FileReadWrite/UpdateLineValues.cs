@@ -8,7 +8,7 @@ namespace FileReadWrite
         private int[] indexArray;
         private string[] oldString;
         private string[] updateArray;
-        private string[] incrementedArr;
+        //private string[] incrementedArr;
         private string[][] tabRows;
         private ProcessLines objUpdate;
 
@@ -29,7 +29,7 @@ namespace FileReadWrite
             indexArray = indexes;
             amountLines = inAmountLines;
             oldString = new string[indexArray.Length];
-            incrementedArr = new string[updateArray.Length];
+            //incrementedArr = new string[updateArray.Length];
             int iA;
 
             if (amountLines == 1)
@@ -52,8 +52,8 @@ namespace FileReadWrite
 
                     for (int i = 0; i < updateArray.Length; i++)
                     {
-                        incrementedArr[i] = incrementDataValue(updateArray[i]);
-                        tabRows[x][i] = incrementedArr[i];
+                        updateArray[i] = incrementDataValue(updateArray[i]);
+                        tabRows[x][i] = updateArray[i];
                     }
                 }
                 return tabRows;
