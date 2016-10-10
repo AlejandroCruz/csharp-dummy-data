@@ -16,15 +16,15 @@ namespace FileReadWrite
     {
         static void Main(string[] args)
         {
+            bool overwrite = false;
+            char valueDelimiter = ',';
             string csvRawFileName = "rawData.csv";
             string csvProcessedFileName = "processedData.csv";
             string csvUpdatedFileName = "updatedData.csv";
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
+            string charToDelete = "\"";
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
             string[] processedLines;
-            string charToDelete = "\"";
-            char valueDelimiters = ',';
-            bool overwrite = false;
 
             ProcessLines objProcessLines;
             CreateTextFile processedCSV;
@@ -35,16 +35,20 @@ namespace FileReadWrite
             {
                 Console.WriteLine(rawLines[i]);
             }
+            Console.WriteLine(Environment.NewLine);
+
+            Console.WriteLine(">>> Processing: Delete quotation");
 
             /*
              * UX enhancement:
              * - Deafult constructor takes optional time argument
              * - Method 'addDelay' parameters: inTime, inText, inLoop
              */
-            Console.WriteLine("\n>>> Processing: Delete quotation");
             UXEnhancements uxEnhance1 = new UXEnhancements();
-            uxEnhance1.addDelay(500, "... ", 1);
-            Console.WriteLine("\n");
+            uxEnhance1.addDelay(100, ".", 3);
+
+            Console.WriteLine("Complete\n");
+            Console.WriteLine(Environment.NewLine);
 
             // Delete characters & display data lines
             objProcessLines = new ProcessLines(rawLines);
@@ -53,36 +57,40 @@ namespace FileReadWrite
             {
                 Console.WriteLine(processedLines[i]);
             }
-            Console.WriteLine("\nOuput file: {0}\n", csvProcessedFileName);
+            Console.WriteLine("\nOuput file: {0}", csvProcessedFileName);
 
             // Create file with processed lines
             processedCSV = new CreateTextFile(csvProcessedFileName);
             processedCSV.createFile(csvPath, processedLines, overwrite);
 
             // Split values from each line
-            objProcessLines.splitValues(processedLines, valueDelimiters);
+            objProcessLines.splitValues(processedLines, valueDelimiter);
+
             Console.WriteLine(">>> Fetching values");
-            uxEnhance1.addDelay(100, ".", 5);
+            uxEnhance1.addDelay(100, ".", 6);
             Console.WriteLine("Ready\n");
+
             UXEnhancements uxEnhance2 = new UXEnhancements();
-            uxEnhance2.addDelay();
+            uxEnhance2.addDelay(); // Deafult: 2 seconds
 
             // Show numbered list of values in column format
             int numberedList = 0;
-            for (int i = 0; i < objProcessLines.TabularRow[0].Length; i++)
+            for (int i = 0; i < objProcessLines.ProcessedTabRow[0].Length; i++)
             {
-                Console.WriteLine("{0}. {1} : {2}", numberedList, objProcessLines.TabularRow[0][i], objProcessLines.TabularRow[1][i]);
+                Console.WriteLine("{0}. {1} : {2}", numberedList, objProcessLines.ProcessedTabRow[0][i], objProcessLines.ProcessedTabRow[1][i]);
                 numberedList++;
             }
-            Console.WriteLine();
+            Console.WriteLine(Environment.NewLine);
 
             // Update value (TransactionNumber:50322311 | 12345678)
-            int[] elementIndex = { 0, 1, 2, 7 };
-            string[] newStringVal = { "Business", "10000000", "2016-10-07", "90" };
-            int amountOfLines = 3;
+            int[][] elementIndex = new int[2][];
+            elementIndex[0] = new int[] {};
+            elementIndex[1] = new int[]{ 0, 1, 2, 7 };
+            string[] newLineVal = { "Business", "10000000", "2016-10-07", "90" };
+            int amountOfLines = 1;
             string[][] tabularLines;
             UpdateLineValues updateLineVal = new UpdateLineValues(objProcessLines);
-            tabularLines = updateLineVal.updateLine(newStringVal, elementIndex, amountOfLines);
+            tabularLines = updateLineVal.updateLine(newLineVal, elementIndex, amountOfLines);
 
             // Concatenate updated values into a line(string) of data
             //string[] updatedLine = objProcessLines.appendValues();
@@ -94,7 +102,7 @@ namespace FileReadWrite
             //    Console.WriteLine("\nUpdated data line:\n{0}", updatedLine[i]);
             //}
 
-            // Create one or multiple unique lines & write to new fiel
+            // Create one or multiple unique lines & write to new file
             for (int i = 0; i < tabularLines.Length; i++)
             {
                 foreach(string s in tabularLines[i])

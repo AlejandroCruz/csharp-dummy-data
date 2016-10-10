@@ -9,7 +9,7 @@ namespace FileReadWrite
         private int loop;
         private string text;
 
-        //TODO: Constructor inherit(?)//
+// TODO: Constructor inherit(?) //
         public UXEnhancements()
         {
             time = 2000;

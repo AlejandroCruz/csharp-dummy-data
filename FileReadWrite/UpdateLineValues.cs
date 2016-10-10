@@ -9,11 +9,10 @@ namespace FileReadWrite
         private int charAddCounter = 0;
         private int updateArrayLength = 0;
         private string originUpdateArray;
-        private int[] indexArray;
+        private int[][] indexArray;
         private string[] oldString;
         private string[] updateArray;
-        //private string[] incrementedArr;
-        private string[][] tabRows;
+        private string[][] updatedTabRow;
         private ProcessLines objUpdate;
 
         public UpdateLineValues(ProcessLines inProcLine)
@@ -22,43 +21,48 @@ namespace FileReadWrite
             objUpdate = inProcLine;
         }
 
-        public string[][] TabRow
+        public string[][] UpdatedTabRow
         {
-            get { return tabRows; }
+            get { return updatedTabRow; }
         }
 
-        public string[][] updateLine(string[] inStringVal, int[] indexes, int inAmountLines)
+        public string[][] updateLine(string[] inLineVal, int[][] indexes, int inAmountLines)
         {
-            updateArray = inStringVal;
+            updateArray = inLineVal;
             indexArray = indexes;
             amountLines = inAmountLines;
             oldString = new string[indexArray.Length];
 
+            int y = (indexArray[0].Length == 0) ? 1 : 0; // "Header" line-data empty?
+
             if (amountLines == 1)
             {
-                int iA = indexArray[1];
-                oldString[1] = objUpdate.TabularRow[1][iA];
+                int iA = indexArray[y][0];
+                oldString[1] = objUpdate.ProcessedTabRow[y][iA];
 
-                string incrementedStr = incrementDataValue(updateArray[1]);
-                objUpdate.TabularRow[1][iA] = incrementedStr;
-
-                return null;
+                for (int i = 0; i < updateArray.Length; i++)
+                {
+                    updateArray[i] = incrementDataValue(updateArray[i]);
+                    objUpdate.ProcessedTabRow[y][i] = updateArray[i];
+                }
+                return objUpdate.ProcessedTabRow;
             }
             else
             {
-                tabRows = new string[amountLines][];
+                updatedTabRow = new string[amountLines][];
+                updatedTabRow = objUpdate.ProcessedTabRow;
 
                 for(int x = 0; x < amountLines; x++)
                 {
-                    tabRows[x] = new string[updateArray.Length];
+                    updatedTabRow[x] = new string[updateArray.Length];
 
                     for (int i = 0; i < updateArray.Length; i++)
                     {
                         updateArray[i] = incrementDataValue(updateArray[i]);
-                        tabRows[x][i] = updateArray[i];
+                        updatedTabRow[x][i] = updateArray[i];
                     }
                 }
-                return tabRows;
+                return updatedTabRow;
             }
         }
 

@@ -7,9 +7,12 @@ namespace FileReadWrite
 {
     class ProcessLines
     {
+        private string headData;
+        private string[] lineData;
         private string[] editedLines;
-        private string[][] tabularRow;
+        private string[][] processedTabRow;
         private string[] updateLines;
+        private string[][] tabularLines;
         private StringBuilder strBuild;
 
         // Constructors
@@ -29,10 +32,10 @@ namespace FileReadWrite
         {
             get { return updateLines; }
         }
-        public string[][] TabularRow
+        public string[][] ProcessedTabRow
         {
-            get { return tabularRow; }
-            set { tabularRow = value; }
+            get { return processedTabRow; }
+            set { processedTabRow = value; }
         }
 
         public string[] deleteChars(string[] inLines, string deleteC)
@@ -50,30 +53,34 @@ namespace FileReadWrite
         {
             string[] values;
             char delimiters = inDelimiters;
-            tabularRow = new string[inLines.Length][];
+            processedTabRow = new string[inLines.Length][];
 
-            for (int i = 0; i < tabularRow.Length; i++)
+            for (int i = 0; i < processedTabRow.Length; i++)
             {
                 values = inLines[i].Split(delimiters);
-                tabularRow[i] = values;
+                processedTabRow[i] = values;
             }
         }
 
-        public string[] appendValues()
+        public string[] appendValues(string [][] inTabularLines)
         {
-            int lineCount = this.TabularRow.Length;
+            tabularLines = inTabularLines;
+            int lineCount = tabularLines.Length;
             updateLines = new string[lineCount];
 
             for (int i = 0; i < lineCount; i++)
             {
                 strBuild = new StringBuilder();
 
-                for (int x= 0; x < this.TabularRow[i].Length; x++)
+                for (int x= 0; x < this.ProcessedTabRow[i].Length; x++)
                 {
-                    strBuild.Append(this.TabularRow[i][x] + ",");
+                    strBuild.Append(this.ProcessedTabRow[i][x] + ",");
                 }
                 updateLines[i] = strBuild.ToString().Trim(new char[] { ' ', ',' });
+                if (i > 0)
+                    lineData[i-1] = updateLines[i];
             }
+            headData = updateLines[0];
             return updateLines;
         }
 
