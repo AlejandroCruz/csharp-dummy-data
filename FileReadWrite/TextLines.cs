@@ -83,12 +83,12 @@ namespace FileReadWrite
             Console.WriteLine(Environment.NewLine);
 
             // Update value (TransactionNumber:50322311 | 12345678)
-            int[][] elementIndex = new int[2][];
-            elementIndex[0] = new int[] {};
-            elementIndex[1] = new int[]{ 0, 1, 2, 7 };
+            int amountOfLines = 2;
             string[] newLineVal = { "Business", "10000000", "2016-10-07", "90" };
-            int amountOfLines = 1;
+            int[][] elementIndex = new int[2][];
             string[][] tabularLines;
+            elementIndex[0] = new int[] {};
+            elementIndex[1] = new int[] { 0, 1, 2, 7 };
             UpdateLineValues updateLineVal = new UpdateLineValues(objProcessLines);
             tabularLines = updateLineVal.updateLine(newLineVal, elementIndex, amountOfLines);
 
@@ -105,7 +105,8 @@ namespace FileReadWrite
             // Create one or multiple unique lines & write to new file
             for (int i = 0; i < tabularLines[1].Length; i++)
             {
-                Console.WriteLine("\nEach value in 'tabularLines[0]': {0}", tabularLines[0][i]);
+                Console.WriteLine("Value in 'Head': {0}", tabularLines[0][i]);
+                Console.WriteLine("Value in 'Line': {0}", tabularLines[1][i]);
             }
 
 

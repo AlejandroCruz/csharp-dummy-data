@@ -42,7 +42,8 @@ namespace FileReadWrite
                     int iA = indexArray[z][i];
                     oldString[1] = objUpdate.ProcessedTabRow[z][iA];
 
-                    updateArray[i] = incrementDataValue(updateArray[i]);
+                    if(z==1)
+                        updateArray[i] = incrementDataValue(updateArray[i]);
                     objUpdate.ProcessedTabRow[z][iA] = updateArray[i];
                 }
                 return objUpdate.ProcessedTabRow;
