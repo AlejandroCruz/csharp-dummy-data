@@ -33,17 +33,17 @@ namespace FileReadWrite
             amountLines = inAmountLines;
             oldString = new string[indexArray.Length];
 
-            int y = (indexArray[0].Length == 0) ? 1 : 0; // "Header" line-data empty?
+            int z = (indexArray[0].Length == 0) ? 1 : 0; // "Header" line-data empty?
 
             if (amountLines == 1)
             {
-                int iA = indexArray[y][0];
-                oldString[1] = objUpdate.ProcessedTabRow[y][iA];
-
                 for (int i = 0; i < updateArray.Length; i++)
                 {
+                    int iA = indexArray[z][i];
+                    oldString[1] = objUpdate.ProcessedTabRow[z][iA];
+
                     updateArray[i] = incrementDataValue(updateArray[i]);
-                    objUpdate.ProcessedTabRow[y][i] = updateArray[i];
+                    objUpdate.ProcessedTabRow[z][iA] = updateArray[i];
                 }
                 return objUpdate.ProcessedTabRow;
             }
