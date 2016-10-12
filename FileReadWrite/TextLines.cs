@@ -103,10 +103,11 @@ namespace FileReadWrite
             //}
 
             // Create one or multiple unique lines & write to new file
-            for (int i = 0; i < tabularLines[1].Length; i++)
+            Console.WriteLine("Value in 'Head': {0}", tabularLines[0][0]);
+            for (int i = 1; i < tabularLines.Length; i++)
             {
-                Console.WriteLine("Value in 'Head': {0}", tabularLines[0][i]);
-                Console.WriteLine("Value in 'Line': {0}", tabularLines[1][i]);
+                foreach(string s in tabularLines[i])
+                Console.WriteLine("Value in 'Line': {0}", s);
             }
 
 

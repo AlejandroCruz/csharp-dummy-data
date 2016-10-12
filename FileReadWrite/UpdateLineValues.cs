@@ -40,27 +40,40 @@ namespace FileReadWrite
                 for (int i = 0; i < updateArray.Length; i++)
                 {
                     int iA = indexArray[z][i];
-                    oldString[1] = objUpdate.ProcessedTabRow[z][iA];
 
-                    if(z==1)
+                    if (z == 1)
+                    {
                         updateArray[i] = incrementDataValue(updateArray[i]);
+                    }
                     objUpdate.ProcessedTabRow[z][iA] = updateArray[i];
                 }
                 return objUpdate.ProcessedTabRow;
             }
             else
             {
-                updatedTabRow = new string[amountLines][];
-                updatedTabRow = objUpdate.ProcessedTabRow;
+                int iA;
+                updatedTabRow = new string[amountLines + 1][];
+                updatedTabRow[0] = objUpdate.ProcessedTabRow[0];
+                updatedTabRow[1] = objUpdate.ProcessedTabRow[1];
 
-                for(int x = 0; x < amountLines; x++)
+                for (int x = 1; x < amountLines + 1; x++)
                 {
-                    updatedTabRow[x] = new string[updateArray.Length];
+                    updatedTabRow[x] = updatedTabRow[1];
 
                     for (int i = 0; i < updateArray.Length; i++)
                     {
-                        updateArray[i] = incrementDataValue(updateArray[i]);
-                        updatedTabRow[x][i] = updateArray[i];
+                        iA = indexArray[z][i];
+
+                        if (z > 0)
+                        {
+                            updateArray[i] = incrementDataValue(updateArray[i]);
+                            updatedTabRow[x][iA] = updateArray[i];
+                        }
+                        else
+                        {
+                            updatedTabRow[x][iA] = updateArray[i];
+                        }
+                        z = 1;
                     }
                 }
                 return updatedTabRow;
