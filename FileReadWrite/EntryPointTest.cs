@@ -12,20 +12,25 @@ namespace FileReadWrite
 
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
 
-            ProcessLines objProcessHead = new ProcessLines();
             ProcessLines objProcessLine = new ProcessLines();
 
             string charToDelete = "\"";
-            string headLine = objProcessHead.removeChar(rawLines[0], charToDelete);
-            string lineLine = objProcessHead.removeChar(rawLines[1], charToDelete);
+            string headLine = objProcessLine.removeChar(rawLines[0], charToDelete);
+            string lineLine = objProcessLine.removeChar(rawLines[1], charToDelete);
             string[] headArr = new string[rawLines[0].Length];
             string[] lineArr = new string[rawLines[1].Length];
-            headArr = objProcessHead.splitValues(headLine, valueDelimiter);
-            lineArr = objProcessHead.splitValues(lineLine, valueDelimiter);
+            headArr = objProcessLine.splitValues(headLine, valueDelimiter);
+            lineArr = objProcessLine.splitValues(lineLine, valueDelimiter);
 
+            int[] elementIndex = new int[] { 0, 7 };
             UpdateLine objUpdateLine = new UpdateLine();
-            lineLine = objUpdateLine.incrementDataValue(lineLine);
-            Console.WriteLine("\nUpdated Line object: {0}", lineLine);
+            objUpdateLine.modifyLine(lineArr, elementIndex);
+            int count = objUpdateLine.StrLine.Length;
+            for (int i = 0; i < count; i++)
+                Console.WriteLine("{0}. {1}", (i+1), objUpdateLine.StrLine[i]);
+
+            Console.WriteLine("\n>>> Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }

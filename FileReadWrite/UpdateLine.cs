@@ -1,28 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FileReadWrite
 {
     class UpdateLine
     {
+        string[] strLine;
+
         public UpdateLine()
         { }
 
-        //public string modifyLine(string inLineStr, int[] indexes)
-        //{
-        //    string strLine = inLineStr;
-        //    int[] indexValue = indexes;
-        //    string tmpString;
+        public string[] StrLine
+        {
+            get { return strLine; }
+        }
 
-        //    for (int i = 0; i< strLine.Length; i++)
-        //    {
-        //        int iA = indexValue[i];
+        public void modifyLine(string[] inLineArr, int[] indexes)
+        {
+            string tmpString;
+            int[] indexValue = indexes;
 
-        //        tmpString = incrementDataValue(strLine[iA]);
-        //        oldArrayVal[iA] = newArrayVal[i];
-        //                        updatedList.Add(oldArrayVal[iA]);
-        //    }
+            strLine = new string[inLineArr.Length];
 
-        //}
+            for (int i = 0; i < inLineArr.Length; i++)
+            {
+                strLine[i] = inLineArr[i];
+            }
+
+            for(int x = 0; x < indexes.Length; x++)
+            {
+                int iA = indexes[x];
+
+                tmpString = incrementDataValue(inLineArr[iA]);
+                strLine.SetValue(tmpString, iA);
+            }
+
+        }
 
 
         public string incrementDataValue(string uString)
