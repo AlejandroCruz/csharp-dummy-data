@@ -5,7 +5,8 @@ namespace FileReadWrite
 {
     class UpdateLine
     {
-        string[] strLine;
+        private string[] strLine;
+        public List<string[]> lineList;
 
         public UpdateLine()
         { }
@@ -27,9 +28,9 @@ namespace FileReadWrite
                 strLine[i] = inLineArr[i];
             }
 
-            for(int x = 0; x < indexes.Length; x++)
+            for(int i = 0; i < indexes.Length; i++)
             {
-                int iA = indexes[x];
+                int iA = indexes[i];
 
                 tmpString = incrementDataValue(inLineArr[iA]);
                 strLine.SetValue(tmpString, iA);
@@ -37,6 +38,27 @@ namespace FileReadWrite
 
         }
 
+        public void multiLine(string[] inLineArr, int[] indexes, int amountL)
+        {
+            int[] indexValue = indexes;
+            string tmpString;
+
+            strLine = new string[inLineArr.Length];
+            lineList = new List<string[]>();
+
+            while(amountL > 0)
+            {
+                for (int j = 0; j < indexes.Length; j++)
+                {
+                    int iA = indexes[j];
+
+                    tmpString = incrementDataValue(inLineArr[iA]);
+                    strLine.SetValue(tmpString, iA);
+                }
+                lineList.Add(strLine);
+                amountL--;
+            }
+        }
 
         public string incrementDataValue(string uString)
         {

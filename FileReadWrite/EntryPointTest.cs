@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FileReadWrite
 {
@@ -23,11 +24,19 @@ namespace FileReadWrite
             lineArr = objProcessLine.splitValues(lineLine, valueDelimiter);
 
             int[] elementIndex = new int[] { 0, 7 };
+            UpdateLine objUpdateHead = new UpdateLine();
             UpdateLine objUpdateLine = new UpdateLine();
+            objUpdateHead.modifyLine(headArr, elementIndex);
             objUpdateLine.modifyLine(lineArr, elementIndex);
-            int count = objUpdateLine.StrLine.Length;
-            for (int i = 0; i < count; i++)
-                Console.WriteLine("{0}. {1}", (i+1), objUpdateLine.StrLine[i]);
+
+            int lineAmount = 2;
+            elementIndex = new int[] { 0, 7 };
+            objUpdateLine.multiLine(lineArr, elementIndex, lineAmount);
+            int count = objUpdateLine.lineList.Count;
+            for(int i = 0; i < count; i++)
+            {
+                Console.WriteLine("Multi line: {0}", objUpdateLine.lineList[i]);
+            }
 
             Console.WriteLine("\n>>> Press any key to exit.");
             Console.ReadKey();
