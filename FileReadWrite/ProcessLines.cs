@@ -74,6 +74,19 @@ namespace FileReadWrite
                 processedTabRow[i] = values;
             }
         }
+        public string[] splitValues(string inLine, char inDelimiters)
+        {
+            string[] values;
+            char delimiters = inDelimiters;
+            string[] valueArr = new string[inLine.Length];
+
+            for (int i = 0; i < valueArr.Length; i++)
+            {
+                values = inLine.Split(delimiters);
+                valueArr = values;
+            }
+            return valueArr;
+        }
 
         public string[] appendValues(string [][] inTabularLines)
         {
