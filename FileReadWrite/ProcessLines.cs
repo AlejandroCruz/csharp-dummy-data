@@ -8,6 +8,7 @@ namespace FileReadWrite
     class ProcessLines
     {
         private string headData;
+        private string editLine;
         private string[] lineData;
         private string[] editedLines;
         private string[][] processedTabRow;
@@ -36,6 +37,18 @@ namespace FileReadWrite
         {
             get { return processedTabRow; }
             set { processedTabRow = value; }
+        }
+
+        public string removeChar(string inLine, string removeC)
+        {
+            editLine = inLine;
+            string c = removeC;
+
+            for (int i = 0; i < editLine.Length; i++)
+            {
+                editLine = inLine.Replace(c, string.Empty);
+            }
+            return editLine;
         }
 
         public string[] deleteChars(string[] inLines, string deleteC)
@@ -83,12 +96,6 @@ namespace FileReadWrite
             headData = updateLines[0];
             return updateLines;
         }
-
-        //public void appendLine(int inAmountLines)
-        //{
-        //    int amountLines = inAmountLines;
-
-        //}
 
     } // END Class
 }

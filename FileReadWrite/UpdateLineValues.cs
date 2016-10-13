@@ -1,20 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FileReadWrite
 {
     class UpdateLineValues
     {
+        private bool modify;
         private char letter = 'A';
         private int amountLines;
         private int charAddCounter = 0;
         private int updateArrayLength = 0;
         private string originUpdateArray;
-        private int[][] indexArray;
-        private string[] oldString;
-        private string[] updateArray;
+        private int[] indexValue;
+        //private int[][] indexArray;
+        //private string[] oldString;
+        private string[] oldArrayVal;
+        private string[] newArrayVal;
+        //private string[] updateArray;
         private string[][] updatedTabRow;
+        List<string> updatedList;
         private ProcessLines objUpdate;
 
+        public UpdateLineValues()
+        { }
         public UpdateLineValues(ProcessLines inProcLine)
         {
             objUpdate = new ProcessLines();
@@ -26,59 +34,110 @@ namespace FileReadWrite
             get { return updatedTabRow; }
         }
 
-        public string[][] updateLine(string[] inLineVal, int[][] indexes, int inAmountLines)
+        public List<string> updateLine(string[] inOldVal, string[] inNewVal, int[] indexes, int inAmountLines, bool inModify)
         {
-            updateArray = inLineVal;
-            indexArray = indexes;
+            oldArrayVal = new string [inOldVal.Length];
+            newArrayVal = inNewVal;
+            indexValue = indexes;
             amountLines = inAmountLines;
-            oldString = new string[indexArray.Length];
-
-            int z = (indexArray[0].Length == 0) ? 1 : 0; // "Header" line-data empty?
+            modify = inModify;
+            updatedList = new List<string>();
 
             if (amountLines == 1)
             {
-                for (int i = 0; i < updateArray.Length; i++)
+                for (int i = 0; i < newArrayVal.Length; i++)
                 {
-                    int iA = indexArray[z][i];
+                    int iA = indexValue[i];
 
-                    if (z == 1)
+                    if(modify)
                     {
-                        updateArray[i] = incrementDataValue(updateArray[i]);
+                        newArrayVal[i] = incrementDataValue(newArrayVal[i]);
                     }
-                    objUpdate.ProcessedTabRow[z][iA] = updateArray[i];
+                    oldArrayVal[iA] = newArrayVal[i];
+                    updatedList.Add(oldArrayVal[iA]);
                 }
-                return objUpdate.ProcessedTabRow;
+                return updatedList;
             }
             else
             {
                 int iA;
-                updatedTabRow = new string[amountLines + 1][];
-                updatedTabRow[0] = objUpdate.ProcessedTabRow[0];
-                updatedTabRow[1] = objUpdate.ProcessedTabRow[1];
+                updatedTabRow = new string[amountLines][];
 
-                for (int x = 1; x < amountLines + 1; x++)
+                for (int x = 0; x < amountLines; x++)
                 {
-                    updatedTabRow[x] = updatedTabRow[1];
-
-                    for (int i = 0; i < updateArray.Length; i++)
+                    for (int i = 0; i < newArrayVal.Length; i++)
                     {
-                        iA = indexArray[z][i];
+                        iA = indexValue[i];
 
-                        if (z > 0)
+                        if (modify)
                         {
-                            updateArray[i] = incrementDataValue(updateArray[i]);
-                            updatedTabRow[x][iA] = updateArray[i];
+                            newArrayVal[i] = incrementDataValue(newArrayVal[i]);
+                            oldArrayVal[iA] = newArrayVal[i];
+                            updatedList.Add(oldArrayVal[iA]);
                         }
                         else
                         {
-                            updatedTabRow[x][iA] = updateArray[i];
+                            oldArrayVal[iA] = newArrayVal[i];
+                            updatedList.Add(oldArrayVal[iA]);
                         }
-                        z = 1;
                     }
                 }
-                return updatedTabRow;
+                return updatedList;
             }
         }
+        //public string[][] updateLine(string[] inLineVal, int[][] indexes, int inAmountLines)
+        //{
+        //    updateArray = inLineVal;
+        //    indexArray = indexes;
+        //    amountLines = inAmountLines;
+        //    oldString = new string[indexArray.Length];
+
+        //    int z = (indexArray[0].Length == 0) ? 1 : 0; // "Header" line-data empty?
+
+        //    if (amountLines == 1)
+        //    {
+        //        for (int i = 0; i < updateArray.Length; i++)
+        //        {
+        //            int iA = indexArray[z][i];
+
+        //            if (z == 1)
+        //            {
+        //                updateArray[i] = incrementDataValue(updateArray[i]);
+        //            }
+        //            objUpdate.ProcessedTabRow[z][iA] = updateArray[i];
+        //        }
+        //        return objUpdate.ProcessedTabRow;
+        //    }
+        //    else
+        //    {
+        //        int iA;
+        //        updatedTabRow = new string[amountLines + 1][];
+        //        updatedTabRow[0] = objUpdate.ProcessedTabRow[0];
+        //        updatedTabRow[1] = objUpdate.ProcessedTabRow[1];
+
+        //        for (int x = 1; x < amountLines + 1; x++)
+        //        {
+        //            updatedTabRow[x] = updatedTabRow[1];
+
+        //            for (int i = 0; i < updateArray.Length; i++)
+        //            {
+        //                iA = indexArray[z][i];
+
+        //                if (z > 0)
+        //                {
+        //                    updateArray[i] = incrementDataValue(updateArray[i]);
+        //                    updatedTabRow[x][iA] = updateArray[i];
+        //                }
+        //                else
+        //                {
+        //                    updatedTabRow[x][iA] = updateArray[i];
+        //                }
+        //                z = 1;
+        //            }
+        //        }
+        //        return updatedTabRow;
+        //    }
+        //}
 
         private string incrementDataValue(string inUpdateStr)
         {

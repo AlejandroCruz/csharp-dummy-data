@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateTextFile.cs" />
+    <Compile Include="EntryPointTest.cs" />
     <Compile Include="ProcessLines.cs" />
     <Compile Include="TextLines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
