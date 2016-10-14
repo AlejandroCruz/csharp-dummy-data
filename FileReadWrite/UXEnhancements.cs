@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * UX enhancement:
+ * - Deafult constructor takes optional time argument
+ * - Method 'addDelay' parameters: inTime, inText, inLoop
+ */
+
+using System;
 using System.Threading.Tasks;
 
 namespace FileReadWrite

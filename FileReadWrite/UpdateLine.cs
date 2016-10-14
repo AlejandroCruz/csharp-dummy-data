@@ -32,12 +32,6 @@ namespace FileReadWrite
             string tmpString;
             int[] indexValue = indexes;
             strList = sList;
-            //strLine = new string[inLineArr.Length];
-
-            //for (int i = 0; i < inLineArr.Length; i++)
-            //{
-            //    strLine[i] = inLineArr[i];
-            //}
 
             for(int i = 0; i < indexes.Length; i++)
             {
@@ -54,8 +48,6 @@ namespace FileReadWrite
             string tmpString;
             strListArr = new List<string[]>();
 
-            //strLine = new string[inLineArr.Length];
-            //strLine = inLineArr;
             for(int i = 0; i < totalL; i++)
             {
 
@@ -64,7 +56,6 @@ namespace FileReadWrite
                     int iA = indexes[j];
 
                     tmpString = incrementDataValue(strList[iA]);
-                    //strLine.SetValue(tmpString, iA);
                     strList[iA] = tmpString;
                 }
                 strListArr.Add(strList.ToArray());
