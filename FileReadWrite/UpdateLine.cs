@@ -6,57 +6,68 @@ namespace FileReadWrite
     class UpdateLine
     {
         private string[] strLine;
-        public List<string[]> lineList;
+        List<string> strList;
+        public List<string> strListArr;
 
         public UpdateLine()
-        { }
+        {
+            strList = new List<string>();
+        }
 
         public string[] StrLine
         {
             get { return strLine; }
         }
+        public List<string> StrList
+        {
+            get { return strList; }
+        }
+        public List<string> StrListArr
+        {
+            get { return strListArr; }
+        }
 
-        public void modifyLine(string[] inLineArr, int[] indexes)
+        public void modifyLine(List<string> sList, int[] indexes)
         {
             string tmpString;
             int[] indexValue = indexes;
+            strList = sList;
+            //strLine = new string[inLineArr.Length];
 
-            strLine = new string[inLineArr.Length];
-
-            for (int i = 0; i < inLineArr.Length; i++)
-            {
-                strLine[i] = inLineArr[i];
-            }
+            //for (int i = 0; i < inLineArr.Length; i++)
+            //{
+            //    strLine[i] = inLineArr[i];
+            //}
 
             for(int i = 0; i < indexes.Length; i++)
             {
                 int iA = indexes[i];
 
-                tmpString = incrementDataValue(inLineArr[iA]);
-                strLine.SetValue(tmpString, iA);
+                tmpString = incrementDataValue(sList[iA]);
+                strList[iA] = tmpString;
             }
-
         }
 
-        public void multiLine(string[] inLineArr, int[] indexes, int amountL)
+        public void multiLine(int[] indexes, int totalL)
         {
             int[] indexValue = indexes;
             string tmpString;
 
-            strLine = new string[inLineArr.Length];
-            lineList = new List<string[]>();
-
-            while(amountL > 0)
+            //strLine = new string[inLineArr.Length];
+            //strLine = inLineArr;
+            for(int i = 0; i < totalL; i++)
             {
+                strListArr = new List<string>();
+
                 for (int j = 0; j < indexes.Length; j++)
                 {
                     int iA = indexes[j];
 
-                    tmpString = incrementDataValue(inLineArr[iA]);
-                    strLine.SetValue(tmpString, iA);
+                    tmpString = incrementDataValue(strList[iA]);
+                    //strLine.SetValue(tmpString, iA);
+                    strList[iA] = tmpString;
                 }
-                lineList.Add(strLine);
-                amountL--;
+                strListArr.Add(strList.ToString());
             }
         }
 

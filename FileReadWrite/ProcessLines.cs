@@ -16,6 +16,8 @@ namespace FileReadWrite
         private string[][] tabularLines;
         private StringBuilder strBuild;
 
+        public List<string> lineList;
+
         // Constructors
         public ProcessLines()
         { }
@@ -74,41 +76,43 @@ namespace FileReadWrite
                 processedTabRow[i] = values;
             }
         }
-        public string[] splitValues(string inLine, char inDelimiters)
+        public List<string> splitValues(string inLine, char inDelimiters)
         {
             string[] values;
             char delimiters = inDelimiters;
             string[] valueArr = new string[inLine.Length];
+            lineList = new List<string>();
 
-            for (int i = 0; i < valueArr.Length; i++)
+            values = inLine.Split(delimiters);
+
+            for(int i = 0; i < values.Length; i++)
             {
-                values = inLine.Split(delimiters);
-                valueArr = values;
+                lineList.Add(values[i]);
             }
-            return valueArr;
+            return lineList;
         }
 
-        public string[] appendValues(string [][] inTabularLines)
-        {
-            tabularLines = inTabularLines;
-            int lineCount = tabularLines.Length;
-            updateLines = new string[lineCount];
+        //public string[] appendValues(string [][] inTabularLines)
+        //{
+        //    tabularLines = inTabularLines;
+        //    int lineCount = tabularLines.Length;
+        //    updateLines = new string[lineCount];
 
-            for (int i = 0; i < lineCount; i++)
-            {
-                strBuild = new StringBuilder();
+        //    for (int i = 0; i < lineCount; i++)
+        //    {
+        //        strBuild = new StringBuilder();
 
-                for (int x= 0; x < this.ProcessedTabRow[i].Length; x++)
-                {
-                    strBuild.Append(this.ProcessedTabRow[i][x] + ",");
-                }
-                updateLines[i] = strBuild.ToString().Trim(new char[] { ' ', ',' });
-                if (i > 0)
-                    lineData[i-1] = updateLines[i];
-            }
-            headData = updateLines[0];
-            return updateLines;
-        }
+        //        for (int x= 0; x < this.ProcessedTabRow[i].Length; x++)
+        //        {
+        //            strBuild.Append(this.ProcessedTabRow[i][x] + ",");
+        //        }
+        //        updateLines[i] = strBuild.ToString().Trim(new char[] { ' ', ',' });
+        //        if (i > 0)
+        //            lineData[i-1] = updateLines[i];
+        //    }
+        //    headData = updateLines[0];
+        //    return updateLines;
+        //}
 
     } // END Class
 }

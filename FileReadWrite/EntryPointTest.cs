@@ -18,25 +18,30 @@ namespace FileReadWrite
             string charToDelete = "\"";
             string headLine = objProcessLine.removeChar(rawLines[0], charToDelete);
             string lineLine = objProcessLine.removeChar(rawLines[1], charToDelete);
-            string[] headArr = new string[rawLines[0].Length];
-            string[] lineArr = new string[rawLines[1].Length];
-            headArr = objProcessLine.splitValues(headLine, valueDelimiter);
-            lineArr = objProcessLine.splitValues(lineLine, valueDelimiter);
+            //string[] headArr = new string[rawLines[0].Length];
+            //string[] lineArr = new string[rawLines[1].Length];
+            List<string> headList = new List<string>();
+            List<string> lineList = new List<string>();
+            headList = objProcessLine.splitValues(headLine, valueDelimiter);
+            lineList = objProcessLine.splitValues(lineLine, valueDelimiter);
 
             int[] elementIndex = new int[] { 0, 7 };
             UpdateLine objUpdateHead = new UpdateLine();
             UpdateLine objUpdateLine = new UpdateLine();
-            objUpdateHead.modifyLine(headArr, elementIndex);
-            objUpdateLine.modifyLine(lineArr, elementIndex);
+            objUpdateHead.modifyLine(headList, elementIndex);
+            objUpdateLine.modifyLine(lineList, elementIndex);
 
-            int lineAmount = 2;
             elementIndex = new int[] { 0, 7 };
-            objUpdateLine.multiLine(lineArr, elementIndex, lineAmount);
-            int count = objUpdateLine.lineList.Count;
-            for(int i = 0; i < count; i++)
-            {
-                Console.WriteLine("Multi line: {0}", objUpdateLine.lineList[i]);
-            }
+            int totalLines = 3;
+            objUpdateLine.multiLine(elementIndex, totalLines);
+
+            int count = objUpdateLine.StrListArr.Count;
+            objUpdateLine.StrList.ForEach(Console.WriteLine);
+            //for (int i = 0; i < count; i++)
+            //{
+            //    foreach(string s in objUpdateLine.strListArr)
+            //    Console.WriteLine("Multi line: {0}", s);
+            //}
 
             Console.WriteLine("\n>>> Press any key to exit.");
             Console.ReadKey();
