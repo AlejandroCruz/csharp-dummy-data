@@ -7,7 +7,7 @@ namespace FileReadWrite
     {
         private string[] strLine;
         List<string> strList;
-        public List<string> strListArr;
+        List<string[]> strListArr;
 
         public UpdateLine()
         {
@@ -22,7 +22,7 @@ namespace FileReadWrite
         {
             get { return strList; }
         }
-        public List<string> StrListArr
+        public List<string[]> StrListArr
         {
             get { return strListArr; }
         }
@@ -52,12 +52,12 @@ namespace FileReadWrite
         {
             int[] indexValue = indexes;
             string tmpString;
+            strListArr = new List<string[]>();
 
             //strLine = new string[inLineArr.Length];
             //strLine = inLineArr;
             for(int i = 0; i < totalL; i++)
             {
-                strListArr = new List<string>();
 
                 for (int j = 0; j < indexes.Length; j++)
                 {
@@ -67,7 +67,7 @@ namespace FileReadWrite
                     //strLine.SetValue(tmpString, iA);
                     strList[iA] = tmpString;
                 }
-                strListArr.Add(strList.ToString());
+                strListArr.Add(strList.ToArray());
             }
         }
 
