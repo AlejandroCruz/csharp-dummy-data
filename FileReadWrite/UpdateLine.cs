@@ -29,8 +29,16 @@ namespace FileReadWrite
 
         public void modifyLine(List<string> sList, int[] indexes)
         {
+            try
+            {
+                if(indexes.GetLength(0) == 0) { return; }
+            }
+            catch(IndexOutOfRangeException)
+            {
+                return;
+            }
+
             string tmpString;
-            int[] indexValue = indexes;
             strList = sList;
 
             for(int i = 0; i < indexes.Length; i++)
@@ -44,7 +52,6 @@ namespace FileReadWrite
 
         public void multiLine(int[] indexes, int totalL)
         {
-            int[] indexValue = indexes;
             string tmpString;
             strListArr = new List<string[]>();
 
@@ -64,22 +71,10 @@ namespace FileReadWrite
 
         public string incrementDataValue(string uString)
         {
-            int tmpInt;
             string uStr = uString;
             DateTime tmpDt;
 
-            if (Int32.TryParse(uStr, out tmpInt))
-            {
-                tmpInt++;
-                uStr = Convert.ToString(tmpInt);
-            }
-            else if (DateTime.TryParse(uStr, out tmpDt))
-            {
-                DateTime tD = tmpDt.AddDays(1);
-                string format = "yyyy-M-d";
-                uStr = tD.ToString(format);
-            }
-            else
+            if(System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D"))
             {
                 char letter = 'A';
                 int charAddCounter = 0;
@@ -101,6 +96,22 @@ namespace FileReadWrite
                 }
                 uStr = letter + uStr;
                 letter++;
+            }
+            if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\d"))
+            {
+                long tmpInt = long.Parse(uStr);
+                tmpInt++;
+                uStr = tmpInt.ToString();
+            }
+            else if (DateTime.TryParse(uStr, out tmpDt))
+            {
+                DateTime tD = tmpDt.AddDays(1);
+                string format = "yyyy-M-d";
+                uStr = tD.ToString(format);
+            }
+            else
+            {
+                uStr = "n-" + uStr;
             }
             return uStr;
         }
