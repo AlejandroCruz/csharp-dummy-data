@@ -5,7 +5,10 @@ namespace FileReadWrite
 {
     class UpdateLine
     {
-        private string[] strLine;
+        private bool multiLine;
+        char letter = 'A';
+        int charAddCounter = 0;
+        int originUpdateArrLength;
         List<string> strList;
         List<string[]> strListArr;
 
@@ -14,10 +17,6 @@ namespace FileReadWrite
             strList = new List<string>();
         }
 
-        public string[] StrLine
-        {
-            get { return strLine; }
-        }
         public List<string> StrList
         {
             get { return strList; }
@@ -27,13 +26,15 @@ namespace FileReadWrite
             get { return strListArr; }
         }
 
-        public void modifyLine(List<string> sList, int[] indexes)
+        public void modifySingleLine(List<string> sList, int[] indexes)
         {
+            multiLine = false;
+
             try
             {
-                if(indexes.GetLength(0) == 0) { return; }
+                if (indexes.GetLength(0) == 0) { return; }
             }
-            catch(IndexOutOfRangeException)
+            catch (IndexOutOfRangeException)
             {
                 return;
             }
@@ -41,54 +42,52 @@ namespace FileReadWrite
             string tmpString;
             strList = sList;
 
-            for(int i = 0; i < indexes.Length; i++)
+            for (int i = 0; i < indexes.Length; i++)
             {
                 int iA = indexes[i];
 
-                tmpString = incrementDataValue(sList[iA]);
+                tmpString = incrementDataValue(sList[iA], multiLine);
                 strList[iA] = tmpString;
             }
         }
 
-        public void multiLine(int[] indexes, int totalL)
+        public void modifyMultiLine(int[] indexes, int totalL)
         {
+            multiLine = true;
             string tmpString;
             strListArr = new List<string[]>();
 
-            for(int i = 0; i < totalL; i++)
+            for (int i = 0; i < totalL; i++)
             {
 
                 for (int j = 0; j < indexes.Length; j++)
                 {
                     int iA = indexes[j];
 
-                    tmpString = incrementDataValue(strList[iA]);
+                    tmpString = incrementDataValue(strList[iA], multiLine);
                     strList[iA] = tmpString;
                 }
                 strListArr.Add(strList.ToArray());
             }
         }
 
-        public string incrementDataValue(string uString)
+        public string incrementDataValue(string uString, bool multiLine)
         {
+            int updateArrayLength = uString.Length;
             string uStr = uString;
+            string originUpdateArray;
             DateTime tmpDt;
 
-            if(System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D") && (multiLine))
             {
-                char letter = 'A';
-                int charAddCounter = 0;
-                int updateArrayLength = 0;
-                string originUpdateArray;
-
                 switch (charAddCounter)
                 {
                     case 0:
-                        updateArrayLength = uStr.Length;
+                        originUpdateArrLength = updateArrayLength;
                         charAddCounter++;
                         break;
                     case 1:
-                        originUpdateArray = uStr.Substring((uStr.Length - updateArrayLength), updateArrayLength);
+                        originUpdateArray = uStr.Substring((uStr.Length - originUpdateArrLength), originUpdateArrLength);
                         uStr = originUpdateArray;
                         break;
                     default:
@@ -108,10 +107,6 @@ namespace FileReadWrite
                 DateTime tD = tmpDt.AddDays(1);
                 string format = "yyyy-M-d";
                 uStr = tD.ToString(format);
-            }
-            else
-            {
-                uStr = "n-" + uStr;
             }
             return uStr;
         }
