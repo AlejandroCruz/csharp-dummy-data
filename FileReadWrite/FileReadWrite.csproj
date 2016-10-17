@@ -55,9 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Assets\processedData.csv" />
     <None Include="Assets\rawData.csv" />
-    <None Include="Assets\updatedData.csv" />
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
