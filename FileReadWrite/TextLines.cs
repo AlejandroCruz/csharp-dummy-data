@@ -38,7 +38,7 @@ namespace FileReadWrite
             objUpdateHead.modifySingleLine(headList, elementIndex);
 
             UpdateLine objUpdateLine = new UpdateLine();
-            elementIndex = new int[] { 0 };
+            elementIndex = new int[] { 0, 1, 3 };
             objUpdateLine.modifySingleLine(lineList, elementIndex);
 
             int totalLines = 10;
