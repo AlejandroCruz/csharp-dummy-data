@@ -1,7 +1,7 @@
 ﻿/*
  * Console application: FileReadWrite
  * Date: 9/2016
- * Description: Training purpose application to learn I/O process in C#
+ * Description:
  *  The application reads lines of text from file in specified dir. path
  *  and displays to console. It deletes special characters and rewrites
  *  the data to new file.

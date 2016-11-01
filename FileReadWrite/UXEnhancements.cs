@@ -1,7 +1,6 @@
 ﻿/*
  * UX enhancement:
- * - Deafult constructor takes optional time argument
- * - Method 'addDelay' parameters: inTime, inText, inLoop
+ * Add delay between displaying lines in order to not show all results at once when console output.
  */
 
 using System;
