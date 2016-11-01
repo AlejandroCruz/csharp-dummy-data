@@ -1,11 +1,10 @@
 ﻿/*
  * Console application: FileReadWrite
- * Date: 9/2016
- * Description: Training purpose application to learn I/O process in C#
- *  The application reads lines of text from file in specified dir. path
- *  and displays to console. It deletes special characters and rewrites
- *  the data to new file.
- *  Added delay functions are for end user experience.
+ * Date: 9/2016 - 11/2016
+ * Description:
+ *  Read lines of text from file in specified dir. path and display to console.
+ *  Delete special characters and rewrite the data to new file.
+ *  Optional delay functions are for end user experience.
  */
 
 using System;
@@ -19,25 +18,24 @@ namespace FileReadWrite
         {
             string csvRawFileName = "rawData.csv";
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
-            char valueDelimiter = ',';
-
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
 
-            ProcessLines objProcessLine = new ProcessLines();
-
             string charToDelete = "\"";
+            ProcessLines objProcessLine = new ProcessLines();
             string headLine = objProcessLine.removeChar(rawLines[0], charToDelete);
             string lineLine = objProcessLine.removeChar(rawLines[1], charToDelete);
+
+            char valueDelimiter = ',';
             List<string> headList = new List<string>();
             List<string> lineList = new List<string>();
             headList = objProcessLine.splitValues(headLine, valueDelimiter);
             lineList = objProcessLine.splitValues(lineLine, valueDelimiter);
 
-            UpdateLine objUpdateHead = new UpdateLine();
             int[] elementIndex = new int[] { };
-            objUpdateHead.modifySingleLine(headList, elementIndex);
-
+            UpdateLine objUpdateHead = new UpdateLine();
             UpdateLine objUpdateLine = new UpdateLine();
+            // elementIndex = new int[] { 0 };
+            objUpdateHead.modifySingleLine(headList, elementIndex);
             elementIndex = new int[] { 0, 1, 3 };
             objUpdateLine.modifySingleLine(lineList, elementIndex);
 
