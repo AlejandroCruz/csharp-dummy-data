@@ -6,8 +6,6 @@ namespace FileReadWrite
     class UpdateLine
     {
         private bool multiLine;
-        char letter = 'A';
-        int charAddCounter = 0;
         int originUpdateArrLength;
         List<string> strList;
         List<string[]> strListArr;
@@ -44,6 +42,7 @@ namespace FileReadWrite
                     Console.WriteLine("Index adjusted to minimum: {0}", indexes.Length);
                 }
             }
+// TODO //
             catch (IndexOutOfRangeException e)
             {
             }
@@ -82,36 +81,43 @@ namespace FileReadWrite
 
         public string incrementDataValue(string uString, bool multiLine)
         {
+            char letter = 'A';
+            int charAddCounter = 0;
+
             int updateArrayLength = uString.Length;
+            long tmpLong;
             string uStr = uString;
             string originUpdateArray;
             DateTime tmpDt;
 
             // Matches any character other than a decimal digit.
-            if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D") && (multiLine))
+            if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D"))
             {
                 switch (charAddCounter)
                 {
                     case 0:
                         originUpdateArrLength = updateArrayLength;
                         charAddCounter++;
+                        uStr = letter + uStr;
+                        letter++;
                         break;
                     case 1:
                         originUpdateArray = uStr.Substring((uStr.Length - originUpdateArrLength), originUpdateArrLength);
                         uStr = originUpdateArray;
+                        uStr = letter + uStr;
+                        letter++;
                         break;
                     default:
+                        uStr = letter + uStr;
+                        letter++;
                         break;
                 }
-                uStr = letter + uStr;
-                letter++;
             }
             // Matches any decimal digit.
-            if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\d"))
+            else if (long.TryParse(uStr, out tmpLong))
             {
-                long tmpInt = long.Parse(uStr);
-                tmpInt++;
-                uStr = tmpInt.ToString();
+                tmpLong++;
+                uStr = tmpLong.ToString();
             }
             else if (DateTime.TryParse(uStr, out tmpDt))
             {
