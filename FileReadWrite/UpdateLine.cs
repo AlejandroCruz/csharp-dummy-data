@@ -32,11 +32,20 @@ namespace FileReadWrite
 
             try
             {
-                if (indexes.GetLength(0) == 0) { return; }
+                if (indexes.Length > sList.Count)
+                {
+                    Console.WriteLine("Warning! index count: {0} greater than header elements: {1}", indexes.Length, sList.Count);
+                    Array.Resize(ref indexes, sList.Count);
+                    Console.WriteLine("\nIndex adjusted to maximum: {0}", indexes.Length);
+                }
+                else if (indexes.Length == 0)
+                {
+                    Array.Resize(ref indexes, 1);
+                    Console.WriteLine("Index adjusted to minimum: {0}", indexes.Length);
+                }
             }
-            catch (IndexOutOfRangeException)
+            catch (IndexOutOfRangeException e)
             {
-                return;
             }
 
             string tmpString;
@@ -78,6 +87,7 @@ namespace FileReadWrite
             string originUpdateArray;
             DateTime tmpDt;
 
+            // Matches any character other than a decimal digit.
             if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D") && (multiLine))
             {
                 switch (charAddCounter)
@@ -96,6 +106,7 @@ namespace FileReadWrite
                 uStr = letter + uStr;
                 letter++;
             }
+            // Matches any decimal digit.
             if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\d"))
             {
                 long tmpInt = long.Parse(uStr);

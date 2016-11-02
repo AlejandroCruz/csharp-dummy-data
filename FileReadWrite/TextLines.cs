@@ -16,7 +16,7 @@ namespace FileReadWrite
     {
         public static void Main(string[] args)
         {
-            string csvRawFileName = "rawData.csv";
+            string csvRawFileName = "rawDataTest.csv";
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
 
@@ -31,10 +31,10 @@ namespace FileReadWrite
             headList = objProcessLine.splitValues(headLine, valueDelimiter);
             lineList = objProcessLine.splitValues(lineLine, valueDelimiter);
 
-            int[] elementIndex = new int[] { };
+            int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
             UpdateLine objUpdateHead = new UpdateLine();
             UpdateLine objUpdateLine = new UpdateLine();
-            // elementIndex = new int[] { 0 };
+            elementIndex = new int[4] { 0,1,2,3};
             objUpdateHead.modifySingleLine(headList, elementIndex);
             elementIndex = new int[] { 0, 1, 3 };
             objUpdateLine.modifySingleLine(lineList, elementIndex);
