@@ -5,11 +5,8 @@ namespace FileReadWrite
 {
     class UpdateLine
     {
-        private bool multiLine;
         private char letter = 'A';
         private int totalOfLines;
-        private int charAddCounter = 0;
-        private int originUpdateArrLength;
         private List<string> originStrList;
         private List<string> strList;
         private  List<string[]> strListArr;
@@ -40,18 +37,18 @@ namespace FileReadWrite
                 }
                 else if (indexes.Length == 0)
                 {
-                    Array.Resize(ref indexes, 1);
-                    Console.WriteLine("Index adjusted to minimum: {0}", indexes.Length);
+                    Console.WriteLine("Index empty. No value modified: {0}", indexes.Length);
+                    //Array.Resize(ref indexes, 1);
+                    //Console.WriteLine("Index adjusted to minimum: {0}", indexes.Length);
                 }
             }
 // TODO //
-            catch (IndexOutOfRangeException e)
+            catch (IndexOutOfRangeException)
             {
             }
 
             string tmpString;
             strList = originStrList = sList;
-            multiLine = false;
 
             for (int i = 0; i < indexes.Length; i++)
             {
@@ -62,10 +59,10 @@ namespace FileReadWrite
             }
         }
 
-        public void modifyMultiLine(int[] indexes)
+        public void modifyMultiLine(List<string> sList, int[] indexes)
         {
-            multiLine = true;
             string tmpString;
+            strList = originStrList = sList;
             strListArr = new List<string[]>();
 
             for (int i = 0; i < totalOfLines; i++)
@@ -85,7 +82,6 @@ namespace FileReadWrite
 
         public string incrementDataValue(string uString, int thisIndex)
         {
-            int updateArrLength = uString.Length;
             long tmpLong;
             string uStr = uString;
             string originUpdateArray;

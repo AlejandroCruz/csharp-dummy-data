@@ -34,17 +34,21 @@ namespace FileReadWrite
             int totalLines = 0;
             int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
             UpdateLine objUpdateHead = new UpdateLine(totalLines);
-            UpdateLine objUpdateLine = new UpdateLine(totalLines = 10);
-            //elementIndex = new int[] { 0,1,2,3,4,5,6 };
             objUpdateHead.modifySingleLine(headList, elementIndex);
-            elementIndex = new int[] { 0, 1, 3 };
-            objUpdateLine.modifySingleLine(lineList, elementIndex);
 
-            objUpdateLine.modifyMultiLine(elementIndex);
+            totalLines = 4;
+            elementIndex = new int[] { 0, 1 };
+            UpdateLine objUpdateLine = new UpdateLine(totalLines);
+            if (totalLines <= 1)
+            { objUpdateLine.modifySingleLine(lineList, elementIndex); }
+            else
+            { objUpdateLine.modifyMultiLine(lineList, elementIndex); }
 
-            Console.WriteLine(">>> Begin");
+            Console.WriteLine(">>> Begin\n");
             foreach (string s in objUpdateHead.StrList)
+            {
                 Console.Write("{0}, ", s);
+            }
             Console.Write(Environment.NewLine);
             int count = objUpdateLine.StrListArr.Count;
             for (int i = 0; i < count; i++)
