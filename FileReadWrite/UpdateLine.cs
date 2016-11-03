@@ -11,11 +11,10 @@ namespace FileReadWrite
         private List<string> strList;
         private  List<string[]> strListArr;
 
-        public UpdateLine(int inTotalOfLines)
+        public UpdateLine(List<string> dataList, int inTotalOfLines)
         {
+            originStrList = new List<string>(dataList);
             totalOfLines = inTotalOfLines;
-            originStrList = new List<string>();
-            strList = new List<string>();
         }
 // TODO //
         public List<string> StrList { get { return strList; } }
@@ -25,14 +24,14 @@ namespace FileReadWrite
             set { originStrList = value; }
         }
 
-        public void modifySingleLine(List<string> sList, int[] indexes)
+        public void modifySingleLine(int[] indexes)
         {
             try
             {
-                if (indexes.Length > sList.Count)
+                if (indexes.Length > originStrList.Count)
                 {
-                    Console.WriteLine("Warning! index count: {0} greater than header elements: {1}", indexes.Length, sList.Count);
-                    Array.Resize(ref indexes, sList.Count);
+                    Console.WriteLine("Warning! index count: {0} greater than header elements: {1}", indexes.Length, originStrList.Count);
+                    Array.Resize(ref indexes, originStrList.Count);
                     Console.WriteLine("\nIndex adjusted to maximum: {0}", indexes.Length);
                 }
                 else if (indexes.Length == 0)
@@ -48,21 +47,21 @@ namespace FileReadWrite
             }
 
             string tmpString;
-            strList = originStrList = sList;
+            strList = new List<string>(originStrList);
 
             for (int i = 0; i < indexes.Length; i++)
             {
                 int iA = indexes[i];
 
-                tmpString = incrementDataValue(sList[iA], iA);
+                tmpString = incrementDataValue(originStrList[iA], iA);
                 strList[iA] = tmpString;
             }
         }
 
-        public void modifyMultiLine(List<string> sList, int[] indexes)
+        public void modifyMultiLine(int[] indexes)
         {
             string tmpString;
-            strList = originStrList = sList;
+            strList = new List<string>(originStrList);
             strListArr = new List<string[]>();
 
             for (int i = 0; i < totalOfLines; i++)
@@ -84,7 +83,7 @@ namespace FileReadWrite
         {
             long tmpLong;
             string uStr = uString;
-            string originUpdateArray;
+            string tmpString;
             DateTime tmpDt;
 
             // Matches any character other than a decimal digit.
@@ -92,7 +91,8 @@ namespace FileReadWrite
             {
                 if (uString.Length > originStrList[thisIndex].Length)
                 {
-                    originUpdateArray = uStr.Substring((uString.Length - originStrList[thisIndex].Length), uString.Length);
+                    tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
+                    uStr = letter + tmpString;
                 }
                 else
                 {

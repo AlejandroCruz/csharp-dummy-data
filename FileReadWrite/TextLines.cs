@@ -23,33 +23,33 @@ namespace FileReadWrite
             string charToDelete = "\"";
             ProcessLines objProcessLine = new ProcessLines();
             string headLine = objProcessLine.removeChar(rawLines[0], charToDelete);
-            string lineLine = objProcessLine.removeChar(rawLines[1], charToDelete);
+            string recordLine = objProcessLine.removeChar(rawLines[1], charToDelete);
 
             char valueDelimiter = ',';
             List<string> headList = new List<string>();
-            List<string> lineList = new List<string>();
+            List<string> recordList = new List<string>();
             headList = objProcessLine.splitValues(headLine, valueDelimiter);
-            lineList = objProcessLine.splitValues(lineLine, valueDelimiter);
+            recordList = objProcessLine.splitValues(recordLine, valueDelimiter);
 
             int totalLines = 0;
             int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
-            UpdateLine objUpdateHead = new UpdateLine(totalLines);
-            objUpdateHead.modifySingleLine(headList, elementIndex);
+            //UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
+            //objUpdateHead.modifySingleLine(elementIndex);
 
             totalLines = 4;
             elementIndex = new int[] { 0, 1 };
-            UpdateLine objUpdateLine = new UpdateLine(totalLines);
+            UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
             if (totalLines <= 1)
-            { objUpdateLine.modifySingleLine(lineList, elementIndex); }
+            { objUpdateLine.modifySingleLine(elementIndex); }
             else
-            { objUpdateLine.modifyMultiLine(lineList, elementIndex); }
+            { objUpdateLine.modifyMultiLine(elementIndex); }
 
             Console.WriteLine(">>> Begin\n");
-            foreach (string s in objUpdateHead.StrList)
-            {
-                Console.Write("{0}, ", s);
-            }
-            Console.Write(Environment.NewLine);
+            //foreach (string s in objUpdateHead.StrList)
+            //{
+            //    Console.Write("{0}, ", s);
+            //}
+            //Console.Write(Environment.NewLine);
             int count = objUpdateLine.StrListArr.Count;
             for (int i = 0; i < count; i++)
             {
