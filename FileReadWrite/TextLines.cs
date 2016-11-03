@@ -43,6 +43,9 @@ namespace FileReadWrite
             objUpdateLine.modifyMultiLine(elementIndex);
 
             Console.WriteLine(">>> Begin");
+            foreach (string s in objUpdateHead.StrList)
+                Console.Write("{0}, ", s);
+            Console.Write(Environment.NewLine);
             int count = objUpdateLine.StrListArr.Count;
             for (int i = 0; i < count; i++)
             {
@@ -50,9 +53,6 @@ namespace FileReadWrite
                     Console.Write("{0}, ", s);
                 Console.Write(Environment.NewLine);
             }
-
-
-
             Console.WriteLine("\n>>> Press any key to exit.");
             Console.ReadKey();
         }
