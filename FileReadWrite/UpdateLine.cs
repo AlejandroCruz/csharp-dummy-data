@@ -6,28 +6,30 @@ namespace FileReadWrite
     class UpdateLine
     {
         private bool multiLine;
-        int originUpdateArrLength;
-        List<string> strList;
-        List<string[]> strListArr;
+        private char letter = 'A';
+        private int totalOfLines;
+        private int charAddCounter = 0;
+        private int originUpdateArrLength;
+        private List<string> originStrList;
+        private List<string> strList;
+        private  List<string[]> strListArr;
 
-        public UpdateLine()
+        public UpdateLine(int inTotalOfLines)
         {
+            totalOfLines = inTotalOfLines;
+            originStrList = new List<string>();
             strList = new List<string>();
         }
-
-        public List<string> StrList
-        {
-            get { return strList; }
-        }
-        public List<string[]> StrListArr
-        {
-            get { return strListArr; }
+// TODO //
+        public List<string> StrList { get { return strList; } }
+        public List<string[]> StrListArr { get { return strListArr; } }
+        public List<string> OriginStrList {
+            get { return originStrList; }
+            set { originStrList = value; }
         }
 
         public void modifySingleLine(List<string> sList, int[] indexes)
         {
-            multiLine = false;
-
             try
             {
                 if (indexes.Length > sList.Count)
@@ -48,43 +50,42 @@ namespace FileReadWrite
             }
 
             string tmpString;
-            strList = sList;
+            strList = originStrList = sList;
+            multiLine = false;
 
             for (int i = 0; i < indexes.Length; i++)
             {
                 int iA = indexes[i];
 
-                tmpString = incrementDataValue(sList[iA], multiLine);
+                tmpString = incrementDataValue(sList[iA], iA);
                 strList[iA] = tmpString;
             }
         }
 
-        public void modifyMultiLine(int[] indexes, int totalL)
+        public void modifyMultiLine(int[] indexes)
         {
             multiLine = true;
             string tmpString;
             strListArr = new List<string[]>();
 
-            for (int i = 0; i < totalL; i++)
+            for (int i = 0; i < totalOfLines; i++)
             {
 
                 for (int j = 0; j < indexes.Length; j++)
                 {
                     int iA = indexes[j];
 
-                    tmpString = incrementDataValue(strList[iA], multiLine);
+                    tmpString = incrementDataValue(strList[iA], iA);
                     strList[iA] = tmpString;
                 }
                 strListArr.Add(strList.ToArray());
+                letter++;
             }
         }
 
-        public string incrementDataValue(string uString, bool multiLine)
+        public string incrementDataValue(string uString, int thisIndex)
         {
-            char letter = 'A';
-            int charAddCounter = 0;
-
-            int updateArrayLength = uString.Length;
+            int updateArrLength = uString.Length;
             long tmpLong;
             string uStr = uString;
             string originUpdateArray;
@@ -93,24 +94,13 @@ namespace FileReadWrite
             // Matches any character other than a decimal digit.
             if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D"))
             {
-                switch (charAddCounter)
+                if (uString.Length > originStrList[thisIndex].Length)
                 {
-                    case 0:
-                        originUpdateArrLength = updateArrayLength;
-                        charAddCounter++;
-                        uStr = letter + uStr;
-                        letter++;
-                        break;
-                    case 1:
-                        originUpdateArray = uStr.Substring((uStr.Length - originUpdateArrLength), originUpdateArrLength);
-                        uStr = originUpdateArray;
-                        uStr = letter + uStr;
-                        letter++;
-                        break;
-                    default:
-                        uStr = letter + uStr;
-                        letter++;
-                        break;
+                    originUpdateArray = uStr.Substring((uString.Length - originStrList[thisIndex].Length), uString.Length);
+                }
+                else
+                {
+                    uStr = letter + uString;
                 }
             }
             // Matches any decimal digit.

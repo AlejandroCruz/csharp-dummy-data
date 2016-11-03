@@ -31,16 +31,16 @@ namespace FileReadWrite
             headList = objProcessLine.splitValues(headLine, valueDelimiter);
             lineList = objProcessLine.splitValues(lineLine, valueDelimiter);
 
+            int totalLines = 0;
             int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
-            UpdateLine objUpdateHead = new UpdateLine();
-            UpdateLine objUpdateLine = new UpdateLine();
-            elementIndex = new int[] { 0,1,2,3,4,5,6 };
+            UpdateLine objUpdateHead = new UpdateLine(totalLines);
+            UpdateLine objUpdateLine = new UpdateLine(totalLines = 10);
+            //elementIndex = new int[] { 0,1,2,3,4,5,6 };
             objUpdateHead.modifySingleLine(headList, elementIndex);
             elementIndex = new int[] { 0, 1, 3 };
             objUpdateLine.modifySingleLine(lineList, elementIndex);
 
-            int totalLines = 10;
-            objUpdateLine.modifyMultiLine(elementIndex, totalLines);
+            objUpdateLine.modifyMultiLine(elementIndex);
 
             Console.WriteLine(">>> Begin");
             int count = objUpdateLine.StrListArr.Count;
