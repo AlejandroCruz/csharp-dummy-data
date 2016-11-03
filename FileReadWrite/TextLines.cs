@@ -2,7 +2,7 @@
  * Console application: FileReadWrite
  * Date: 9/2016 - 11/2016
  * Description:
- *  Read lines of text from file in specified dir. path and display to console.
+ *  Read lines of text from file in specified Dir. path and display to console.
  *  Delete special characters and rewrite the data to new file.
  *  Optional delay functions are for end user experience.
  */
