@@ -32,30 +32,42 @@ namespace FileReadWrite
             recordList = objProcessLine.splitValues(recordLine, valueDelimiter);
 
             int totalLines = 0;
-            int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
+            int[] elementIndex = new int[] {}; // Defaults to elementIndex[0] (no elements)
             UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
             objUpdateHead.modifySingleLine(elementIndex);
 
             totalLines = 10;
-            elementIndex = new int[] { 11 };
+            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8,9,10,11 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
             if (totalLines <= 1)
             { objUpdateLine.modifySingleLine(elementIndex); }
             else
             { objUpdateLine.modifyMultiLine(elementIndex); }
 
+            // Results
             Console.WriteLine(">>> Begin\n");
             foreach (string s in objUpdateHead.StrList)
             {
                 Console.Write("| {0} |", s);
             }
             Console.Write(Environment.NewLine);
-            int count = objUpdateLine.StrListArr.Count;
-            for (int i = 0; i < count; i++)
+            if (totalLines <= 1)
             {
-                foreach (string s in objUpdateLine.StrListArr[i])
+                foreach (string s in objUpdateLine.StrList)
+                {
                     Console.Write("| {0} |", s);
+                }
                 Console.Write(Environment.NewLine);
+            }
+            else
+            {
+                int count = objUpdateLine.StrListArr.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    foreach (string s in objUpdateLine.StrListArr[i])
+                        Console.Write("| {0} |", s);
+                    Console.Write(Environment.NewLine);
+                }
             }
             Console.WriteLine("\n>>> Press any key to exit.");
             Console.ReadKey();

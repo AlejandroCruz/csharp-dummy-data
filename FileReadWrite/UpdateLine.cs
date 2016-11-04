@@ -7,10 +7,11 @@ namespace FileReadWrite
     {
         private char letter = 'A';
         private int iA; // Current element index
+        private int lineCount;
         private int totalOfLines;
         private List<string> originStrList;
         private List<string> strList;
-        private  List<string[]> strListArr;
+        private List<string[]> strListArr;
 
         public UpdateLine(List<string> dataList, int inTotalOfLines)
         {
@@ -20,10 +21,6 @@ namespace FileReadWrite
 
         public List<string> StrList { get { return strList; } }
         public List<string[]> StrListArr { get { return strListArr; } }
-        public List<string> OriginStrList {
-            get { return originStrList; }
-            set { originStrList = value; }
-        }
 
         public void modifySingleLine(int[] indexes)
         {
@@ -77,11 +74,12 @@ namespace FileReadWrite
                 Console.WriteLine("\n>>> System message:\n" + e);
                 Console.WriteLine("\n>>> Press any key to exit.");
                 Console.ReadKey();
-                System.Environment.Exit(0);
+                Environment.Exit(0);
             }
 
             for (int i = 0; i < totalOfLines; i++)
             {
+                lineCount = i;
 
                 for (int j = 0; j < indexes.Length; j++)
                 {
@@ -90,7 +88,7 @@ namespace FileReadWrite
                     strList[iA] = tmpString;
                 }
                 strListArr.Add(strList.ToArray());
-                letter++;
+                if (i > 0) letter++;
             }
         }
 
@@ -101,17 +99,13 @@ namespace FileReadWrite
             string tmpString;
             DateTime tmpDt;
 
-            // Match any character other than a decimal digit.
+            // Match any character other than a decimal digit: @"\D"
             if ( System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D") && (!DateTime.TryParse(uStr, out tmpDt)) )
             {
-                if (uString.Length > originStrList[thisIndex].Length)
+                if (lineCount > 0)
                 {
                     tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
                     uStr = letter + tmpString;
-                }
-                else
-                {
-                    uStr = letter + uString;
                 }
             }
             else if (long.TryParse(uStr, out tmpLong))
