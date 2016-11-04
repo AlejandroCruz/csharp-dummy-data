@@ -16,7 +16,7 @@ namespace FileReadWrite
     {
         public static void Main(string[] args)
         {
-            string csvRawFileName = "rawDataTest.csv";
+            string csvRawFileName = "rawData.csv";
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
 
@@ -33,11 +33,11 @@ namespace FileReadWrite
 
             int totalLines = 0;
             int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
-            //UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
-            //objUpdateHead.modifySingleLine(elementIndex);
+            UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
+            objUpdateHead.modifySingleLine(elementIndex);
 
-            totalLines = 4;
-            elementIndex = new int[] { 0, 1 };
+            totalLines = 10;
+            elementIndex = new int[] { 11 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
             if (totalLines <= 1)
             { objUpdateLine.modifySingleLine(elementIndex); }
@@ -45,16 +45,16 @@ namespace FileReadWrite
             { objUpdateLine.modifyMultiLine(elementIndex); }
 
             Console.WriteLine(">>> Begin\n");
-            //foreach (string s in objUpdateHead.StrList)
-            //{
-            //    Console.Write("{0}, ", s);
-            //}
-            //Console.Write(Environment.NewLine);
+            foreach (string s in objUpdateHead.StrList)
+            {
+                Console.Write("| {0} |", s);
+            }
+            Console.Write(Environment.NewLine);
             int count = objUpdateLine.StrListArr.Count;
             for (int i = 0; i < count; i++)
             {
                 foreach (string s in objUpdateLine.StrListArr[i])
-                    Console.Write("{0}, ", s);
+                    Console.Write("| {0} |", s);
                 Console.Write(Environment.NewLine);
             }
             Console.WriteLine("\n>>> Press any key to exit.");

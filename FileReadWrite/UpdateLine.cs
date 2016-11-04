@@ -6,6 +6,7 @@ namespace FileReadWrite
     class UpdateLine
     {
         private char letter = 'A';
+        private int iA; // Current element index
         private int totalOfLines;
         private List<string> originStrList;
         private List<string> strList;
@@ -16,7 +17,7 @@ namespace FileReadWrite
             originStrList = new List<string>(dataList);
             totalOfLines = inTotalOfLines;
         }
-// TODO //
+
         public List<string> StrList { get { return strList; } }
         public List<string[]> StrListArr { get { return strListArr; } }
         public List<string> OriginStrList {
@@ -36,13 +37,12 @@ namespace FileReadWrite
                 }
                 else if (indexes.Length == 0)
                 {
-                    Console.WriteLine("Index empty. No value modified: {0}", indexes.Length);
                     //Array.Resize(ref indexes, 1);
                     //Console.WriteLine("Index adjusted to minimum: {0}", indexes.Length);
                 }
             }
 // TODO //
-            catch (IndexOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
             }
 
@@ -51,8 +51,7 @@ namespace FileReadWrite
 
             for (int i = 0; i < indexes.Length; i++)
             {
-                int iA = indexes[i];
-
+                iA = indexes[i];
                 tmpString = incrementDataValue(originStrList[iA], iA);
                 strList[iA] = tmpString;
             }
@@ -64,13 +63,29 @@ namespace FileReadWrite
             strList = new List<string>(originStrList);
             strListArr = new List<string[]>();
 
+            try
+            {
+                for (int i = 0; i < indexes.Length; i++)
+                {
+                    iA = indexes[i];
+                    tmpString = strList[iA];
+                }
+            }
+            catch(ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine("Array element out of range: #{0}", iA);
+                Console.WriteLine("\n>>> System message:\n" + e);
+                Console.WriteLine("\n>>> Press any key to exit.");
+                Console.ReadKey();
+                System.Environment.Exit(0);
+            }
+
             for (int i = 0; i < totalOfLines; i++)
             {
 
                 for (int j = 0; j < indexes.Length; j++)
                 {
-                    int iA = indexes[j];
-
+                    iA = indexes[j];
                     tmpString = incrementDataValue(strList[iA], iA);
                     strList[iA] = tmpString;
                 }
@@ -86,8 +101,8 @@ namespace FileReadWrite
             string tmpString;
             DateTime tmpDt;
 
-            // Matches any character other than a decimal digit.
-            if (System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D"))
+            // Match any character other than a decimal digit.
+            if ( System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D") && (!DateTime.TryParse(uStr, out tmpDt)) )
             {
                 if (uString.Length > originStrList[thisIndex].Length)
                 {
@@ -99,7 +114,6 @@ namespace FileReadWrite
                     uStr = letter + uString;
                 }
             }
-            // Matches any decimal digit.
             else if (long.TryParse(uStr, out tmpLong))
             {
                 tmpLong++;

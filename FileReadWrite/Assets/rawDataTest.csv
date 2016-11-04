@@ -1,2 +1,2 @@
-﻿"CustomerName","TransactionNumber","TransactionDate","AddressLine1","LineNumber","UnitPrice"
+﻿"CustomerName","TransNumber","TransDate","Address1","Quantity","UnitPrice"
 "Pacman Enterprises","50322311","2016-01-02","Dagobah System 4537","2","199.98"
