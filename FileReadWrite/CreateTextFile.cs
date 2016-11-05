@@ -11,17 +11,17 @@
             filePath = inPath;
         }
 
-        public void CreateFile(UpdateLine header, UpdateLine recordSet, bool inOverwrite)
+        public void CreateFile(UpdateLine inHeader, UpdateLine inRecord, bool inOverwrite)
         {
             if (inOverwrite)
             {
-                System.IO.File.AppendAllLines(filePath + fileName, header.StrList);
-                System.IO.File.AppendAllLines(filePath + fileName, recordSet.StrList);
+                System.IO.File.AppendAllLines(filePath + fileName, inHeader.StrList);
+                System.IO.File.AppendAllLines(filePath + fileName, inRecord.StrList);
             }
             else
             {
-                System.IO.File.WriteAllLines(filePath + fileName, header.StrList);
-                System.IO.File.AppendAllLines(filePath + fileName, recordSet.StrList);
+                System.IO.File.WriteAllLines(filePath + fileName, inHeader.StrList);
+                System.IO.File.AppendAllLines(filePath + fileName, inRecord.StrList);
             }
         }
 

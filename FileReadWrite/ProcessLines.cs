@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace FileReadWrite
 {
@@ -6,6 +7,7 @@ namespace FileReadWrite
     {
         private string editLine;
         public List<string> lineList;
+        public List<string[]> lineListArr;
 
         public ProcessLines()
         { }
@@ -31,6 +33,36 @@ namespace FileReadWrite
                 lineList.Add(values[i]);
             }
             return lineList;
+        }
+
+        public string[] AppendValues(UpdateLine inHeader, UpdateLine inRecord)
+        {
+            int headCount = 1;
+            int lineCount = inRecord.StrListArr.Count;
+            string[] lineListArr = new string[headCount+lineCount];
+
+            StringBuilder strBuildHead = new StringBuilder();
+
+            foreach (string s in inHeader.StrList)
+            {
+                strBuildHead.Append(s + ",");
+            }
+            lineListArr[0] = strBuildHead.ToString().Trim(new char[] { ' ', ',' });
+
+            StringBuilder strBuildRecord;
+
+            for (int i = 0; i < inRecord.StrListArr.Count; i++)
+            {
+                strBuildRecord = new StringBuilder();
+
+                foreach (string s in inRecord.StrListArr[i])
+                {
+                    strBuildRecord.Append(s + ",");
+                }
+                lineListArr[i+headCount] = strBuildRecord.ToString().Trim(new char[] { ' ', ',' });
+            }
+            return lineListArr;
+
         }
 
     } // END Class

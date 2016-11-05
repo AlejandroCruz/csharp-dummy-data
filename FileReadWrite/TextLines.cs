@@ -31,17 +31,17 @@ namespace FileReadWrite
             } Console.WriteLine(Environment.NewLine);
 
             // Remove quotation
-            ProcessLines objProcessLine = new ProcessLines();
+            ProcessLines objPreProcess = new ProcessLines();
             string strToRemove = "\"";
-            string headLine = objProcessLine.RemoveString(rawLines[0], strToRemove);
-            string recordLine = objProcessLine.RemoveString(rawLines[1], strToRemove);
+            string headLine = objPreProcess.RemoveString(rawLines[0], strToRemove);
+            string recordLine = objPreProcess.RemoveString(rawLines[1], strToRemove);
 
             // Split values
             char valueDelimiter = ',';
             List<string> headList = new List<string>();
             List<string> recordList = new List<string>();
-            headList = objProcessLine.SplitValues(headLine, valueDelimiter);
-            recordList = objProcessLine.SplitValues(recordLine, valueDelimiter);
+            headList = objPreProcess.SplitValues(headLine, valueDelimiter);
+            recordList = objPreProcess.SplitValues(recordLine, valueDelimiter);
 
             // Header edit
             int totalLines = 0;
@@ -58,33 +58,44 @@ namespace FileReadWrite
             else
             { objUpdateLine.ModifyMultiLine(elementIndex); }
 
-            // Write data to new file
-            bool overwrite = true;
-            CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
-            objNewTxtFile.CreateFile(objUpdateHead, objUpdateLine, overwrite);
+            // Concatenate Values
+            ProcessLines objPostProcess = new ProcessLines();
+            string[] dataSet = new string[] { };
+            dataSet = objPostProcess.AppendValues(objUpdateHead, objUpdateLine);
 
-            // Results
-            Console.WriteLine(">>> Begin unique tabular data:\n");
-            foreach (string s in objUpdateHead.StrList)
-            { Console.Write("| {0} |", s); }
-            Console.Write(Environment.NewLine);
-            if (totalLines < 2)
-            {
-                foreach (string s in objUpdateLine.StrList)
-                { Console.Write("| {0} |", s); }
-                Console.Write(Environment.NewLine);
-            }
-            else
-            {
-                int count = objUpdateLine.StrListArr.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    foreach (string s in objUpdateLine.StrListArr[i])
-                    { Console.Write("| {0} |", s); }
-                    Console.Write(Environment.NewLine);
-                }
-            }
+            /* TEST */
+            System.Console.WriteLine("Appended values:");
+            foreach (string s in dataSet)
+            { Console.WriteLine(s); }
 
+            /*
+                        // Write data to new file
+                        bool overwrite = true;
+                        CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
+                        objNewTxtFile.CreateFile(objUpdateHead, objUpdateLine, overwrite);
+
+                        // Results
+                        Console.WriteLine(">>> Begin unique tabular data:\n");
+                        foreach (string s in objUpdateHead.StrList)
+                        { Console.Write("| {0} |", s); }
+                        Console.Write(Environment.NewLine);
+                        if (totalLines < 2)
+                        {
+                            foreach (string s in objUpdateLine.StrList)
+                            { Console.Write("| {0} |", s); }
+                            Console.Write(Environment.NewLine);
+                        }
+                        else
+                        {
+                            int count = objUpdateLine.StrListArr.Count;
+                            for (int i = 0; i < count; i++)
+                            {
+                                foreach (string s in objUpdateLine.StrListArr[i])
+                                { Console.Write("| {0} |", s); }
+                                Console.Write(Environment.NewLine);
+                            }
+                        }
+            */
             Console.WriteLine("\n>>> Press any key to exit.");
             Console.ReadKey();
         }
