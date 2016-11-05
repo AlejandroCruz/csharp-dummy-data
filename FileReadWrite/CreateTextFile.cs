@@ -2,19 +2,19 @@
 {
     class CreateTextFile
     {
-        private string nFile;
+        private string newFile;
 
         public CreateTextFile(string inFile)
         {
-            nFile = inFile;
+            newFile = inFile;
         }
 
         public void createFile(string inPath, string[] inLines, bool inOverwrite)
         {
             if(inOverwrite == false)
-                System.IO.File.AppendAllLines(inPath + nFile, inLines);
+                System.IO.File.AppendAllLines(inPath + newFile, inLines);
             else
-                System.IO.File.WriteAllLines(inPath + nFile, inLines);
+                System.IO.File.WriteAllLines(inPath + newFile, inLines);
         }
     }
 }

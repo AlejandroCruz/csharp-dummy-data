@@ -20,6 +20,15 @@ namespace FileReadWrite
             string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
 
+            // Display original quoted lines
+            Console.WriteLine(">>> Input file: {0}\n", csvRawFileName);
+            Console.WriteLine(">>> Raw lines:");
+            for (int i = 0; i < rawLines.Length; i++)
+            {
+                Console.WriteLine(rawLines[i]);
+            }
+            Console.WriteLine(Environment.NewLine);
+
             string charToDelete = "\"";
             ProcessLines objProcessLine = new ProcessLines();
             string headLine = objProcessLine.removeChar(rawLines[0], charToDelete);
@@ -45,13 +54,13 @@ namespace FileReadWrite
             { objUpdateLine.modifyMultiLine(elementIndex); }
 
             // Results
-            Console.WriteLine(">>> Begin\n");
+            Console.WriteLine(">>> Begin tabular data:\n");
             foreach (string s in objUpdateHead.StrList)
             {
                 Console.Write("| {0} |", s);
             }
             Console.Write(Environment.NewLine);
-            if (totalLines <= 1)
+            if (totalLines < 2)
             {
                 foreach (string s in objUpdateLine.StrList)
                 {
