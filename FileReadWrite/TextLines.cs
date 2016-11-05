@@ -26,32 +26,31 @@ namespace FileReadWrite
             for (int i = 0; i < rawLines.Length; i++)
             {
                 Console.WriteLine(rawLines[i]);
-            }
-            Console.WriteLine(Environment.NewLine);
+            } Console.WriteLine(Environment.NewLine);
 
             string charToDelete = "\"";
             ProcessLines objProcessLine = new ProcessLines();
-            string headLine = objProcessLine.removeChar(rawLines[0], charToDelete);
-            string recordLine = objProcessLine.removeChar(rawLines[1], charToDelete);
+            string headLine = objProcessLine.RemoveChar(rawLines[0], charToDelete);
+            string recordLine = objProcessLine.RemoveChar(rawLines[1], charToDelete);
 
             char valueDelimiter = ',';
             List<string> headList = new List<string>();
             List<string> recordList = new List<string>();
-            headList = objProcessLine.splitValues(headLine, valueDelimiter);
-            recordList = objProcessLine.splitValues(recordLine, valueDelimiter);
+            headList = objProcessLine.SplitValues(headLine, valueDelimiter);
+            recordList = objProcessLine.SplitValues(recordLine, valueDelimiter);
 
             int totalLines = 0;
             int[] elementIndex = new int[] {}; // Defaults to elementIndex[0] (no elements)
             UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
-            objUpdateHead.modifySingleLine(elementIndex);
+            objUpdateHead.ModifySingleLine(elementIndex);
 
             totalLines = 10;
             elementIndex = new int[] { 0,1,2,3,4,5,6,7,8,9,10,11 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
             if (totalLines <= 1)
-            { objUpdateLine.modifySingleLine(elementIndex); }
+            { objUpdateLine.ModifySingleLine(elementIndex); }
             else
-            { objUpdateLine.modifyMultiLine(elementIndex); }
+            { objUpdateLine.ModifyMultiLine(elementIndex); }
 
             // Results
             Console.WriteLine(">>> Begin tabular data:\n");

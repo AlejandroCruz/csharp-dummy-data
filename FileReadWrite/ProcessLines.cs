@@ -41,7 +41,7 @@ namespace FileReadWrite
             set { processedTabRow = value; }
         }
 
-        public string removeChar(string inLine, string removeC)
+        public string RemoveChar(string inLine, string removeC)
         {
             editLine = inLine;
             string c = removeC;
@@ -76,7 +76,7 @@ namespace FileReadWrite
                 processedTabRow[i] = values;
             }
         }
-        public List<string> splitValues(string inLine, char inDelimiters)
+        public List<string> SplitValues(string inLine, char inDelimiters)
         {
             string[] values;
             char delimiters = inDelimiters;

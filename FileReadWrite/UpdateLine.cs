@@ -22,7 +22,7 @@ namespace FileReadWrite
         public List<string> StrList { get { return strList; } }
         public List<string[]> StrListArr { get { return strListArr; } }
 
-        public void modifySingleLine(int[] indexes)
+        public void ModifySingleLine(int[] indexes)
         {
             try
             {
@@ -49,12 +49,12 @@ namespace FileReadWrite
             for (int i = 0; i < indexes.Length; i++)
             {
                 iA = indexes[i];
-                tmpString = incrementDataValue(originStrList[iA], iA);
+                tmpString = IncrementDataValue(originStrList[iA], iA);
                 strList[iA] = tmpString;
             }
         }
 
-        public void modifyMultiLine(int[] indexes)
+        public void ModifyMultiLine(int[] indexes)
         {
             string tmpString;
             strList = new List<string>(originStrList);
@@ -84,7 +84,7 @@ namespace FileReadWrite
                 for (int j = 0; j < indexes.Length; j++)
                 {
                     iA = indexes[j];
-                    tmpString = incrementDataValue(strList[iA], iA);
+                    tmpString = IncrementDataValue(strList[iA], iA);
                     strList[iA] = tmpString;
                 }
                 strListArr.Add(strList.ToArray());
@@ -92,7 +92,7 @@ namespace FileReadWrite
             }
         }
 
-        public string incrementDataValue(string uString, int thisIndex)
+        public string IncrementDataValue(string uString, int thisIndex)
         {
             long tmpLong;
             string uStr = uString;
