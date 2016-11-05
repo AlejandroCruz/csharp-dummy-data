@@ -16,12 +16,14 @@ namespace FileReadWrite
     {
         public static void Main(string[] args)
         {
-            string csvRawFileName = "rawData.csv";
-            string csvPath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
-            string[] rawLines = System.IO.File.ReadAllLines(csvPath + csvRawFileName);
+            string csvRawFile = "rawData.csv";
+            string newFileName = "newData.csv";
+            string oldFilePath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
+            string newFilePath = oldFilePath;
+            string[] rawLines = System.IO.File.ReadAllLines(oldFilePath + csvRawFile);
 
             // Display original quoted lines
-            Console.WriteLine(">>> Input file: {0}\n", csvRawFileName);
+            Console.WriteLine(">>> Input file: {0}\n", csvRawFile);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
             {
@@ -41,14 +43,13 @@ namespace FileReadWrite
             headList = objProcessLine.SplitValues(headLine, valueDelimiter);
             recordList = objProcessLine.SplitValues(recordLine, valueDelimiter);
 
-
-            // Table header edit
+            // Header edit
             int totalLines = 0;
             int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
             UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
             objUpdateHead.ModifySingleLine(elementIndex);
 
-            // Table record edit
+            // Record edit
             totalLines = 10;
             elementIndex = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
@@ -56,6 +57,11 @@ namespace FileReadWrite
             { objUpdateLine.ModifySingleLine(elementIndex); }
             else
             { objUpdateLine.ModifyMultiLine(elementIndex); }
+
+            // Write data to new file
+            bool overwrite = true;
+            CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
+            objNewTxtFile.CreateFile(objUpdateHead, objUpdateLine, overwrite);
 
             // Results
             Console.WriteLine(">>> Begin unique tabular data:\n");
