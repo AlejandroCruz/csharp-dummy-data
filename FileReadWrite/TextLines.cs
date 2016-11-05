@@ -28,24 +28,29 @@ namespace FileReadWrite
                 Console.WriteLine(rawLines[i]);
             } Console.WriteLine(Environment.NewLine);
 
-            string charToDelete = "\"";
+            // Remove quotation
             ProcessLines objProcessLine = new ProcessLines();
-            string headLine = objProcessLine.RemoveChar(rawLines[0], charToDelete);
-            string recordLine = objProcessLine.RemoveChar(rawLines[1], charToDelete);
+            string strToRemove = "\"";
+            string headLine = objProcessLine.RemoveString(rawLines[0], strToRemove);
+            string recordLine = objProcessLine.RemoveString(rawLines[1], strToRemove);
 
+            // Split values
             char valueDelimiter = ',';
             List<string> headList = new List<string>();
             List<string> recordList = new List<string>();
             headList = objProcessLine.SplitValues(headLine, valueDelimiter);
             recordList = objProcessLine.SplitValues(recordLine, valueDelimiter);
 
+
+            // Table header edit
             int totalLines = 0;
-            int[] elementIndex = new int[] {}; // Defaults to elementIndex[0] (no elements)
+            int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
             UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
             objUpdateHead.ModifySingleLine(elementIndex);
 
+            // Table record edit
             totalLines = 10;
-            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8,9,10,11 };
+            elementIndex = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
             if (totalLines <= 1)
             { objUpdateLine.ModifySingleLine(elementIndex); }
@@ -53,18 +58,14 @@ namespace FileReadWrite
             { objUpdateLine.ModifyMultiLine(elementIndex); }
 
             // Results
-            Console.WriteLine(">>> Begin tabular data:\n");
+            Console.WriteLine(">>> Begin unique tabular data:\n");
             foreach (string s in objUpdateHead.StrList)
-            {
-                Console.Write("| {0} |", s);
-            }
+            { Console.Write("| {0} |", s); }
             Console.Write(Environment.NewLine);
             if (totalLines < 2)
             {
                 foreach (string s in objUpdateLine.StrList)
-                {
-                    Console.Write("| {0} |", s);
-                }
+                { Console.Write("| {0} |", s); }
                 Console.Write(Environment.NewLine);
             }
             else
@@ -73,10 +74,11 @@ namespace FileReadWrite
                 for (int i = 0; i < count; i++)
                 {
                     foreach (string s in objUpdateLine.StrListArr[i])
-                        Console.Write("| {0} |", s);
+                    { Console.Write("| {0} |", s); }
                     Console.Write(Environment.NewLine);
                 }
             }
+
             Console.WriteLine("\n>>> Press any key to exit.");
             Console.ReadKey();
         }
