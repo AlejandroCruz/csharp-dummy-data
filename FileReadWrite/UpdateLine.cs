@@ -39,9 +39,8 @@ namespace FileReadWrite
                 }
             }
 // TODO //
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException e)
+            { Console.WriteLine("\n>>> System message:\n" + e); }
 
             string tmpString;
             strList = new List<string>(originStrList);
@@ -63,10 +62,7 @@ namespace FileReadWrite
             try
             {
                 for (int i = 0; i < indexes.Length; i++)
-                {
-                    iA = indexes[i];
-                    tmpString = strList[iA];
-                }
+                { tmpString = strList[indexes[i]]; }
             }
             catch(ArgumentOutOfRangeException e)
             {

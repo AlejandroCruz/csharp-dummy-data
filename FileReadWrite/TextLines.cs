@@ -1,12 +1,10 @@
-﻿/*
- * Console application: FileReadWrite
+﻿/* Console application: FileReadWrite
  * Date: 9/2016 - 11/2016
  * Description:
  *  Read tabular data from CSV file in specified dir. and display to console.
  *  Delete special characters (mainly quotation "") and rewrite to new file.
  *  Optional delay functions are for end user experience.
  */
-
 using System;
 using System.Collections.Generic;
 
@@ -26,9 +24,8 @@ namespace FileReadWrite
             Console.WriteLine(">>> Input file: {0}\n", csvRawFile);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
-            {
-                Console.WriteLine(rawLines[i]);
-            } Console.WriteLine(Environment.NewLine);
+            { Console.WriteLine(rawLines[i]); }
+            Console.WriteLine(Environment.NewLine);
 
             // Remove quotation
             ProcessLines objPreProcess = new ProcessLines();
@@ -50,10 +47,10 @@ namespace FileReadWrite
             objUpdateHead.ModifySingleLine(elementIndex);
 
             // Record edit
-            totalLines = 10;
-            elementIndex = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+            totalLines = 20;
+            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8,9,11,12 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
-            if (totalLines <= 1)
+            if (totalLines < 2)
             { objUpdateLine.ModifySingleLine(elementIndex); }
             else
             { objUpdateLine.ModifyMultiLine(elementIndex); }
@@ -63,39 +60,33 @@ namespace FileReadWrite
             string[] dataSet = new string[] { };
             dataSet = objPostProcess.AppendValues(objUpdateHead, objUpdateLine);
 
-            /* TEST */
-            System.Console.WriteLine("Appended values:");
-            foreach (string s in dataSet)
-            { Console.WriteLine(s); }
+            // Write data to new file
+            bool overwrite = true;
+            CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
+            objNewTxtFile.CreateFile(dataSet, overwrite);
 
-            /*
-                        // Write data to new file
-                        bool overwrite = true;
-                        CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
-                        objNewTxtFile.CreateFile(objUpdateHead, objUpdateLine, overwrite);
+            // Results
+            Console.WriteLine(">>> Begin unique tabular data:\n");
+            foreach (string s in objUpdateHead.StrList)
+            { Console.Write("| {0} |", s); }
+            Console.Write(Environment.NewLine);
+            if (totalLines < 2)
+            {
+                foreach (string s in objUpdateLine.StrList)
+                { Console.Write("| {0} |", s); }
+                Console.Write(Environment.NewLine);
+            }
+            else
+            {
+                int count = objUpdateLine.StrListArr.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    foreach (string s in objUpdateLine.StrListArr[i])
+                    { Console.Write("| {0} |", s); }
+                    Console.Write(Environment.NewLine);
+                }
+            }
 
-                        // Results
-                        Console.WriteLine(">>> Begin unique tabular data:\n");
-                        foreach (string s in objUpdateHead.StrList)
-                        { Console.Write("| {0} |", s); }
-                        Console.Write(Environment.NewLine);
-                        if (totalLines < 2)
-                        {
-                            foreach (string s in objUpdateLine.StrList)
-                            { Console.Write("| {0} |", s); }
-                            Console.Write(Environment.NewLine);
-                        }
-                        else
-                        {
-                            int count = objUpdateLine.StrListArr.Count;
-                            for (int i = 0; i < count; i++)
-                            {
-                                foreach (string s in objUpdateLine.StrListArr[i])
-                                { Console.Write("| {0} |", s); }
-                                Console.Write(Environment.NewLine);
-                            }
-                        }
-            */
             Console.WriteLine("\n>>> Press any key to exit.");
             Console.ReadKey();
         }

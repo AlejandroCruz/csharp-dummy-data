@@ -10,22 +10,18 @@ namespace FileReadWrite
 {
     class UXEnhancements
     {
-        private int time;
+        private int time = 2000;
         private int loop;
         private string text;
 
-// TODO: Constructor inherit(?) //
         public UXEnhancements()
         {
-            time = 2000;
             text = null;
             loop = 0;
         }
-        public UXEnhancements(int inTime)
+        public UXEnhancements(int inTime) : this()
         {
             time = inTime;
-            text = null;
-            loop = 0;
             addDelay(time, text, loop);
         }
 
