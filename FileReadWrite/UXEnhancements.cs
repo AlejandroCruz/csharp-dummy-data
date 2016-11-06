@@ -11,24 +11,20 @@ namespace FileReadWrite
     class UXEnhancements
     {
         private int time = 2000;
-        private int loop;
-        private string text;
+        private int loop = 0;
+        private string text = null;
 
         public UXEnhancements()
-        {
-            text = null;
-            loop = 0;
-        }
-        public UXEnhancements(int inTime) : this()
+        { addDelay(); }
+
+        public UXEnhancements(int inTime)
         {
             time = inTime;
-            addDelay(time, text, loop);
+            addDelay();
         }
 
         public void addDelay()
-        {
-            Task.Delay(time).Wait();
-        }
+        { Task.Delay(time).Wait(); }
 
         public void addDelay(int inTime, string inText, int inLoop)
         {
@@ -41,19 +37,20 @@ namespace FileReadWrite
                 int i = 0;
                 while ( i < loop)
                 {
-                    Task.Delay(time).Wait(); Console.Write(text);
+                    Task.Delay(time).Wait();
+                    Console.Write(text);
                     i++;
                 }
                 Task.Delay(time).Wait();
             }
             else if(!String.IsNullOrEmpty(text))
             {
-                Task.Delay(time).Wait(); Console.Write(text); Task.Delay(time).Wait();
-            }
-            else
-            {
+                Task.Delay(time).Wait();
+                Console.Write(text);
                 Task.Delay(time).Wait();
             }
+            else
+            { Task.Delay(time).Wait(); }
         }
     }
 }
