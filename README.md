@@ -1,6 +1,6 @@
 C# Application: File Read/Write
 =====================================
 
-This repository includes files for a C# program that finds a comma separated value (CSV) data file, edits specified data values and creates a new CSV file with the edits. The idea behind the program is producing dummy data for development purposes. The user creates a raw file with a heading line and a record line. In the case that a raw data file already exists produced by a DB system, the program will read and remove quotaion wrapping the values. Final output will have the new data without quotes for uploading to a DB table.
+This repository includes source files for a C# program that finds a comma separated value (CSV) data file, edits specified data and creates a new CSV file. The output lines serve as database dummy data for development purposes. User can specify which "column" values to edit and the amount of lines to produce. The application will iterate through each specified element, incrementing the value by one, corresponding to its format: number, character, date.
 
-![Console output](https://github.com/AlejandroCruz/mvc-app/blob/master/_resources/MovieApp_User-Interface.PNG)
+In the case that a raw data file already exists produced by a DB system, this data can be used as template. The program will read raw data and remove undesired characters wrapping each value, usually double quotes. Final output will be written to a new file with specified name and path in system, maintaining data integrity of old file. CSV output file is ideally suited for uploading to DB table.
