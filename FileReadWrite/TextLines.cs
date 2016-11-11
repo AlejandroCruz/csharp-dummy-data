@@ -67,13 +67,18 @@ namespace FileReadWrite
 
             // Results
             Console.WriteLine(">>> Begin unique tabular data:\n");
+            int totalStrLength = 0;
             foreach (string s in objUpdateHead.StrList)
-            { Console.Write("| {0} |", s); }
+            { totalStrLength += s.Length; }
+            int rowDivider = ( (totalStrLength) + (4 * objUpdateHead.StrList.Count) ); // 4 is the amount of characters used to separate each header value: "|  |"
+            foreach (string s in objUpdateHead.StrList)
+            { Console.Write("| {0," + s.ToString().Length + "} |", s); }
             Console.Write(Environment.NewLine);
+            Console.WriteLine(new String('-', rowDivider));
             if (totalLines < 2)
             {
                 foreach (string s in objUpdateLine.StrList)
-                { Console.Write("| {0} |", s); }
+                { Console.Write("| {0,19} |", s); }
                 Console.Write(Environment.NewLine);
             }
             else
@@ -82,7 +87,7 @@ namespace FileReadWrite
                 for (int i = 0; i < count; i++)
                 {
                     foreach (string s in objUpdateLine.StrListArr[i])
-                    { Console.Write("| {0} |", s); }
+                    { Console.Write("| {0," + objUpdateLine.StrListArr[i][i++].Length + "} |", s); }
                     Console.Write(Environment.NewLine);
                 }
             }
