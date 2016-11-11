@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace FileReadWrite
 {
@@ -90,24 +92,31 @@ namespace FileReadWrite
 
         public string IncrementDataValue(string uString, int thisIndex)
         {
-            long tmpLong;
+            long tmpL;
+            double tmpD;
             string uStr = uString;
             string tmpString;
+
             DateTime tmpDt;
 
             // Match any character other than a decimal digit: @"\D"
-            if ( System.Text.RegularExpressions.Regex.IsMatch(uStr, @"\D") && (!DateTime.TryParse(uStr, out tmpDt)) )
+            if ( (lineCount > 0) && (Regex.IsMatch(uStr, @"\w")) && (!DateTime.TryParse(uStr, out tmpDt)) )
             {
-                if (lineCount > 0)
+                if (long.TryParse(uStr, out tmpL))
+                {
+                    tmpL++;
+                    uStr = tmpL.ToString();
+                }
+                else if (double.TryParse(uStr, out tmpD))
+                {
+                    tmpD++;
+                    uStr = tmpD.ToString();
+                }
+                else if (Regex.IsMatch(uStr, @"\D"))
                 {
                     tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
                     uStr = letter + tmpString;
                 }
-            }
-            else if (long.TryParse(uStr, out tmpLong))
-            {
-                tmpLong++;
-                uStr = tmpLong.ToString();
             }
             else if (DateTime.TryParse(uStr, out tmpDt))
             {
@@ -117,6 +126,5 @@ namespace FileReadWrite
             }
             return uStr;
         }
-
     }
 }
