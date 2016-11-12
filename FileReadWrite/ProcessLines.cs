@@ -6,13 +6,6 @@ namespace FileReadWrite
 {
     class ProcessLines
     {
-        //private int[] countForColumnPadding;
-
-        //public int[] CountForColumnPadding
-        //{
-        //    get { return countForColumnPadding; }
-        //}
-
         public string RemoveString(string inLine, string rmvStr)
         {
             string editLine = null;
@@ -36,14 +29,11 @@ namespace FileReadWrite
 
         public string[] AppendValues(UpdateLine inHeader, UpdateLine inRecord)
         {
-            //countForColumnPadding = new int[inHeader.StrList.Count];
             string[] lineStrArr = new string[1 + inRecord.StrListArr.Count];
             StringBuilder strBuild = new StringBuilder();
 
             foreach (string s in inHeader.StrList)
-            {
-                strBuild.Append(s + ",");
-            }
+            { strBuild.Append(s + ","); }
             lineStrArr[0] = strBuild.ToString().Trim(new char[] { ' ', ',' });
 
             for (int i = 0; i < inRecord.StrListArr.Count; i++)
@@ -51,11 +41,7 @@ namespace FileReadWrite
                 strBuild = new StringBuilder();
 
                 foreach (string s in inRecord.StrListArr[i])
-                {
-                    //int sCounter = 0;
-                    strBuild.Append(s + ",");
-                    //countForColumnPadding[sCounter] = (countForColumnPadding[sCounter] > s.ToString().Length) ? s.ToString().Length : countForColumnPadding };
-                }
+                { strBuild.Append(s + ","); }
                 lineStrArr[i + 1] = strBuild.ToString().Trim(new char[] { ' ', ',' });
             }
             return lineStrArr;

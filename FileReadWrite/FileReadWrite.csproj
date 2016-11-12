@@ -54,6 +54,7 @@
     <None Include="App.config" />
     <None Include="Assets\newData.csv" />
     <None Include="Assets\rawData.csv" />
+    <None Include="Assets\rawData2.csv" />
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

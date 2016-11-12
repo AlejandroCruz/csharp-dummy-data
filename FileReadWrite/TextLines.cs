@@ -14,8 +14,8 @@ namespace FileReadWrite
     {
         public static void Main(string[] args)
         {
-            string csvRawFile = "rawData.csv";
-            string newFileName = "newData.csv";
+            string csvRawFile = "rawData2.csv";
+            string newFileName = "newData2.csv";
             string oldFilePath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
             string newFilePath = oldFilePath;
             string[] rawLines = System.IO.File.ReadAllLines(oldFilePath + csvRawFile);
@@ -41,14 +41,13 @@ namespace FileReadWrite
             recordList = objPreProcess.SplitValues(recordLine, valueDelimiter);
 
             // Header edit
-            int totalLines = 0;
             int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
-            UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
+            UpdateLine objUpdateHead = new UpdateLine(headList);
             objUpdateHead.ModifySingleLine(elementIndex);
 
             // Row edit
-            totalLines = 20;
-            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8,9,10,11 };
+            int totalLines = 10;
+            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8,9 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
             if (totalLines < 2)
             { objUpdateLine.ModifySingleLine(elementIndex); }
@@ -79,7 +78,8 @@ namespace FileReadWrite
 
             for (int i = 0; i < lenghtStrArr.Count; i++)
             {
-                rowDivider += int.Parse(lenghtStrArr[i].ToString());
+                // 4 = amount of characters padding the column
+                rowDivider += int.Parse(lenghtStrArr[i].ToString()) + 4;
             }
 
             foreach (string s in objUpdateHead.StrList)

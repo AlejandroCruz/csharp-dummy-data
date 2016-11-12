@@ -15,6 +15,11 @@ namespace FileReadWrite
         private List<string> strList;
         private List<string[]> strListArr;
 
+        public UpdateLine(List<string> dataList)
+        {
+            originStrList = new List<string>(dataList);
+            totalOfLines = 1;
+        }
         public UpdateLine(List<string> dataList, int inTotalOfLines)
         {
             originStrList = new List<string>(dataList);
@@ -46,6 +51,7 @@ namespace FileReadWrite
 
             string tmpString;
             strList = new List<string>(originStrList);
+            strListArr = new List<string[]>();
 
             for (int i = 0; i < indexes.Length; i++)
             {
@@ -53,6 +59,7 @@ namespace FileReadWrite
                 tmpString = IncrementDataValue(originStrList[iA], iA);
                 strList[iA] = tmpString;
             }
+            strListArr.Add(strList.ToArray());
         }
 
         public void ModifyMultiLine(int[] indexes)
@@ -68,7 +75,7 @@ namespace FileReadWrite
             }
             catch(ArgumentOutOfRangeException e)
             {
-                Console.WriteLine("Array element out of range: #{0}", iA);
+                Console.WriteLine("Array element out of range surfaced at: #{0}", iA);
                 Console.WriteLine("\n>>> System message:\n" + e);
                 Console.WriteLine("\n>>> Press any key to exit.");
                 Console.ReadKey();
