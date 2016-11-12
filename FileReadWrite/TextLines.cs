@@ -46,7 +46,7 @@ namespace FileReadWrite
             UpdateLine objUpdateHead = new UpdateLine(headList, totalLines);
             objUpdateHead.ModifySingleLine(elementIndex);
 
-            // Record edit
+            // Row edit
             totalLines = 20;
             elementIndex = new int[] { 0,1,2,3,4,5,6,7,8,9,10,11 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
@@ -55,8 +55,12 @@ namespace FileReadWrite
             else
             { objUpdateLine.ModifyMultiLine(elementIndex); }
 
-            // Concatenate Values
+            // Longest field indexes for padding of columns
+            List<int> lenghtStrArr = new List<int>();
             ProcessLines objPostProcess = new ProcessLines();
+            lenghtStrArr = objPostProcess.CompareFields(objUpdateHead, objUpdateLine);
+
+            // Concatenate Values
             string[] dataSet = new string[] { };
             dataSet = objPostProcess.AppendValues(objUpdateHead, objUpdateLine);
 
@@ -67,27 +71,47 @@ namespace FileReadWrite
 
             // Results
             Console.WriteLine(">>> Begin unique tabular data:\n");
+            int counter = 0;
             int totalStrLength = 0;
             foreach (string s in objUpdateHead.StrList)
             { totalStrLength += s.Length; }
-            int rowDivider = ( (totalStrLength) + (4 * objUpdateHead.StrList.Count) ); // 4 is the amount of characters used to separate each header value: "|  |"
+
+            int rowDivider = ((totalStrLength) + (4 * objUpdateHead.StrList.Count)); // 4 is the amount of characters used to separate each header value: "|  |"
             foreach (string s in objUpdateHead.StrList)
-            { Console.Write("| {0," + s.ToString().Length + "} |", s); }
+            {
+                counter = 0;
+
+                Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                counter++;
+            }
+
             Console.Write(Environment.NewLine);
             Console.WriteLine(new String('-', rowDivider));
+
             if (totalLines < 2)
             {
+                counter = 0;
+
                 foreach (string s in objUpdateLine.StrList)
-                { Console.Write("| {0,19} |", s); }
+                {
+                    Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                    counter++;
+                }
                 Console.Write(Environment.NewLine);
             }
             else
             {
                 int count = objUpdateLine.StrListArr.Count;
+
                 for (int i = 0; i < count; i++)
                 {
+                    counter = 0;
+
                     foreach (string s in objUpdateLine.StrListArr[i])
-                    { Console.Write("| {0," + objUpdateLine.StrListArr[i][i++].Length + "} |", s); }
+                    {
+                        Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                    }
+                    counter++;
                     Console.Write(Environment.NewLine);
                 }
             }
