@@ -99,14 +99,14 @@ namespace FileReadWrite
 
         public string IncrementDataValue(string uString, int thisIndex)
         {
+            const string NULLSTR = "NULL";
+
             long tmpL;
             double tmpD;
             string uStr = uString;
             string tmpString;
-
             DateTime tmpDt;
 
-            // Match any character other than a decimal digit: @"\D"
             if (lineCount > 0)
             {
                 if ((Regex.IsMatch(uStr, @"\w")) && (!DateTime.TryParse(uStr, out tmpDt)))
@@ -121,7 +121,7 @@ namespace FileReadWrite
                         tmpD++;
                         uStr = tmpD.ToString();
                     }
-                    else if (Regex.IsMatch(uStr, @"\D"))
+                    else if ( (Regex.IsMatch(uStr, @"\D")) && (!uStr.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
                     {
                         tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
                         uStr = letter + tmpString;
