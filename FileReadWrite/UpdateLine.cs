@@ -107,29 +107,36 @@ namespace FileReadWrite
             DateTime tmpDt;
 
             // Match any character other than a decimal digit: @"\D"
-            if ( (lineCount > 0) && (Regex.IsMatch(uStr, @"\w")) && (!DateTime.TryParse(uStr, out tmpDt)) )
+            if (lineCount > 0)
             {
-                if (long.TryParse(uStr, out tmpL))
+                if ((Regex.IsMatch(uStr, @"\w")) && (!DateTime.TryParse(uStr, out tmpDt)))
                 {
-                    tmpL++;
-                    uStr = tmpL.ToString();
+                    if (long.TryParse(uStr, out tmpL))
+                    {
+                        tmpL++;
+                        uStr = tmpL.ToString();
+                    }
+                    else if (double.TryParse(uStr, out tmpD))
+                    {
+                        tmpD++;
+                        uStr = tmpD.ToString();
+                    }
+                    else if (Regex.IsMatch(uStr, @"\D"))
+                    {
+                        tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
+                        uStr = letter + tmpString;
+                    }
                 }
-                else if (double.TryParse(uStr, out tmpD))
+                else if (DateTime.TryParse(uStr, out tmpDt))
                 {
-                    tmpD++;
-                    uStr = tmpD.ToString();
+                    DateTime tD = tmpDt.AddDays(1);
+                    string format = "yyyy-MM-dd";
+                    uStr = tD.ToString(format);
                 }
-                else if (Regex.IsMatch(uStr, @"\D"))
+                else
                 {
-                    tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
-                    uStr = letter + tmpString;
+                    uStr = "NULL";
                 }
-            }
-            else if (DateTime.TryParse(uStr, out tmpDt))
-            {
-                DateTime tD = tmpDt.AddDays(1);
-                string format = "yyyy-M-d";
-                uStr = tD.ToString(format);
             }
             return uStr;
         }
