@@ -110,20 +110,19 @@ namespace FileReadWrite
 
             if ((Regex.IsMatch(nStr, @"\w")) && (!DateTime.TryParse(nStr, out tmpDt)))
             {
-               RegexHandler rgxHandler = new RegexHandler();
-                nStr = rgxHandler.RegexCharHandler(originStrList, nStr, thisIndex, charAdd);
+               RegexHandler rgxChar = new RegexHandler();
+                nStr = rgxChar.RegexCharHandler(originStrList, nStr, thisIndex, charAdd);
             }
             else if (DateTime.TryParse(nStr, out tmpDt))
             {
-                DateTime tD = tmpDt.AddDays(1);
-                string format = "yyyy-MM-dd";
-                nStr = tD.ToString(format);
+                RegexHandler rgxDate = new RegexHandler();
+                nStr = rgxDate.RegexDateHandler(tmpDt);
             }
             else
             {
                 nStr = "NULL";
             }
             return nStr;
-        }        
+        }
     }
 }
