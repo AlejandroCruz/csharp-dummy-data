@@ -41,20 +41,20 @@ namespace FileReadWrite
             recordList = objPreProcess.SplitValues(recordLine, valueDelimiter);
 
             // Header edit
-            int[] elementIndex = new int[] { }; // Defaults to elementIndex[0] (no elements)
+            int[] elementIndex = new int[] { };
             UpdateLine objUpdateHead = new UpdateLine(headList);
             objUpdateHead.ModifySingleLine(elementIndex);
 
             // Row edit
             int totalLines = 10;
-            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8,9 };
+            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
             if (totalLines < 2)
             { objUpdateLine.ModifySingleLine(elementIndex); }
             else
             { objUpdateLine.ModifyMultiLine(elementIndex); }
 
-            // Longest field indexes for padding of columns
+            // Longest field indexes for column padding
             List<int> lenghtStrArr = new List<int>();
             ProcessLines objPostProcess = new ProcessLines();
             lenghtStrArr = objPostProcess.CompareFields(objUpdateHead, objUpdateLine);
