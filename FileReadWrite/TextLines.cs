@@ -78,12 +78,13 @@ namespace FileReadWrite
 
             for (int i = 0; i < lenghtStrArr.Count; i++)
             {
-                // 4 = amount of characters padding the column
+                // Padding: 4 = amount of characters padding the column
                 rowDivider += int.Parse(lenghtStrArr[i].ToString()) + 4;
             }
 
             foreach (string s in objUpdateHead.StrList)
             {
+                // Padding: "| "
                 Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
                 counter++;
             }

@@ -7,9 +7,8 @@ namespace FileReadWrite
 {
     class UpdateLine
     {
-        private char letter = 'A';
-        private int iA; // Current element index
-        private int lineCount;
+        private char charAdd = 'A';
+        private int thisIndex;
         private int totalOfLines;
         private List<string> originStrList;
         private List<string> strList;
@@ -55,9 +54,9 @@ namespace FileReadWrite
 
             for (int i = 0; i < indexes.Length; i++)
             {
-                iA = indexes[i];
-                tmpString = IncrementDataValue(originStrList[iA], iA);
-                strList[iA] = tmpString;
+                thisIndex = indexes[i];
+                tmpString = IncrementDataValue(originStrList[thisIndex], thisIndex);
+                strList[thisIndex] = tmpString;
             }
             strListArr.Add(strList.ToArray());
         }
@@ -75,7 +74,7 @@ namespace FileReadWrite
             }
             catch(ArgumentOutOfRangeException e)
             {
-                Console.WriteLine("Array element out of range surfaced at: #{0}", iA);
+                Console.WriteLine("Array element out of range surfaced at: #{0}", thisIndex);
                 Console.WriteLine("\n>>> System message:\n" + e);
                 Console.WriteLine("\n>>> Press any key to exit.");
                 Console.ReadKey();
@@ -84,16 +83,23 @@ namespace FileReadWrite
 
             for (int i = 0; i < totalOfLines; i++)
             {
-                lineCount = i;
+                int lineCount = i;
 
-                for (int j = 0; j < indexes.Length; j++)
+                if (lineCount > 0)
                 {
-                    iA = indexes[j];
-                    tmpString = IncrementDataValue(strList[iA], iA);
-                    strList[iA] = tmpString;
+                    for (int j = 0; j < indexes.Length; j++)
+                    {
+                        thisIndex = indexes[j];
+                        tmpString = IncrementDataValue(strList[thisIndex], thisIndex);
+                        strList[thisIndex] = tmpString;
+                    }
+                    strListArr.Add(strList.ToArray());
                 }
-                strListArr.Add(strList.ToArray());
-                if (i > 0) letter++;
+                else
+                {
+                    strListArr.Add(strList.ToArray());
+                }
+                if (i > 0) charAdd++;
             }
         }
 
@@ -107,36 +113,37 @@ namespace FileReadWrite
             string tmpString;
             DateTime tmpDt;
 
-            if (lineCount > 0)
+            if ((Regex.IsMatch(uStr, @"\w")) && (!DateTime.TryParse(uStr, out tmpDt)))
             {
-                if ((Regex.IsMatch(uStr, @"\w")) && (!DateTime.TryParse(uStr, out tmpDt)))
+                if (long.TryParse(uStr, out tmpL))
                 {
-                    if (long.TryParse(uStr, out tmpL))
-                    {
-                        tmpL++;
-                        uStr = tmpL.ToString();
-                    }
-                    else if (double.TryParse(uStr, out tmpD))
-                    {
-                        tmpD++;
-                        uStr = tmpD.ToString();
-                    }
-                    else if ( (Regex.IsMatch(uStr, @"\D")) && (!uStr.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
-                    {
-                        tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
-                        uStr = letter + tmpString;
-                    }
+                    tmpL++;
+                    uStr = tmpL.ToString();
                 }
-                else if (DateTime.TryParse(uStr, out tmpDt))
+                else if (double.TryParse(uStr, out tmpD))
                 {
-                    DateTime tD = tmpDt.AddDays(1);
-                    string format = "yyyy-MM-dd";
-                    uStr = tD.ToString(format);
+                    tmpD++;
+                    uStr = tmpD.ToString();
+                }
+                else if ((Regex.IsMatch(uStr, @"\D")) && (!uStr.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)))
+                {
+                    tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
+                    uStr = charAdd + tmpString;
                 }
                 else
                 {
-                    uStr = "NULL";
+                    uStr = "EMPTY";
                 }
+            }
+            else if (DateTime.TryParse(uStr, out tmpDt))
+            {
+                DateTime tD = tmpDt.AddDays(1);
+                string format = "yyyy-MM-dd";
+                uStr = tD.ToString(format);
+            }
+            else
+            {
+                uStr = "NULL";
             }
             return uStr;
         }
