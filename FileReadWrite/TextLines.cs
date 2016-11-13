@@ -1,5 +1,4 @@
 ﻿/* Console application: FileReadWrite
- * Date: 9/2016 - 11/2016
  * Description:
  *  Read tabular data from CSV file in specified dir. and display to console.
  *  Delete special characters (mainly quotation "") and rewrite to new file.

@@ -24,7 +24,7 @@ namespace FileReadWrite
             originStrList = new List<string>(dataList);
             totalOfLines = inTotalOfLines;
         }
-
+        public List<string> OriginStrList { get { return originStrList; } }
         public List<string> StrList { get { return strList; } }
         public List<string[]> StrListArr { get { return strListArr; } }
 
@@ -103,49 +103,27 @@ namespace FileReadWrite
             }
         }
 
-        public string IncrementDataValue(string uString, int thisIndex)
+        public string IncrementDataValue(string inString, int thisIndex)
         {
-            const string NULLSTR = "NULL";
-
-            long tmpL;
-            double tmpD;
-            string uStr = uString;
-            string tmpString;
+            string nStr = inString;
             DateTime tmpDt;
 
-            if ((Regex.IsMatch(uStr, @"\w")) && (!DateTime.TryParse(uStr, out tmpDt)))
+            if ((Regex.IsMatch(nStr, @"\w")) && (!DateTime.TryParse(nStr, out tmpDt)))
             {
-                if (long.TryParse(uStr, out tmpL))
-                {
-                    tmpL++;
-                    uStr = tmpL.ToString();
-                }
-                else if (double.TryParse(uStr, out tmpD))
-                {
-                    tmpD++;
-                    uStr = tmpD.ToString();
-                }
-                else if ((Regex.IsMatch(uStr, @"\D")) && (!uStr.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)))
-                {
-                    tmpString = uStr.Substring((uString.Length - originStrList[thisIndex].Length), originStrList[thisIndex].Length);
-                    uStr = charAdd + tmpString;
-                }
-                else
-                {
-                    uStr = "EMPTY";
-                }
+               RegexHandler rgxHandler = new RegexHandler();
+                nStr = rgxHandler.RegexCharHandler(originStrList, nStr, thisIndex, charAdd);
             }
-            else if (DateTime.TryParse(uStr, out tmpDt))
+            else if (DateTime.TryParse(nStr, out tmpDt))
             {
                 DateTime tD = tmpDt.AddDays(1);
                 string format = "yyyy-MM-dd";
-                uStr = tD.ToString(format);
+                nStr = tD.ToString(format);
             }
             else
             {
-                uStr = "NULL";
+                nStr = "NULL";
             }
-            return uStr;
-        }
+            return nStr;
+        }        
     }
 }
