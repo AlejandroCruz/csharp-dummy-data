@@ -14,9 +14,9 @@ namespace FileReadWrite
     {
         public static void Main(string[] args)
         {
-            string csvRawFile = "rawData2.csv";
-            string newFileName = "newData2.csv";
-            string oldFilePath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\";
+            string csvRawFile = "rawData.csv";
+            string newFileName = "newData.csv";
+            string oldFilePath = @"C:\Users\FileReadWrite\";
             string newFilePath = oldFilePath;
             string[] rawLines = System.IO.File.ReadAllLines(oldFilePath + csvRawFile);
 
