@@ -23,7 +23,9 @@ namespace FileReadWrite
             Console.WriteLine(">>> Input file: {0}\n", csvRawFile);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
-            { Console.WriteLine(rawLines[i]); }
+            {
+                Console.WriteLine(rawLines[i]);
+            }
             Console.WriteLine(Environment.NewLine);
 
             // Remove quotation
@@ -49,9 +51,13 @@ namespace FileReadWrite
             elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
             UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
             if (totalLines < 2)
-            { objUpdateLine.ModifySingleLine(elementIndex); }
+            {
+                objUpdateLine.ModifySingleLine(elementIndex);
+            }
             else
-            { objUpdateLine.ModifyMultiLine(elementIndex); }
+            {
+                objUpdateLine.ModifyMultiLine(elementIndex);
+            }
 
             // Longest field indexes for column padding
             List<int> lenghtStrArr = new List<int>();
@@ -73,7 +79,9 @@ namespace FileReadWrite
             int totalStrLength = 0;
             int rowDivider = 0;
             foreach (string s in objUpdateHead.StrList)
-            { totalStrLength += s.Length; }
+            {
+                totalStrLength += s.Length;
+            }
 
             for (int i = 0; i < lenghtStrArr.Count; i++)
             {

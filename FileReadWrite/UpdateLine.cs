@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace FileReadWrite
 {
@@ -24,6 +23,7 @@ namespace FileReadWrite
             originStrList = new List<string>(dataList);
             totalOfLines = inTotalOfLines;
         }
+
         public List<string> OriginStrList { get { return originStrList; } }
         public List<string> StrList { get { return strList; } }
         public List<string[]> StrListArr { get { return strListArr; } }
@@ -70,7 +70,9 @@ namespace FileReadWrite
             try
             {
                 for (int i = 0; i < indexes.Length; i++)
-                { tmpString = strList[indexes[i]]; }
+                {
+                    tmpString = strList[indexes[i]];
+                }
             }
             catch(ArgumentOutOfRangeException e)
             {
@@ -103,26 +105,27 @@ namespace FileReadWrite
             }
         }
 
-        public string IncrementDataValue(string inString, int thisIndex)
+        public string IncrementDataValue(string inStringList, int thisIndex)
         {
-            string nStr = inString;
+            const string NULLSTR = "NULL";
+            string nStrList = inStringList;
             DateTime tmpDt;
 
-            if ((Regex.IsMatch(nStr, @"\w")) && (!DateTime.TryParse(nStr, out tmpDt)))
+            RegexHandler rgxHandle = new RegexHandler();
+
+            if ((Regex.IsMatch(nStrList, @"\w")) && (!DateTime.TryParse(nStrList, out tmpDt)))
             {
-               RegexHandler rgxChar = new RegexHandler();
-                nStr = rgxChar.RegexCharHandler(originStrList, nStr, thisIndex, charAdd);
+                nStrList = rgxHandle.RegexCharHandler(originStrList, nStrList, thisIndex, charAdd);
             }
-            else if (DateTime.TryParse(nStr, out tmpDt))
+            else if (DateTime.TryParse(nStrList, out tmpDt))
             {
-                RegexHandler rgxDate = new RegexHandler();
-                nStr = rgxDate.RegexDateHandler(tmpDt);
+                nStrList = rgxHandle.RegexDateHandler(tmpDt);
             }
             else
             {
-                nStr = "NULL";
+                nStrList = NULLSTR;
             }
-            return nStr;
+            return nStrList;
         }
     }
 }

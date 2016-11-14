@@ -11,46 +11,45 @@ namespace FileReadWrite
 {
     class RegexHandler
     {
-        private string inStr;
+        const string NULLSTR = "NULL";
+        private string inString;
 
-        public string RegexCharHandler(List<string> origStr, string inString, int inIndex, char inCharAdd)
+        public string RegexCharHandler(List<string> origStr, string inString, int thisIndex, char inCharAdd)
         {
-            const string NULLSTR = "NULL";
             string tmpString;
             long tmpL;
             double tmpD;
-            inStr = inString;
+            this.inString = inString;
 
-            if (long.TryParse(inStr, out tmpL))
+            if (long.TryParse(this.inString, out tmpL))
             {
                 tmpL++;
-                inStr = tmpL.ToString();
+                this.inString = tmpL.ToString();
             }
-            else if (double.TryParse(inStr, out tmpD))
+            else if (double.TryParse(this.inString, out tmpD))
             {
                 tmpD++;
-                inStr = tmpD.ToString();
+                this.inString = tmpD.ToString();
             }
-            else if ((Regex.IsMatch(inStr, @"\D")) && (!inStr.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)))
+            else if ((Regex.IsMatch(this.inString, @"\D")) && (!this.inString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)))
             {
-                tmpString = inStr.Substring((inString.Length - origStr[inIndex].Length), origStr[inIndex].Length);
-                inStr = inCharAdd + tmpString;
+                tmpString = this.inString.Substring((inString.Length - origStr[thisIndex].Length), origStr[thisIndex].Length);
+                this.inString = inCharAdd + tmpString;
             }
             else
             {
-                inStr = "NULL";
+                this.inString = NULLSTR;
             }
-
-            return inStr;
+            return this.inString;
         }
 
         public string RegexDateHandler(DateTime inTempDate)
         {
             DateTime tD = inTempDate.AddDays(1);
             string format = "yyyy-MM-dd";
-            inStr = tD.ToString(format);
+            this.inString = tD.ToString(format);
 
-            return inStr;
+            return this.inString;
         }
     }
 }

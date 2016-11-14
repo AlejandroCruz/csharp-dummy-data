@@ -11,8 +11,9 @@ namespace FileReadWrite
             string editLine = null;
 
             for (int i = 0; i < inLine.Length; i++)
-            { editLine = inLine.Replace(rmvStr, string.Empty); }
-
+            {
+                editLine = inLine.Replace(rmvStr, string.Empty);
+            }
             return editLine;
         }
 
@@ -22,8 +23,9 @@ namespace FileReadWrite
             List<string> lineList = new List<string>();
 
             for(int i = 0; i < values.Length; i++)
-            { lineList.Add(values[i]); }
-
+            {
+                lineList.Add(values[i]);
+            }
             return lineList;
         }
 
@@ -33,7 +35,9 @@ namespace FileReadWrite
             StringBuilder strBuild = new StringBuilder();
 
             foreach (string s in inHeader.StrList)
-            { strBuild.Append(s + ","); }
+            {
+                strBuild.Append(s + ",");
+            }
             lineStrArr[0] = strBuild.ToString().Trim(new char[] { ' ', ',' });
 
             for (int i = 0; i < inRecord.StrListArr.Count; i++)
@@ -41,7 +45,9 @@ namespace FileReadWrite
                 strBuild = new StringBuilder();
 
                 foreach (string s in inRecord.StrListArr[i])
-                { strBuild.Append(s + ","); }
+                {
+                    strBuild.Append(s + ",");
+                }
                 lineStrArr[i + 1] = strBuild.ToString().Trim(new char[] { ' ', ',' });
             }
             return lineStrArr;

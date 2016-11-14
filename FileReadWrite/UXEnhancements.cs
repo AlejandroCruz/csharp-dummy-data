@@ -15,7 +15,9 @@ namespace FileReadWrite
         private string text = null;
 
         public UXEnhancements()
-        { addDelay(); }
+        {
+            addDelay();
+        }
 
         public UXEnhancements(int inTime)
         {
@@ -24,7 +26,9 @@ namespace FileReadWrite
         }
 
         public void addDelay()
-        { Task.Delay(time).Wait(); }
+        {
+            Task.Delay(time).Wait();
+        }
 
         public void addDelay(int inTime, string inText, int inLoop)
         {
@@ -50,7 +54,9 @@ namespace FileReadWrite
                 Task.Delay(time).Wait();
             }
             else
-            { Task.Delay(time).Wait(); }
+            {
+                Task.Delay(time).Wait();
+            }
         }
     }
 }
