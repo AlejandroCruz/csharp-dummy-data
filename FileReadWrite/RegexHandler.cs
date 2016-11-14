@@ -12,44 +12,55 @@ namespace FileReadWrite
     class RegexHandler
     {
         const string NULLSTR = "NULL";
-        private string inString;
+        private static string newString;
 
-        public string RegexCharHandler(List<string> origStr, string inString, int thisIndex, char inCharAdd)
+        public static string RegexCharHandler(string inString, int thisIndex, char inCharAdd, List<string> origStr)
         {
+            bool newStringHasLetter = true;
+            bool newStringHasNumber = true;
             string tmpString;
-            long tmpL;
-            double tmpD;
-            this.inString = inString;
+            long tmpLong;
+            double tmpDecimal;
+            newString = inString;
 
-            if (long.TryParse(this.inString, out tmpL))
+            foreach (var item in newString)
             {
-                tmpL++;
-                this.inString = tmpL.ToString();
+                newStringHasLetter = Char.IsLetter(item);
+                newStringHasNumber = Char.IsNumber(item);
             }
-            else if (double.TryParse(this.inString, out tmpD))
+
+            if (!newStringHasLetter)
             {
-                tmpD++;
-                this.inString = tmpD.ToString();
+                if (long.TryParse(newString, out tmpLong))
+                {
+                    tmpLong++;
+                    newString = tmpLong.ToString();
+                }
+                else if (double.TryParse(newString, out tmpDecimal))
+                {
+                    tmpDecimal++;
+                    newString = tmpDecimal.ToString();
+                }
             }
-            else if ((Regex.IsMatch(this.inString, @"\D")) && (!this.inString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)))
+            else if ( (Regex.IsMatch(newString, @"\D")) && (!newString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
             {
-                tmpString = this.inString.Substring((inString.Length - origStr[thisIndex].Length), origStr[thisIndex].Length);
-                this.inString = inCharAdd + tmpString;
+                tmpString = newString.Substring((inString.Length - origStr[thisIndex].Length), origStr[thisIndex].Length);
+                newString = inCharAdd + tmpString;
             }
             else
             {
-                this.inString = NULLSTR;
+                newString = NULLSTR;
             }
-            return this.inString;
+            return newString;
         }
 
-        public string RegexDateHandler(DateTime inTempDate)
+        public static string RegexDateHandler(DateTime inTempDate)
         {
             DateTime tD = inTempDate.AddDays(1);
             string format = "yyyy-MM-dd";
-            this.inString = tD.ToString(format);
+            newString = tD.ToString(format);
 
-            return this.inString;
+            return newString;
         }
     }
 }
