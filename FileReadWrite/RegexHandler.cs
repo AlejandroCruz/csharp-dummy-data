@@ -5,6 +5,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace FileReadWrite
@@ -16,18 +17,30 @@ namespace FileReadWrite
 
         public static string RegexCharHandler(string inString, int thisIndex, char inCharAdd, List<string> origStr)
         {
-            bool newStringHasLetter = true;
-            bool newStringHasNumber = true;
+            bool newStringHasLetter = false;
             string tmpString;
             long tmpLong;
             double tmpDecimal;
             newString = inString;
 
-            foreach (var item in newString)
+            do
             {
-                newStringHasLetter = Char.IsLetter(item);
-                newStringHasNumber = Char.IsNumber(item);
-            }
+                int unicodeA = CharUnicodeInfo.GetDecimalDigitValue('A');
+                int unicodeZ = CharUnicodeInfo.GetDecimalDigitValue('Z');
+                int unicodea = CharUnicodeInfo.GetDecimalDigitValue('a');
+                int unicodez = CharUnicodeInfo.GetDecimalDigitValue('z');
+
+                foreach (var item in inString)
+                {
+                    int tmpInt = CharUnicodeInfo.GetDecimalDigitValue(item);
+
+                    if (unicodeA < tmpInt && tmpInt > unicodeZ ||
+                        unicodea < tmpInt && tmpInt > unicodez)
+                    {
+                        newStringHasLetter = true;
+                    }
+                }
+            } while (newStringHasLetter == false);
 
             if (!newStringHasLetter)
             {
@@ -40,6 +53,13 @@ namespace FileReadWrite
                 {
                     tmpDecimal++;
                     newString = tmpDecimal.ToString();
+                }
+                else
+                {
+                    char lastNumb = inString[inString.Length - 1];
+                    lastNumb++;
+                    newString = char.ToString(lastNumb);
+
                 }
             }
             else if ( (Regex.IsMatch(newString, @"\D")) && (!newString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
