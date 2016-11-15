@@ -12,7 +12,7 @@ namespace FileReadWrite
 {
     class RegexHandler
     {
-        const string NULLSTR = "NULL";
+        private const string NULLSTR = "NULL";
         private static string newString;
 
         public static string RegexCharHandler(string inString, int thisIndex, char inCharAdd, List<string> origStr)

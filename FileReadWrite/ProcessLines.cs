@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace FileReadWrite
 {
     class ProcessLines
     {
-        public string RemoveString(string inLine, string rmvStr)
+        public static string RemoveString(string inLine, string rmvStr)
         {
             string editLine = null;
 
@@ -17,7 +16,7 @@ namespace FileReadWrite
             return editLine;
         }
 
-        public List<string> SplitValues(string inLine, char inDelimiter)
+        public static List<string> SplitValues(string inLine, char inDelimiter)
         {
             string[] values = inLine.Split(inDelimiter);
             List<string> lineList = new List<string>();
@@ -29,7 +28,7 @@ namespace FileReadWrite
             return lineList;
         }
 
-        public string[] AppendValues(UpdateLine inHeader, UpdateLine inRecord)
+        public static string[] AppendValues(UpdateLine inHeader, UpdateLine inRecord)
         {
             string[] lineStrArr = new string[1 + inRecord.StrListArr.Count];
             StringBuilder strBuild = new StringBuilder();
@@ -53,7 +52,7 @@ namespace FileReadWrite
             return lineStrArr;
         }
 
-        public List<int> CompareFields(UpdateLine inHeader, UpdateLine inRecord)
+        public static List<int> CompareFields(UpdateLine inHeader, UpdateLine inRecord)
         {
             int countStrListArr = (inRecord.StrListArr.Count - 1);
             List<int> lengthIndexes = new List<int>(inHeader.StrList.Count);

@@ -29,44 +29,42 @@ namespace FileReadWrite
             Console.WriteLine(Environment.NewLine);
 
             // Remove quotation
-            ProcessLines objPreProcess = new ProcessLines();
             string strToRemove = "\"";
-            string headLine = objPreProcess.RemoveString(rawLines[0], strToRemove);
-            string recordLine = objPreProcess.RemoveString(rawLines[1], strToRemove);
+            string headLine = ProcessLines.RemoveString(rawLines[0], strToRemove);
+            string recordLine = ProcessLines.RemoveString(rawLines[1], strToRemove);
 
             // Split values
             char valueDelimiter = ',';
             List<string> headList = new List<string>();
             List<string> recordList = new List<string>();
-            headList = objPreProcess.SplitValues(headLine, valueDelimiter);
-            recordList = objPreProcess.SplitValues(recordLine, valueDelimiter);
+            headList = ProcessLines.SplitValues(headLine, valueDelimiter);
+            recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
             // Header edit
             int[] elementIndex = new int[] { };
-            UpdateLine objUpdateHead = new UpdateLine(headList);
-            objUpdateHead.ModifySingleLine(elementIndex);
+            UpdateLine updateHead = new UpdateLine(headList);
+            updateHead.ModifySingleLine(elementIndex);
 
             // Row edit
             int totalLines = 10;
             elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
-            UpdateLine objUpdateLine = new UpdateLine(recordList, totalLines);
+            UpdateLine updateLine = new UpdateLine(recordList, totalLines);
             if (totalLines < 2)
             {
-                objUpdateLine.ModifySingleLine(elementIndex);
+                updateLine.ModifySingleLine(elementIndex);
             }
             else
             {
-                objUpdateLine.ModifyMultiLine(elementIndex);
+                updateLine.ModifyMultiLine(elementIndex);
             }
 
             // Longest field indexes for column padding
             List<int> lenghtStrArr = new List<int>();
-            ProcessLines objPostProcess = new ProcessLines();
-            lenghtStrArr = objPostProcess.CompareFields(objUpdateHead, objUpdateLine);
+            lenghtStrArr = ProcessLines.CompareFields(updateHead, updateLine);
 
             // Concatenate Values
             string[] dataSet = new string[] { };
-            dataSet = objPostProcess.AppendValues(objUpdateHead, objUpdateLine);
+            dataSet = ProcessLines.AppendValues(updateHead, updateLine);
 
             // Write data to new file
             bool overwrite = true;
@@ -78,7 +76,7 @@ namespace FileReadWrite
             int counter = 0;
             int totalStrLength = 0;
             int rowDivider = 0;
-            foreach (string s in objUpdateHead.StrList)
+            foreach (string s in updateHead.StrList)
             {
                 totalStrLength += s.Length;
             }
@@ -89,7 +87,7 @@ namespace FileReadWrite
                 rowDivider += int.Parse(lenghtStrArr[i].ToString()) + 4;
             }
 
-            foreach (string s in objUpdateHead.StrList)
+            foreach (string s in updateHead.StrList)
             {
                 // Padding: "| "
                 Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
@@ -103,7 +101,7 @@ namespace FileReadWrite
             {
                 counter = 0;
 
-                foreach (string s in objUpdateLine.StrList)
+                foreach (string s in updateLine.StrList)
                 {
                     Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
                     counter++;
@@ -112,13 +110,13 @@ namespace FileReadWrite
             }
             else
             {
-                int count = objUpdateLine.StrListArr.Count;
+                int count = updateLine.StrListArr.Count;
 
                 for (int i = 0; i < count; i++)
                 {
                     counter = 0;
 
-                    foreach (string s in objUpdateLine.StrListArr[i])
+                    foreach (string s in updateLine.StrListArr[i])
                     {
                         Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
                         counter++;

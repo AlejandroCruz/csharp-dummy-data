@@ -105,7 +105,7 @@ namespace FileReadWrite
             }
         }
 
-        public string IncrementDataValue(string inStringList, int thisIndex)
+        private string IncrementDataValue(string inStringList, int thisIndex)
         {
             const string NULLSTR = "NULL";
             string newStrList = inStringList;
