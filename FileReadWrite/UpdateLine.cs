@@ -40,11 +40,11 @@ namespace FileReadWrite
                 }
                 else if (indexes.Length == 0)
                 {
-                    //Array.Resize(ref indexes, 1);
-                    //Console.WriteLine("Index adjusted to minimum: {0}", indexes.Length);
+                    Array.Resize(ref indexes, 1);
+                    Console.WriteLine("Index adjusted to minimum: {0}", indexes.Length);
                 }
             }
-// TODO //
+
             catch (ArgumentOutOfRangeException e)
             { Console.WriteLine("\n>>> System message:\n" + e); }
 

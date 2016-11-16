@@ -1,11 +1,5 @@
-﻿/* Console application: FileReadWrite
- * Description:
- *  Handle the modification of strings when character, special character,
- *   decimal, or unrecognized value.
- */
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace FileReadWrite
