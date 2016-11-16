@@ -17,32 +17,12 @@ namespace FileReadWrite
 
         public static string RegexCharHandler(string inString, int thisIndex, char inCharAdd, List<string> origStr)
         {
-            bool newStringHasLetter = false;
             string tmpString;
             long tmpLong;
             double tmpDecimal;
             newString = inString;
 
-            do
-            {
-                int unicodeA = CharUnicodeInfo.GetDecimalDigitValue('A');
-                int unicodeZ = CharUnicodeInfo.GetDecimalDigitValue('Z');
-                int unicodea = CharUnicodeInfo.GetDecimalDigitValue('a');
-                int unicodez = CharUnicodeInfo.GetDecimalDigitValue('z');
-
-                foreach (var item in inString)
-                {
-                    int tmpInt = CharUnicodeInfo.GetDecimalDigitValue(item);
-
-                    if (unicodeA < tmpInt && tmpInt > unicodeZ ||
-                        unicodea < tmpInt && tmpInt > unicodez)
-                    {
-                        newStringHasLetter = true;
-                    }
-                }
-            } while (newStringHasLetter == false);
-
-            if (!newStringHasLetter)
+            if (!Regex.IsMatch(inString, "[a-zA-Z]"))
             {
                 if (long.TryParse(newString, out tmpLong))
                 {
@@ -57,9 +37,18 @@ namespace FileReadWrite
                 else
                 {
                     char lastNumb = inString[inString.Length - 1];
-                    lastNumb++;
-                    newString = char.ToString(lastNumb);
-
+                    if(lastNumb == '9')
+                    {
+                        lastNumb = '0';
+                        newString = newString.Insert(newString.Length, char.ToString(lastNumb));
+                        lastNumb++;
+                    }
+                    else
+                    {
+                        lastNumb++;
+                        tmpString = newString.Remove(inString.Length - 1, 1);
+                        newString = tmpString.Insert(tmpString.Length, char.ToString(lastNumb));
+                    }
                 }
             }
             else if ( (Regex.IsMatch(newString, @"\D")) && (!newString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
