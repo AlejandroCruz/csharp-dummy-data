@@ -1,8 +1,8 @@
 ﻿/* Console application: FileReadWrite
  * Description:
  *  Read tabular data from CSV file in specified dir. and display to console.
- *  Delete special characters (mainly quotation "") and rewrite to new file.
- *  Optional delay functions are for end user experience.
+ *  Delete special characters and rewrite to new file.
+ *  Optional delay functions @UXEnhancements are for end user experience.
  */
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,7 @@ namespace FileReadWrite
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
             // Header edit
-            int[] elementIndex = new int[] { };
+            int[] elementIndex = new int[] {};
             UpdateLine updateHead = new UpdateLine(headList);
             updateHead.ModifySingleLine(elementIndex);
 
@@ -63,7 +63,7 @@ namespace FileReadWrite
             lenghtStrArr = ProcessLines.CompareFields(updateHead, updateLine);
 
             // Concatenate Values
-            string[] dataSet = new string[] { };
+            string[] dataSet = new string[] {};
             dataSet = ProcessLines.AppendValues(updateHead, updateLine);
 
             // Write data to new file
