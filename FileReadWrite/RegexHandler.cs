@@ -31,11 +31,8 @@ namespace FileReadWrite
                 }
                 else
                 {
-                    int endPosition = inString[inString.Length - 1];
-                    int separatorPosition;
                     int[] separatorIndex;
                     int groupCounter = 0;
-                    string numbGroup;
 
                     List<string> inStrList = new List<string>();
                     List<string> strGroup = new List<string>();
@@ -62,17 +59,19 @@ namespace FileReadWrite
                         }
                     }
 
+                    string numbGroup;
+                    int endPosition = inString.Length - 1;
+                    int separatorPosition;
                     int groupLength = 0;
                     StringBuilder strBuild = new StringBuilder();
                     for (int i = 0; i < strSeparators.Count; i++)
                     {
-
-                        strBuild.Append(strSeparators[i]);
+                        //strBuild.Append(strSeparators[i]);
 
                         separatorPosition = inString.LastIndexOf(strSeparators[i], endPosition);
                         groupLength = endPosition - separatorPosition;
 
-                        numbGroup = inString.Substring(separatorPosition, groupLength);
+                        numbGroup = inString.Substring((separatorPosition + 1), groupLength);
 
                         strBuild.Append(numbGroup);
                     }
