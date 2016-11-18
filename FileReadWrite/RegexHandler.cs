@@ -31,15 +31,19 @@ namespace FileReadWrite
                 }
                 else
                 {
-                    int[] groupIndex;
+                    int endPosition = inString[inString.Length - 1];
+                    int separatorPosition;
+                    int[] separatorIndex;
                     int groupCounter = 0;
+                    string numbGroup;
 
                     List<string> inStrList = new List<string>();
                     List<string> strGroup = new List<string>();
                     List<string[]> strGroupsArr = new List<string[]>();
                     List<string> strSeparators = new List<string>();
 
-                    for(int i = 0; i < inString.Length; i++)
+
+                    for (int i = 0; i < inString.Length; i++)
                     {
                         inStrList.Add(inString[i].ToString());
                     }
@@ -53,29 +57,26 @@ namespace FileReadWrite
                         else
                         {
                             strSeparators.Add(inStrList[i]);
-                            groupIndex = new int[] { groupCounter };
+                            separatorIndex = new int[] { (inString.Length - 1) - i };
                             groupCounter++;
                         }
                     }
 
-                    string group1 = 
-                    strGroupsArr.Add(strGroup[i].ToString());
-
-
+                    int groupLength = 0;
                     StringBuilder strBuild = new StringBuilder();
-
-                    for(int i = 0; i < strGroupsArr.Count; i++)
+                    for (int i = 0; i < strSeparators.Count; i++)
                     {
 
-                        foreach (var item in strGroupsArr[i])
-                        {
-                            strBuild.Append(item);
-                        }
-                        if((i+1) < strGroupsArr.Count)
-                        {
-                            strBuild.Append(strSeparators[i]);
-                        }
+                        strBuild.Append(strSeparators[i]);
+
+                        separatorPosition = inString.LastIndexOf(strSeparators[i], endPosition);
+                        groupLength = endPosition - separatorPosition;
+
+                        numbGroup = inString.Substring(separatorPosition, groupLength);
+
+                        strBuild.Append(numbGroup);
                     }
+
                     newString = strBuild.ToString();
 
                     //char lastNumbFound = inString[inString.Length - 1];

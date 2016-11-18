@@ -94,8 +94,7 @@ namespace FileReadWrite
                 counter++;
             }
 
-            Console.Write(Environment.NewLine);
-            Console.WriteLine(new String('-', rowDivider));
+            Console.WriteLine(Environment.NewLine, new String('-', rowDivider));
 
             if (totalLines < 2)
             {
