@@ -31,82 +31,46 @@ namespace FileReadWrite
                 }
                 else
                 {
-                    int[] separatorIndex;
-                    int groupCounter = 0;
-
-                    List<string> inStrList = new List<string>();
-                    List<string> strGroup = new List<string>();
-                    List<string[]> strGroupsArr = new List<string[]>();
+                    List<string> strList = new List<string>();
+                    List<string> strGroups = new List<string>();
                     List<string> strSeparators = new List<string>();
 
-
+                    // Need chars converted to strings for Regex
                     for (int i = 0; i < inString.Length; i++)
                     {
-                        inStrList.Add(inString[i].ToString());
+                        strList.Add(inString[i].ToString());
                     }
 
-                    for(int i = (inString.Length - 1); i >= 0; i--)
+                    for (int i = 0; i < strList.Count; i++)
                     {
-                        if (Regex.IsMatch(inStrList[i], "[0-9]"))
+                        if (Regex.IsMatch(strList[i], @"\D"))
                         {
-                            strGroup.Add(inStrList[i]);
-                        }
-                        else
-                        {
-                            strSeparators.Add(inStrList[i]);
-                            separatorIndex = new int[] { (inString.Length - 1) - i };
-                            groupCounter++;
+                            strSeparators.Add(strList[i]);
                         }
                     }
 
-                    string numbGroup;
-                    int endPosition = inString.Length - 1;
-                    int separatorPosition;
-                    int groupLength = 0;
+                    strGroups.Add(inString.Substring(0, inString.IndexOf(strSeparators[0]) - 1) );
+                    if(strSeparators.Count > 1)
+                    {
+                        for (int i = 0; i < strSeparators.Count; i++)
+                        {
+                            strGroups.Add(inString.Substring(strGroups[i].LastIndexOf(strGroups[i]), strSeparators.IndexOf(strSeparators[i+1]) - 1));
+                        }
+                    }
+                    else
+                    {
+                        strGroups.Add( inString.Substring((strSeparators.IndexOf(strSeparators[0]) + 1), strList.LastIndexOf(strList[0])) );
+                    }
+
+
                     StringBuilder strBuild = new StringBuilder();
                     for (int i = 0; i < strSeparators.Count; i++)
                     {
-                        //strBuild.Append(strSeparators[i]);
-
-                        separatorPosition = inString.LastIndexOf(strSeparators[i], endPosition);
-                        groupLength = endPosition - separatorPosition;
-
-                        numbGroup = inString.Substring((separatorPosition + 1), groupLength);
-
-                        strBuild.Append(numbGroup);
+                        strBuild.Append(strGroups[i] + strSeparators[i]);
                     }
+                    strBuild.Append(strGroups[strGroups.Count - 1]);
 
                     newString = strBuild.ToString();
-
-                    //char lastNumbFound = inString[inString.Length - 1];
-                    //string lNF = lastNumbFound.ToString();
-
-                    //for (int i = 0; i < inString.Length; i++)
-                    //{
-                    //    string lNF = lastNumbFound.ToString();
-                    //    if (Regex.IsMatch(lNF, @"\d"))
-                    //    {
-                    //        aString.Add(lNF);
-                    //    }
-                    //    else
-                    //    {
-                    //        //newString = newString.Insert(newString.Length, "0");
-                    //        aString.Add("0");
-                    //    }
-                    //}
-
-                    //if (lastNumbFound == '9')
-                    //{
-                    //    lastNumbFound = '0';
-                    //    newString = newString.Insert(newString.Length, char.ToString(lastNumbFound));
-                    //    lastNumbFound++;
-                    //}
-                    //else
-                    //{
-                    //    lastNumbFound++;
-                    //    tmpString = newString.Remove(inString.Length - 1, 1);
-                    //    newString = tmpString.Insert(tmpString.Length, char.ToString(lastNumbFound));
-                    //}
                 }
             }
             else if ( (Regex.IsMatch(newString, @"\D")) && (!newString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
