@@ -31,6 +31,7 @@ namespace FileReadWrite
                 }
                 else
                 {
+                    List<int> indexSeparator = new List<int>();
                     List<string> strList = new List<string>();
                     List<string> strGroups = new List<string>();
                     List<string> strSeparators = new List<string>();
@@ -43,6 +44,7 @@ namespace FileReadWrite
                         if (Regex.IsMatch(strList[i], @"\D"))
                         {
                             strSeparators.Add(strList[i]);
+                            indexSeparator.Add(i);
                         }
                     }
 
@@ -50,10 +52,20 @@ namespace FileReadWrite
 
                     if(strSeparators.Count > 1)
                     {
-                        for (int i = 0; i < strSeparators.Count; i++)
+                        int strSep;
+                        int endSep;
+                        int length;
+
+                        for (int i = 0; i < strSeparators.Count - 1; i++)
                         {
-                            strGroups.Add(inString.Substring(strGroups[i].Length + 1, inString.IndexOf(strSeparators[i]) - 1));
+                            strSep = indexSeparator[0+i];
+                            endSep = indexSeparator[1+i];
+                            length = endSep - strSep;
+
+                            strGroups.Add( inString.Substring( (strSep + 1), (length - 1)) );
                         }
+
+                        strGroups.Add(inString.Substring( (indexSeparator[indexSeparator.Count - 1] + 1), (inString.Length - 1) - (indexSeparator[indexSeparator.Count - 1])) );
                     }
                     else
                     {
