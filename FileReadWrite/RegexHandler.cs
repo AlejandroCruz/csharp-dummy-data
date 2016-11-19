@@ -49,17 +49,20 @@ namespace FileReadWrite
                         }
                     }
 
-                    strGroups.Add(inString.Substring(0, inString.IndexOf(strSeparators[0]) - 1) );
+                    int strLength = inString.IndexOf(strSeparators[0]);
+                    int endPosition = inString.Length - 1;
+
+                    strGroups.Add(inString.Substring(0, strLength));
                     if(strSeparators.Count > 1)
                     {
                         for (int i = 0; i < strSeparators.Count; i++)
                         {
-                            strGroups.Add(inString.Substring(strGroups[i].LastIndexOf(strGroups[i]), strSeparators.IndexOf(strSeparators[i+1]) - 1));
+                            strGroups.Add(inString.Substring(strGroups[i].Length + 1, inString.IndexOf(strSeparators[i]) - 1));
                         }
                     }
                     else
                     {
-                        strGroups.Add( inString.Substring((strSeparators.IndexOf(strSeparators[0]) + 1), strList.LastIndexOf(strList[0])) );
+                        strGroups.Add( inString.Substring((inString.IndexOf(strSeparators[0]) + 1), endPosition - inString.IndexOf(strSeparators[0])) );
                     }
 
 
