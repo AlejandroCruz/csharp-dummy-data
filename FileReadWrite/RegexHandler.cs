@@ -49,10 +49,8 @@ namespace FileReadWrite
                         }
                     }
 
-                    int strLength = inString.IndexOf(strSeparators[0]);
-                    int endPosition = inString.Length - 1;
+                    strGroups.Add(inString.Substring(0, inString.IndexOf(strSeparators[0])));
 
-                    strGroups.Add(inString.Substring(0, strLength));
                     if(strSeparators.Count > 1)
                     {
                         for (int i = 0; i < strSeparators.Count; i++)
@@ -62,9 +60,13 @@ namespace FileReadWrite
                     }
                     else
                     {
-                        strGroups.Add( inString.Substring((inString.IndexOf(strSeparators[0]) + 1), endPosition - inString.IndexOf(strSeparators[0])) );
+                        strGroups.Add( inString.Substring((inString.IndexOf(strSeparators[0]) + 1), (inString.Length - 1) - inString.IndexOf(strSeparators[0])) );
                     }
 
+                    // Grouped separated number sequences --> increment last group
+                    int tmpStrGroup = int.Parse(strGroups[strGroups.Count - 1]);
+                    tmpStrGroup++;
+                    strGroups[strGroups.Count - 1] = tmpStrGroup.ToString();
 
                     StringBuilder strBuild = new StringBuilder();
                     for (int i = 0; i < strSeparators.Count; i++)
