@@ -39,17 +39,14 @@ namespace FileReadWrite
                     for (int i = 0; i < inString.Length; i++)
                     {
                         strList.Add(inString[i].ToString());
-                    }
 
-                    for (int i = 0; i < strList.Count; i++)
-                    {
                         if (Regex.IsMatch(strList[i], @"\D"))
                         {
                             strSeparators.Add(strList[i]);
                         }
                     }
 
-                    strGroups.Add(inString.Substring(0, inString.IndexOf(strSeparators[0])));
+                    strGroups.Add( inString.Substring(0, inString.IndexOf(strSeparators[0])) );
 
                     if(strSeparators.Count > 1)
                     {
@@ -63,7 +60,6 @@ namespace FileReadWrite
                         strGroups.Add( inString.Substring((inString.IndexOf(strSeparators[0]) + 1), (inString.Length - 1) - inString.IndexOf(strSeparators[0])) );
                     }
 
-                    // Grouped separated number sequences --> increment last group
                     int tmpStrGroup = int.Parse(strGroups[strGroups.Count - 1]);
                     tmpStrGroup++;
                     strGroups[strGroups.Count - 1] = tmpStrGroup.ToString();
