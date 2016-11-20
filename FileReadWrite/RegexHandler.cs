@@ -55,53 +55,53 @@ namespace FileReadWrite
             return newString;
         }
 
-        private static void ProcessSeparatedDecimalSequences(string dSequence)
+        private static void ProcessSeparatedDecimalSequences(string decimalSequence)
         {
-            List<int> indexSeparator = new List<int>();
+            List<int> indexOfSeparator = new List<int>();
             List<string> strGroups = new List<string>();
 
-            for (int i = 0; i < dSequence.Length; i++)
+            for (int i = 0; i < decimalSequence.Length; i++)
             {
-                if (Regex.IsMatch(dSequence[i].ToString(), @"\D"))
+                if (Regex.IsMatch(decimalSequence[i].ToString(), @"\D"))
                 {
-                    indexSeparator.Add(i);
+                    indexOfSeparator.Add(i);
                 }
             }
 
-            strGroups.Add(dSequence.Substring(0, indexSeparator[0]));
+            strGroups.Add(decimalSequence.Substring(0, indexOfSeparator[0]));
 
-            if (indexSeparator.Count > 1)
+            if (indexOfSeparator.Count > 1)
             {
-                int strSep;
-                int endSep;
-                int length;
+                int startS;
+                int endS;
+                int lengthS;
 
-                for (int i = 0; i < indexSeparator.Count - 1; i++)
+                for (int i = 0; i < indexOfSeparator.Count - 1; i++)
                 {
-                    strSep = indexSeparator[0 + i];
-                    endSep = indexSeparator[1 + i];
-                    length = endSep - strSep;
+                    startS = indexOfSeparator[0 + i];
+                    endS = indexOfSeparator[1 + i];
+                    lengthS = endS - startS;
 
-                    strGroups.Add(dSequence.Substring((strSep + 1), (length - 1)));
+                    strGroups.Add( decimalSequence.Substring((startS + 1), (lengthS - 1)) );
                 }
 
-                strGroups.Add( dSequence.Substring((indexSeparator[indexSeparator.Count - 1] + 1), (dSequence.Length - 1) - (indexSeparator[indexSeparator.Count - 1])) );
+                strGroups.Add( decimalSequence.Substring((indexOfSeparator[indexOfSeparator.Count - 1] + 1), (decimalSequence.Length - 1) - (indexOfSeparator[indexOfSeparator.Count - 1])) );
             }
             else
             {
-                strGroups.Add( dSequence.Substring((indexSeparator[0] + 1), (dSequence.Length - 1) - (indexSeparator[0])) );
+                strGroups.Add( decimalSequence.Substring((indexOfSeparator[0] + 1), (decimalSequence.Length - 1) - (indexOfSeparator[0])) );
             }
 
-            // Increment last decimal sequence group
+            // Increment last sequence group
             int tmpStrGroup = int.Parse(strGroups[strGroups.Count - 1]);
             tmpStrGroup++;
             strGroups[strGroups.Count - 1] = tmpStrGroup.ToString();
 
             StringBuilder strBuild = new StringBuilder();
 
-            for (int i = 0; i < indexSeparator.Count; i++)
+            for (int i = 0; i < indexOfSeparator.Count; i++)
             {
-                strBuild.Append(strGroups[i] + dSequence[indexSeparator[i]]);
+                strBuild.Append(strGroups[i] + decimalSequence[indexOfSeparator[i]]);
             }
             strBuild.Append(strGroups[strGroups.Count - 1]);
 
