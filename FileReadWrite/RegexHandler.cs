@@ -43,6 +43,7 @@ namespace FileReadWrite
             {
                 newString = NULLSTR;
             }
+
             return newString;
         }
 
