@@ -76,8 +76,9 @@ namespace FileReadWrite
                 int startS;
                 int endS;
                 int lengthS;
+                int indexS = indexOfSeparator.Count - 1;
 
-                for (int i = 0; i < indexOfSeparator.Count - 1; i++)
+                for (int i = 0; i < indexS; i++)
                 {
                     startS = indexOfSeparator[0 + i];
                     endS = indexOfSeparator[1 + i];
@@ -86,7 +87,7 @@ namespace FileReadWrite
                     strGroups.Add( decimalSequence.Substring((startS + 1), (lengthS - 1)) );
                 }
 
-                strGroups.Add( decimalSequence.Substring((indexOfSeparator[indexOfSeparator.Count - 1] + 1), (decimalSequence.Length - 1) - (indexOfSeparator[indexOfSeparator.Count - 1])) );
+                strGroups.Add( decimalSequence.Substring((indexOfSeparator[indexS] + 1), (decimalSequence.Length - 1) - (indexOfSeparator[indexS])) );
             }
             else
             {
