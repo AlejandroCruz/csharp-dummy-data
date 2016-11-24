@@ -55,6 +55,7 @@
     <Compile Include="CreateTextFile.cs" />
     <Compile Include="ProcessLines.cs" />
     <Compile Include="RegexHandler.cs" />
+    <Compile Include="RegexHandlerUtils.cs" />
     <Compile Include="TextLines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateLine.cs" />

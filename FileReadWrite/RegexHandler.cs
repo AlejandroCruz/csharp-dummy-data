@@ -7,7 +7,7 @@ namespace FileReadWrite
 {
     class RegexHandler
     {
-        private const char DEFAULT_LETTER = 'A';
+        private char charAdd = 'A';
         private const string NULLSTR = "NULL";
         private const string DATE_FORMAT = "yyyy-MM-dd";
 
@@ -20,7 +20,7 @@ namespace FileReadWrite
             originalStr = inOriginStrList;
         }
 
-        public string RegexCharHandler(string inString, int thisIndex, char inCharAdd)
+        public string RegexCharHandler(string inString, int thisIndex)
         {
             if (!Regex.IsMatch(inString, "[a-zA-Z]"))
             {
@@ -29,13 +29,14 @@ namespace FileReadWrite
             // "\D": Matches any character other than a decimal digit
             else if ( (Regex.IsMatch(inString, @"\D")) && (!inString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
             {
-                ProcessWordPhrase(inString, thisIndex, inCharAdd);
+                ProcessWordPhrase(inString, thisIndex);
             }
             else
             {
                 ProcessUnreadable();
             }
 
+            charAdd++;
             return newString;
         }
 
@@ -131,18 +132,18 @@ namespace FileReadWrite
             newString = strBuild.ToString();
         }
 
-        private void ProcessWordPhrase(string wordPhrase, int thisIndex, char inCharAdd)
+        private void ProcessWordPhrase(string wordPhrase, int thisIndex)
         {
-            string tmpString = wordPhrase.Substring((wordPhrase.Length - originalStr[thisIndex].Length), originalStr[thisIndex].Length);
+            string tmpOriginStr = wordPhrase.Substring((wordPhrase.Length - originalStr[thisIndex].Length), originalStr[thisIndex].Length);
+            string tmpPrefixStr = wordPhrase.Substring(0, wordPhrase.Length - tmpOriginStr.Length);
 
-            if (inCharAdd.Equals('Z'))
+            if (tmpPrefixStr.EndsWith("Z"))
             {
-                inCharAdd = 'A';
-                newString = DEFAULT_LETTER.ToString() + inCharAdd + tmpString;
+                newString = charAdd.ToString() + tmpPrefixStr + tmpOriginStr;
             }
             else
             {
-                newString = inCharAdd + tmpString;
+                newString = charAdd.ToString() + tmpOriginStr;
             }
         }
 

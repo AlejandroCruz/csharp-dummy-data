@@ -6,12 +6,12 @@ namespace FileReadWrite
 {
     class UpdateLine
     {
-        private char charAdd = 'A';
         private int thisIndex;
         private int totalOfLines;
         private List<string> originStrList;
         private List<string> strList;
         private List<string[]> strListArr;
+        RegexHandler rgxObj;
 
         public UpdateLine(List<string> dataList)
         {
@@ -22,6 +22,7 @@ namespace FileReadWrite
         {
             originStrList = new List<string>(dataList);
             totalOfLines = inTotalOfLines;
+            rgxObj = new RegexHandler(originStrList);
         }
 
         public List<string> OriginStrList { get { return originStrList; } }
@@ -101,7 +102,6 @@ namespace FileReadWrite
                 {
                     strListArr.Add(strList.ToArray());
                 }
-                if (i > 0) charAdd++;
             }
         }
 
@@ -109,12 +109,11 @@ namespace FileReadWrite
         {
             string newStrList = inStringList;
             DateTime tmpDt;
-            RegexHandler rgxObj = new RegexHandler(originStrList);
 
             // "\w": Matches any word character
             if (!DateTime.TryParse(inStringList, out tmpDt))
             {
-                newStrList = rgxObj.RegexCharHandler(newStrList, thisIndex, charAdd);
+                newStrList = rgxObj.RegexCharHandler(newStrList, thisIndex);
             }
             else if (DateTime.TryParse(inStringList, out tmpDt))
             {
