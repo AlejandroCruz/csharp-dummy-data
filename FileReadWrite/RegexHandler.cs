@@ -7,13 +7,21 @@ namespace FileReadWrite
 {
     class RegexHandler
     {
+        private const char DEFAULT_LETTER = 'A';
         private const string NULLSTR = "NULL";
-        private static string newString;
-        private static char nLetter = 'A';
+        private const string DATE_FORMAT = "yyyy-MM-dd";
 
-        public static string RegexCharHandler(string inString, int thisIndex, char inCharAdd, List<string> origStr)
+        private string newString;
+        private List<string> originalStr;
+        private DateTime tD;
+
+        public RegexHandler(List<string> inOriginStrList)
         {
-            string tmpString;
+            originalStr = inOriginStrList;
+        }
+
+        public string RegexCharHandler(string inString, int thisIndex, char inCharAdd)
+        {
             long tmpLong;
             double tmpDecimal;
             newString = inString;
@@ -37,8 +45,7 @@ namespace FileReadWrite
             }
             else if ( (Regex.IsMatch(newString, @"\D")) && (!newString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
             {
-                tmpString = newString.Substring((inString.Length - origStr[thisIndex].Length), origStr[thisIndex].Length);
-                ProcessWordPhrase(tmpString, inCharAdd);
+                ProcessWordPhrase(newString, thisIndex, inCharAdd);
             }
             else
             {
@@ -48,16 +55,15 @@ namespace FileReadWrite
             return newString;
         }
 
-        public static string RegexDateHandler(DateTime inTempDate)
+        public string RegexDateHandler(DateTime inTempDate)
         {
-            DateTime tD = inTempDate.AddDays(1);
-            string format = "yyyy-MM-dd";
-            newString = tD.ToString(format);
+            tD = inTempDate.AddDays(1);
+            newString = tD.ToString(DATE_FORMAT);
 
             return newString;
         }
 
-        private static void ProcessDecimalSequences(string decimalSequence)
+        private void ProcessDecimalSequences(string decimalSequence)
         {
             List<int> indexOfSeparator = new List<int>();
             List<string> strGroups = new List<string>();
@@ -111,18 +117,19 @@ namespace FileReadWrite
             newString = strBuild.ToString();
         }
 
-        private static void ProcessWordPhrase(string strPhrase, char letterAdd)
+        private void ProcessWordPhrase(string outNewString, int outThisIndex, char outLetterAdd)
         {
-            if (letterAdd.Equals('Z'))
+            string tmpString = outNewString.Substring((outNewString.Length - originalStr[outThisIndex].Length), originalStr[outThisIndex].Length);
+
+            if (outLetterAdd.Equals('Z'))
             {
-                letterAdd = 'A';
-                newString = nLetter.ToString() + letterAdd + strPhrase;
+                outLetterAdd = 'A';
+                newString = DEFAULT_LETTER.ToString() + outLetterAdd + tmpString;
             }
             else
             {
-                newString = letterAdd + strPhrase;
+                newString = outLetterAdd + outNewString;
             }
-
         }
     }
 }

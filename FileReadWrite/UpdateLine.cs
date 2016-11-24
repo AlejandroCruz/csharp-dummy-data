@@ -107,17 +107,18 @@ namespace FileReadWrite
 
         private string IncrementDataValue(string inStringList, int thisIndex)
         {
-            const string NULLSTR = "NULL";
+            const string NULLSTR = "NULL*";
             string newStrList = inStringList;
             DateTime tmpDt;
+            RegexHandler regxObj = new RegexHandler(originStrList);
 
-            if ( (Regex.IsMatch(newStrList, @"\w")) && (!DateTime.TryParse(newStrList, out tmpDt)) )
+            if ( (Regex.IsMatch(inStringList, @"\w")) && (!DateTime.TryParse(inStringList, out tmpDt)) )
             {
-                newStrList = RegexHandler.RegexCharHandler(newStrList, thisIndex, charAdd, originStrList);
+                newStrList = regxObj.RegexCharHandler(newStrList, thisIndex, charAdd);
             }
-            else if (DateTime.TryParse(newStrList, out tmpDt))
+            else if (DateTime.TryParse(inStringList, out tmpDt))
             {
-                newStrList = RegexHandler.RegexDateHandler(tmpDt);
+                newStrList = regxObj.RegexDateHandler(tmpDt);
             }
             else
             {
