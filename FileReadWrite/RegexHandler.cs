@@ -22,34 +22,18 @@ namespace FileReadWrite
 
         public string RegexCharHandler(string inString, int thisIndex, char inCharAdd)
         {
-            long tmpLong;
-            double tmpDecimal;
-            newString = inString;
-
             if (!Regex.IsMatch(inString, "[a-zA-Z]"))
             {
-                if (long.TryParse(newString, out tmpLong))
-                {
-                    tmpLong++;
-                    newString = tmpLong.ToString();
-                }
-                else if (double.TryParse(newString, out tmpDecimal))
-                {
-                    tmpDecimal++;
-                    newString = tmpDecimal.ToString();
-                }
-                else
-                {
-                    ProcessDecimalSequences(inString);
-                }
+                ProcessNoLetterSequence(inString);
             }
-            else if ( (Regex.IsMatch(newString, @"\D")) && (!newString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
+            // "\D": Matches any character other than a decimal digit
+            else if ( (Regex.IsMatch(inString, @"\D")) && (!inString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
             {
-                ProcessWordPhrase(newString, thisIndex, inCharAdd);
+                ProcessWordPhrase(inString, thisIndex, inCharAdd);
             }
             else
             {
-                newString = NULLSTR;
+                ProcessUnreadable();
             }
 
             return newString;
@@ -61,6 +45,36 @@ namespace FileReadWrite
             newString = tD.ToString(DATE_FORMAT);
 
             return newString;
+        }
+
+        private void ProcessNoLetterSequence(string noLetterSequence)
+        {
+            long tmpLong;
+            double tmpDecimal;
+            string strSequence = noLetterSequence;
+
+            if (long.TryParse(strSequence, out tmpLong))
+            {
+                tmpLong++;
+                newString = tmpLong.ToString();
+            }
+            else if (double.TryParse(strSequence, out tmpDecimal))
+            {
+                tmpDecimal++;
+                newString = tmpDecimal.ToString();
+            }
+            else
+            {
+                // "\d": Matches any decimal digit
+                if (Regex.IsMatch(strSequence, @"\d"))
+                {
+                    ProcessDecimalSequences(strSequence);
+                }
+                else
+                {
+                    ProcessUnreadable();
+                }
+            }
         }
 
         private void ProcessDecimalSequences(string decimalSequence)
@@ -117,19 +131,24 @@ namespace FileReadWrite
             newString = strBuild.ToString();
         }
 
-        private void ProcessWordPhrase(string outNewString, int outThisIndex, char outLetterAdd)
+        private void ProcessWordPhrase(string wordPhrase, int thisIndex, char inCharAdd)
         {
-            string tmpString = outNewString.Substring((outNewString.Length - originalStr[outThisIndex].Length), originalStr[outThisIndex].Length);
+            string tmpString = wordPhrase.Substring((wordPhrase.Length - originalStr[thisIndex].Length), originalStr[thisIndex].Length);
 
-            if (outLetterAdd.Equals('Z'))
+            if (inCharAdd.Equals('Z'))
             {
-                outLetterAdd = 'A';
-                newString = DEFAULT_LETTER.ToString() + outLetterAdd + tmpString;
+                inCharAdd = 'A';
+                newString = DEFAULT_LETTER.ToString() + inCharAdd + tmpString;
             }
             else
             {
-                newString = outLetterAdd + outNewString;
+                newString = inCharAdd + tmpString;
             }
+        }
+
+        private void ProcessUnreadable()
+        {
+            newString = NULLSTR;
         }
     }
 }
