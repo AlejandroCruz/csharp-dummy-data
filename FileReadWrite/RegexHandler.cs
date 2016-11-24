@@ -9,6 +9,7 @@ namespace FileReadWrite
     {
         private const string NULLSTR = "NULL";
         private static string newString;
+        private static char nLetter = 'A';
 
         public static string RegexCharHandler(string inString, int thisIndex, char inCharAdd, List<string> origStr)
         {
@@ -31,13 +32,13 @@ namespace FileReadWrite
                 }
                 else
                 {
-                    ProcessSeparatedDecimalSequences(inString);
+                    ProcessDecimalSequences(inString);
                 }
             }
             else if ( (Regex.IsMatch(newString, @"\D")) && (!newString.Equals(NULLSTR, StringComparison.OrdinalIgnoreCase)) )
             {
                 tmpString = newString.Substring((inString.Length - origStr[thisIndex].Length), origStr[thisIndex].Length);
-                newString = inCharAdd + tmpString;
+                ProcessWordPhrase(tmpString, inCharAdd);
             }
             else
             {
@@ -56,7 +57,7 @@ namespace FileReadWrite
             return newString;
         }
 
-        private static void ProcessSeparatedDecimalSequences(string decimalSequence)
+        private static void ProcessDecimalSequences(string decimalSequence)
         {
             List<int> indexOfSeparator = new List<int>();
             List<string> strGroups = new List<string>();
@@ -108,6 +109,20 @@ namespace FileReadWrite
             strBuild.Append(strGroups[strGroups.Count - 1]);
 
             newString = strBuild.ToString();
+        }
+
+        private static void ProcessWordPhrase(string strPhrase, char letterAdd)
+        {
+            if (letterAdd.Equals('Z'))
+            {
+                letterAdd = 'A';
+                newString = nLetter.ToString() + letterAdd + strPhrase;
+            }
+            else
+            {
+                newString = letterAdd + strPhrase;
+            }
+
         }
     }
 }

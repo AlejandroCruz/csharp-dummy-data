@@ -15,7 +15,7 @@ namespace FileReadWrite
         {
             string csvRawFile = "rawData.csv";
             string newFileName = "newData.csv";
-            string oldFilePath = @"C:\Users\FileReadWrite\";
+            string oldFilePath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\"; //@"C:\Users\FileReadWrite\";
             string newFilePath = oldFilePath;
             string[] rawLines = System.IO.File.ReadAllLines(oldFilePath + csvRawFile);
 
@@ -46,7 +46,7 @@ namespace FileReadWrite
             updateHead.ModifySingleLine(elementIndex);
 
             // Row edit
-            int totalLines = 10;
+            int totalLines = 50;
             elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
             UpdateLine updateLine = new UpdateLine(recordList, totalLines);
             if (totalLines < 2)
