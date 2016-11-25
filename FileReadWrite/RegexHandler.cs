@@ -7,7 +7,7 @@ namespace FileReadWrite
 {
     class RegexHandler
     {
-        private char charAdd = 'A';
+        private char addPrefixChar = 'A';
         private const string NULLSTR = "NULL";
         private const string DATE_FORMAT = "yyyy-MM-dd";
 
@@ -18,6 +18,12 @@ namespace FileReadWrite
         public RegexHandler(List<string> inOriginStrList)
         {
             originalStr = inOriginStrList;
+        }
+
+        public char AddPrefixChar
+        {
+            get { return addPrefixChar; }
+            set { addPrefixChar = value; }
         }
 
         public string RegexCharHandler(string inString, int thisIndex)
@@ -36,7 +42,6 @@ namespace FileReadWrite
                 ProcessUnreadable();
             }
 
-            charAdd++;
             return newString;
         }
 
@@ -139,11 +144,11 @@ namespace FileReadWrite
 
             if (tmpPrefixStr.EndsWith("Z"))
             {
-                newString = charAdd.ToString() + tmpPrefixStr + tmpOriginStr;
+                newString = addPrefixChar.ToString() + tmpPrefixStr + tmpOriginStr;
             }
             else
             {
-                newString = charAdd.ToString() + tmpOriginStr;
+                newString = addPrefixChar.ToString() + tmpOriginStr;
             }
         }
 

@@ -102,6 +102,12 @@ namespace FileReadWrite
                 {
                     strListArr.Add(strList.ToArray());
                 }
+                if(i > 0)
+                {
+                    char tmpPrefix = rgxObj.AddPrefixChar;
+                    tmpPrefix++;
+                    rgxObj.AddPrefixChar = tmpPrefix;
+                }
             }
         }
 
