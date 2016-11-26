@@ -8,16 +8,33 @@ namespace FileReadWrite
 {
     class RegexHandlerUtils
     {
-        private char[] prefixSequence;
+        private string outPrefix;
+        private char Z = 'Z';
 
-        public RegexHandlerUtils()
+        public string AddPrefixToSequence(string prefixStr)
         {
-            prefixSequence = new char[4];
-            prefixSequence[0] = 'A';
-        }
+            List<char> prefixSequence = new List<char>();
 
-        public void AddPrefixToSequence()
-        {
+            foreach (var item in prefixStr)
+            {
+                prefixSequence.Add(item);
+            }
+
+            if (prefixSequence.Count > 1)
+            {
+                prefixSequence[0] = 'A';
+                char test = prefixSequence[1];
+                test++;
+                prefixSequence[1] = test;
+                outPrefix = prefixSequence[0].ToString() +
+                    prefixSequence[1].ToString();
+            }
+            else
+            {
+                outPrefix = "A";
+            }
+
+            return outPrefix;
         }
     }
 }
