@@ -2,7 +2,7 @@
 
 namespace FileReadWrite
 {
-    class RegexHandlerUtils
+    public class RegexHandlerUtils
     {
         private string outPrefix;
         private char Z = 'Z';
