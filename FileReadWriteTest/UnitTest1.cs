@@ -7,7 +7,7 @@ namespace FileReadWriteTest
     public class UnitTest1
     {
         [TestMethod]
-        public void TestAddPrefixToSequence()
+        public static void Main()
         {
             string actual = "AA";
             string expected = "AB";

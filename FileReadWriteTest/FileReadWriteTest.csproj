@@ -53,12 +53,6 @@
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FileReadWrite\FileReadWrite.csproj">
-      <Project>{059ff0fc-3cb8-4145-9361-9471530550fe}</Project>
-      <Name>FileReadWrite</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

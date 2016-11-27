@@ -143,27 +143,16 @@ namespace FileReadWrite
             string tmpOriginStr = wordPhrase.Substring((wordPhrase.Length - originalStr[thisIndex].Length), originalStr[thisIndex].Length);
             string tmpPrefixStr = wordPhrase.Substring(0, wordPhrase.Length - tmpOriginStr.Length);
 
-            if ((tmpPrefixStr.StartsWith("Z")) && (tmpPrefixStr.Length < 4))
+            if (String.IsNullOrEmpty(tmpPrefixStr))
             {
-                RegexHandlerUtils rgxUtil = new RegexHandlerUtils();
-
-                addPrefixChar = 'A';
-                tmpPrefixStr = rgxUtil.AddPrefixToSequence(tmpPrefixStr);
-                newString = addPrefixChar.ToString() + tmpPrefixStr + tmpOriginStr;
+                newString = addPrefixChar.ToString() + tmpOriginStr;
             }
             else
             {
-                if (tmpPrefixStr.Length > 1)
-                {
-                    tmpPrefixStr = tmpPrefixStr.Remove(0, 1);
-
-                    newString = addPrefixChar.ToString() + tmpPrefixStr + tmpOriginStr;
-                }
-                else
-                {
-                    newString = addPrefixChar.ToString() + tmpOriginStr;
-                }
+                RegexHandlerUtils rgxUtil = new RegexHandlerUtils();
+                rgxUtil.AddPrefixToSequence(tmpPrefixStr);
             }
+
         }
 
         private void ProcessUnreadable()
