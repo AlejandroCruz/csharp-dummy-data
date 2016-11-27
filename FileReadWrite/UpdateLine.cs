@@ -11,7 +11,7 @@ namespace FileReadWrite
         private List<string> originStrList;
         private List<string> strList;
         private List<string[]> strListArr;
-        RegexHandler rgxObj;
+        private RegexHandler rgxObj;
 
         public UpdateLine(List<string> dataList)
         {
@@ -97,10 +97,6 @@ namespace FileReadWrite
                         strList[strListIndex] = tmpString;
                     }
                     strListArr.Add(strList.ToArray());
-
-                    char tmpPrefix = rgxObj.AddPrefixChar;
-                    tmpPrefix++;
-                    rgxObj.AddPrefixChar = tmpPrefix;
                 }
                 else
                 {
@@ -114,7 +110,6 @@ namespace FileReadWrite
             string newStrList = inStringList;
             DateTime tmpDt;
 
-            // "\w": Matches any word character
             if (!DateTime.TryParse(inStringList, out tmpDt))
             {
                 newStrList = rgxObj.RegexCharHandler(newStrList, elementListIndex);

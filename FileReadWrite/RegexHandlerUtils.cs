@@ -9,7 +9,7 @@ namespace FileReadWrite
 
         public string AddPrefixToSequence(string prefixStr)
         {
-            char Z = 'Z';
+            char validateZ = 'Z';
             List<char> prefixSequence = new List<char>();
 
             foreach (var item in prefixStr)
@@ -23,7 +23,7 @@ namespace FileReadWrite
                 {
                     StringBuilder strBuild = new StringBuilder();
 
-                    if (prefixSequence[i + 1].Equals(Z))
+                    if (prefixSequence[i + 1].Equals(validateZ))
                     {
                         prefixSequence[i + 1] = 'A';
                         char test = prefixSequence[i + 2]++;
@@ -39,7 +39,7 @@ namespace FileReadWrite
             }
             else
             {
-                prefixSequence[0] = 'A';
+                prefixSequence[0]++;
                 outPrefix = prefixSequence[0].ToString();
             }
 

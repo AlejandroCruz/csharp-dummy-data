@@ -7,7 +7,7 @@ namespace FileReadWrite
 {
     class RegexHandler
     {
-        private char addPrefixChar;
+        private const char DEFAULT_PREFIX = 'A';
         private const string NULLSTR = "NULL";
         private const string DATE_FORMAT = "yyyy-MM-dd";
 
@@ -18,13 +18,6 @@ namespace FileReadWrite
         public RegexHandler(List<string> inOriginStrList)
         {
             originalStr = inOriginStrList;
-            addPrefixChar = 'A';
-        }
-
-        public char AddPrefixChar
-        {
-            get { return addPrefixChar; }
-            set { addPrefixChar = value; }
         }
 
         public string RegexCharHandler(string inString, int thisIndex)
@@ -145,12 +138,13 @@ namespace FileReadWrite
 
             if (String.IsNullOrEmpty(tmpPrefixStr))
             {
-                newString = addPrefixChar.ToString() + tmpOriginStr;
+                newString = DEFAULT_PREFIX.ToString() + tmpOriginStr;
             }
             else
             {
                 RegexHandlerUtils rgxUtil = new RegexHandlerUtils();
-                rgxUtil.AddPrefixToSequence(tmpPrefixStr);
+                tmpPrefixStr = rgxUtil.AddPrefixToSequence(tmpPrefixStr);
+                newString = tmpPrefixStr + tmpOriginStr;
             }
 
         }

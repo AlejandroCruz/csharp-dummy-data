@@ -1,5 +1,4 @@
-﻿using FileReadWrite;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FileReadWriteTest
 {
