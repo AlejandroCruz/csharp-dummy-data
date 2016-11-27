@@ -46,7 +46,7 @@ namespace FileReadWrite
             updateHead.ModifySingleLine(elementIndex);
 
             // Row edit
-            int totalLines = 10;
+            int totalLines = 100;
             elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
             UpdateLine updateLine = new UpdateLine(recordList, totalLines);
             if (totalLines < 2)

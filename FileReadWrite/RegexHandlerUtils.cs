@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace FileReadWrite
@@ -17,33 +18,54 @@ namespace FileReadWrite
                 prefixSequence.Add(item);
             }
 
-            if (prefixSequence.Count > 1)
+            for (int i = 0; i < prefixSequence.Count; i++)
             {
-                for (int i = 0; i < prefixSequence.Count; i++)
+                if (prefixSequence[i].Equals(validateZ))
                 {
-                    StringBuilder strBuild = new StringBuilder();
-
-                    if (prefixSequence[i + 1].Equals(validateZ))
+                    if (i == 4)
                     {
-                        prefixSequence[i + 1] = 'A';
-                        char test = prefixSequence[i + 2]++;
+                        throw new Exception();
                     }
-
-                    foreach (var item in prefixSequence)
+                    else
                     {
-                        strBuild.Append(item);
+                        prefixSequence[i] = 'A';
+                        prefixSequence.Add('A');
                     }
-
-                    outPrefix = strBuild.ToString();
+                }
+                else
+                {
+                    prefixSequence[i]++;
+                    outPrefix = prefixSequence[i].ToString();
                 }
             }
-            else
+
+            StringBuilder strBuild = new StringBuilder();
+            foreach (var item in prefixSequence)
             {
-                prefixSequence[0]++;
-                outPrefix = prefixSequence[0].ToString();
+                strBuild.Append(item);
             }
 
-            return outPrefix;
+            return outPrefix = strBuild.ToString();
         }
     }
 }
+//if (prefixSequence.Count > 1)
+//            {
+//                for (int i = 0; i<prefixSequence.Count; i++)
+//                {
+//                    StringBuilder strBuild = new StringBuilder();
+
+//                    if (prefixSequence[i + 1].Equals(validateZ))
+//                    {
+//                        prefixSequence[i + 1] = 'A';
+//                        char test = prefixSequence[i + 2]++;
+//                    }
+
+//                    foreach (var item in prefixSequence)
+//                    {
+//                        strBuild.Append(item);
+//                    }
+
+//                    outPrefix = strBuild.ToString();
+//                }
+//            }

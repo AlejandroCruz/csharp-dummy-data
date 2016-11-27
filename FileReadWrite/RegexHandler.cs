@@ -10,10 +10,8 @@ namespace FileReadWrite
         private const char DEFAULT_PREFIX = 'A';
         private const string NULLSTR = "NULL";
         private const string DATE_FORMAT = "yyyy-MM-dd";
-
         private string newString;
         private List<string> originalStr;
-        private DateTime tD;
 
         public RegexHandler(List<string> inOriginStrList)
         {
@@ -41,8 +39,8 @@ namespace FileReadWrite
 
         public string RegexDateHandler(DateTime inTempDate)
         {
-            tD = inTempDate.AddDays(1);
-            newString = tD.ToString(DATE_FORMAT);
+            DateTime dateStr = inTempDate.AddDays(1);
+            newString = dateStr.ToString(DATE_FORMAT);
 
             return newString;
         }
