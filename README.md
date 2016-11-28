@@ -5,4 +5,4 @@ This repository includes source files for a C# program that finds a comma separa
 
 In the case that a raw data file already exists produced by a DB system, this data can be used as template. The program will read raw data and remove undesired characters wrapping each value, usually double quotes. Final output will be written to a new file with specified name and path in system, maintaining data integrity of old file. CSV output file is ideally suited for uploading to DB table.
 
-![Console output](https://github.com/AlejandroCruz/csharp-dummy-data/blob/RegexHandlerRefine/FileReadWrite/_resources/FileReadWrite_Display-table.PNG)
+![Console output](https://github.com/AlejandroCruz/csharp-dummy-data/blob/master/FileReadWrite/_resources/FileReadWrite_Display-table.PNG)
