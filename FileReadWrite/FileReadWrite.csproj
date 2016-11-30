@@ -69,6 +69,7 @@
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="_resources\devNotes.txt" />
     <Content Include="_resources\FileReadWrite_Display-table.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

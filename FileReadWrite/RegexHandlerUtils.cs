@@ -6,8 +6,6 @@ namespace FileReadWrite
 {
     public class RegexHandlerUtils
     {
-        private string outPrefix;
-
         public string AddPrefixToSequence(string prefixStr)
         {
             char validateZ = 'Z';
@@ -27,17 +25,6 @@ namespace FileReadWrite
             int amountOfElements = prefixSequence.Count;
             switch (amountOfElements)
             {
-                case 1:
-                    if (prefixSequence[0].Equals(validateZ))
-                    {
-                        prefixSequence[0] = 'A';
-                        prefixSequence.Add('A');
-                    }
-                    else
-                    {
-                        prefixSequence[0]++;
-                    }
-                    break;
                 case 2:
                     if (prefixSequence[1].Equals(validateZ))
                     {
@@ -128,6 +115,15 @@ namespace FileReadWrite
                 //}
                 //break;
                 default:
+                    if (prefixSequence[0].Equals(validateZ))
+                    {
+                        prefixSequence[0] = 'A';
+                        prefixSequence.Add('A');
+                    }
+                    else
+                    {
+                        prefixSequence[0]++;
+                    }
                     break;
             }
 
@@ -137,7 +133,7 @@ namespace FileReadWrite
                 strBuild.Append(item);
             }
 
-            return outPrefix = strBuild.ToString();
+            return strBuild.ToString();
         }
     }
 }

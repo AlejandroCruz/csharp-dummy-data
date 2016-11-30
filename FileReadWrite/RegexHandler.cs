@@ -20,7 +20,7 @@ namespace FileReadWrite
 
         public string RegexCharHandler(string inString, int thisIndex)
         {
-            if (!Regex.IsMatch(inString, "[a-zA-Z]"))
+            if ( (!Regex.IsMatch(inString, "[a-zA-Z]")) && (!String.IsNullOrEmpty(inString)) )
             {
                 ProcessNoLetterSequence(inString);
             }
@@ -31,7 +31,14 @@ namespace FileReadWrite
             }
             else
             {
-                ProcessUnreadable();
+                if (String.IsNullOrEmpty(inString))
+                {
+                    ProcessWordPhrase(inString, thisIndex);
+                }
+                else
+                {
+                    ProcessUnreadable();
+                }
             }
 
             return newString;
