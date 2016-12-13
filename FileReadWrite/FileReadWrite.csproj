@@ -71,6 +71,7 @@
   <ItemGroup>
     <Content Include="_resources\devNotes.txt" />
     <Content Include="_resources\FileReadWrite_Display-table.PNG" />
+    <Content Include="_resources\RegexHandlerUtils.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

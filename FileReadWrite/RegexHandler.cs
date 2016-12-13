@@ -148,10 +148,9 @@ namespace FileReadWrite
             else
             {
                 RegexHandlerUtils rgxUtil = new RegexHandlerUtils();
-                tmpPrefixStr = rgxUtil.AddPrefixToSequence(tmpPrefixStr);
+                tmpPrefixStr = rgxUtil.ToName(1 + rgxUtil.ToNumber(tmpPrefixStr));
                 newString = tmpPrefixStr + tmpOriginStr;
             }
-
         }
 
         private void ProcessUnreadable()
