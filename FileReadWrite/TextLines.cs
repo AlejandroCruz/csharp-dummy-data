@@ -6,6 +6,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace FileReadWrite
 {
@@ -40,13 +41,16 @@ namespace FileReadWrite
             headList = ProcessLines.SplitValues(headLine, valueDelimiter);
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
+            // GUI
+
+
             // Header edit
             int[] elementIndex = new int[] {};
             UpdateLine updateHead = new UpdateLine(headList);
             updateHead.ModifySingleLine(elementIndex);
 
             // Row edit
-            int totalLines = 1000;
+            int totalLines = 10;
             elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
             UpdateLine updateLine = new UpdateLine(recordList, totalLines);
             if (totalLines < 2)
