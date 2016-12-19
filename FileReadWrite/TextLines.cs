@@ -16,6 +16,12 @@ namespace FileReadWrite
         public static void CallGUI()
         {
             FileReadWriteGUI inputWindow = new FileReadWriteGUI();
+            while (true)
+            {
+                Application.DoEvents();
+                inputWindow.ShowDialog();
+                break;
+            }
         }
 
         public static void Main(string[] args)
@@ -47,14 +53,9 @@ namespace FileReadWrite
             headList = ProcessLines.SplitValues(headLine, valueDelimiter);
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
-            //TODO - Ref: CallGUI()//
             // GUI
             Application.EnableVisualStyles();
-            while (true)
-            {
-                Application.DoEvents();
-                CallGUI();
-            }
+            CallGUI();
             //ThreadStart childref = new ThreadStart(CallGUI);
             //Thread startGUI = new Thread(childref);
             //startGUI.Start();
