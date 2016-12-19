@@ -15,13 +15,7 @@ namespace FileReadWrite
     {
         public static void CallGUI()
         {
-            FileReadWriteGUI inputWindow = new FileReadWriteGUI();
-            while (true)
-            {
-                Application.DoEvents();
-                inputWindow.ShowDialog();
-                break;
-            }
+            Application.Run(new FileReadWriteGUI());
         }
 
         public static void Main(string[] args)
