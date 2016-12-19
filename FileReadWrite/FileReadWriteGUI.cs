@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace FileReadWrite
@@ -19,6 +12,8 @@ namespace FileReadWrite
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var tmpInputStr = txtLineAmount.Text;
+            MessageBox.Show("Input: " + tmpInputStr);
             ActiveForm.Close();
         }
     }

@@ -48,12 +48,7 @@ namespace FileReadWrite
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
             // GUI
-            Application.EnableVisualStyles();
             CallGUI();
-            //ThreadStart childref = new ThreadStart(CallGUI);
-            //Thread startGUI = new Thread(childref);
-            //startGUI.Start();
-            //Console.ReadKey();
 
             // Header edit
             int[] elementIndex = new int[] {};
