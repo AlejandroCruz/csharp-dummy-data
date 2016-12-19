@@ -5,16 +5,21 @@ namespace FileReadWrite
 {
     public partial class FileReadWriteGUI : Form
     {
+        string tmpInputStr;
+
         public FileReadWriteGUI()
+        {}
+
+        public int CallbackGUI()
         {
             InitializeComponent();
+            return int.Parse(tmpInputStr);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var tmpInputStr = txtLineAmount.Text;
+            tmpInputStr = txtLineAmount.Text;
             MessageBox.Show("Input: " + tmpInputStr);
-            ActiveForm.Close();
         }
     }
 }
