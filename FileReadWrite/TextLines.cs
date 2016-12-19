@@ -7,11 +7,17 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace FileReadWrite
 {
     class TextLines
     {
+        public static void CallGUI()
+        {
+            FileReadWriteGUI inputWindow = new FileReadWriteGUI();
+        }
+
         public static void Main(string[] args)
         {
             string csvRawFile = "rawData.csv";
@@ -41,8 +47,18 @@ namespace FileReadWrite
             headList = ProcessLines.SplitValues(headLine, valueDelimiter);
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
+            //TODO - Ref: CallGUI()//
             // GUI
-
+            Application.EnableVisualStyles();
+            while (true)
+            {
+                Application.DoEvents();
+                CallGUI();
+            }
+            //ThreadStart childref = new ThreadStart(CallGUI);
+            //Thread startGUI = new Thread(childref);
+            //startGUI.Start();
+            //Console.ReadKey();
 
             // Header edit
             int[] elementIndex = new int[] {};
