@@ -34,13 +34,15 @@
             // 
             // btnExeInputForm
             // 
+            this.btnExeInputForm.CausesValidation = false;
+            this.btnExeInputForm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExeInputForm.Location = new System.Drawing.Point(96, 121);
             this.btnExeInputForm.Name = "btnExeInputForm";
             this.btnExeInputForm.Size = new System.Drawing.Size(75, 23);
             this.btnExeInputForm.TabIndex = 0;
             this.btnExeInputForm.Text = "Submit";
             this.btnExeInputForm.UseVisualStyleBackColor = true;
-            this.btnExeInputForm.Click += new System.EventHandler(this.button1_Click);
+            this.btnExeInputForm.Click += new System.EventHandler(this.btnExeInputForm_Click);
             // 
             // txtLineAmount
             // 

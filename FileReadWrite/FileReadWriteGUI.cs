@@ -14,12 +14,22 @@ namespace FileReadWrite
             return int.Parse(inputStr);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnExeInputForm_Click(object sender, EventArgs e)
         {
+            string message = "Input: ";
+            string caption = "Confirm";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result;
+
             inputStr = txtLineAmount.Text;
             inputStr = (string.IsNullOrEmpty(inputStr)) ? "0" : inputStr;
-            Close();
-            //MessageBox.Show("Input: " + tmpInputStr);
+
+            result = MessageBox.Show(message + inputStr, caption, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                Close();
+            }
         }
     }
 }
