@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FileReadWrite
 {
     public partial class FileReadWriteGUI : Form
     {
-        string tmpInputStr;
+        string tmpInputStr = "0";
 
         public FileReadWriteGUI()
         {}
 
-        public async Task<int> CallbackGUI()
+        public int CallbackGUI()
         {
             InitializeComponent();
+            this.ShowDialog();
             return int.Parse(tmpInputStr);
         }
 
