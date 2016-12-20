@@ -45,12 +45,14 @@ namespace FileReadWrite
                     Console.Write(text);
                     i++;
                 }
+                Console.Write(Environment.NewLine);
                 Task.Delay(time).Wait();
             }
             else if(!String.IsNullOrEmpty(text))
             {
                 Task.Delay(time).Wait();
                 Console.Write(text);
+                Console.Write(Environment.NewLine);
                 Task.Delay(time).Wait();
             }
             else

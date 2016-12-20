@@ -45,7 +45,7 @@ namespace FileReadWrite
             // GUI
             UXEnhancements delay = new UXEnhancements(500);
             FileReadWriteGUI inputFromGUI = new FileReadWriteGUI();
-            int totalLines = inputFromGUI.CallbackGUI();
+            inputFromGUI.CallbackGUI();
 
             // Header edit
             int[] elementIndex = new int[] {};
@@ -54,8 +54,8 @@ namespace FileReadWrite
 
             // Row edit
             elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
-            UpdateLine updateLine = new UpdateLine(recordList, totalLines);
-            if (totalLines < 2)
+            UpdateLine updateLine = new UpdateLine(recordList, inputFromGUI.LineAmount);
+            if (inputFromGUI.LineAmount < 2)
             {
                 updateLine.ModifySingleLine(elementIndex);
             }
@@ -79,7 +79,7 @@ namespace FileReadWrite
 
             // Results
             delay.addDelay();
-            Console.WriteLine(">>> Begin unique tabular data:\n");
+            Console.WriteLine("\n>>> Begin unique tabular data:\n");
             int counter = 0;
             int totalStrLength = 0;
             int rowDivider = 0;
@@ -104,7 +104,7 @@ namespace FileReadWrite
             Console.Write(Environment.NewLine);
             Console.WriteLine(new String('-', rowDivider));
 
-            if (totalLines < 2)
+            if (inputFromGUI.LineAmount < 2)
             {
                 counter = 0;
 

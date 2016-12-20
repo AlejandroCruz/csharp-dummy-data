@@ -6,12 +6,14 @@ namespace FileReadWrite
     public partial class FileReadWriteGUI : Form
     {
         private string inputStr;
+        private int lineAmount;
 
-        public int CallbackGUI()
+        public int LineAmount { get { return lineAmount; } }
+
+        public void CallbackGUI()
         {
             InitializeComponent();
             ShowDialog();
-            return int.Parse(inputStr);
         }
 
         private void btnExeInputForm_Click(object sender, EventArgs e)
@@ -28,6 +30,7 @@ namespace FileReadWrite
 
             if (result == DialogResult.OK)
             {
+                lineAmount = int.Parse(inputStr);
                 Close();
             }
         }
