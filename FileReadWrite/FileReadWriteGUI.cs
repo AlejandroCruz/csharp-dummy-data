@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FileReadWrite
 {
     public partial class FileReadWriteGUI : Form
     {
-        string tmpInputStr = "0";
-
-        public FileReadWriteGUI()
-        {}
+        private string tmpInputStr;
 
         public int CallbackGUI()
         {
             InitializeComponent();
-            this.ShowDialog();
+            ShowDialog();
             return int.Parse(tmpInputStr);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             tmpInputStr = txtLineAmount.Text;
-            MessageBox.Show("Input: " + tmpInputStr);
+            tmpInputStr = (string.IsNullOrEmpty(tmpInputStr)) ? "0" : tmpInputStr;
+            Close();
+            //MessageBox.Show("Input: " + tmpInputStr);
         }
     }
 }

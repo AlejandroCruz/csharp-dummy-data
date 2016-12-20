@@ -13,13 +13,6 @@ namespace FileReadWrite
 {
     class TextLines
     {
-        //public int CallGUI()
-        //{
-        //    //Application.Run(new FileReadWriteGUI());
-        //    FileReadWriteGUI inputFromGUI = new FileReadWriteGUI();
-        //    return inputFromGUI.CallbackVals();
-        //}
-
         public static void Main(string[] args)
         {
             string csvRawFile = "rawData.csv";
@@ -50,6 +43,7 @@ namespace FileReadWrite
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
             // GUI
+            UXEnhancements delay = new UXEnhancements(500);
             FileReadWriteGUI inputFromGUI = new FileReadWriteGUI();
             int totalLines = inputFromGUI.CallbackGUI();
 
@@ -84,6 +78,7 @@ namespace FileReadWrite
             //objNewTxtFile.CreateFile(dataSet, overwrite);
 
             // Results
+            delay.addDelay();
             Console.WriteLine(">>> Begin unique tabular data:\n");
             int counter = 0;
             int totalStrLength = 0;
