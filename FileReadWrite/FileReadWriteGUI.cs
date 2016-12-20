@@ -5,19 +5,19 @@ namespace FileReadWrite
 {
     public partial class FileReadWriteGUI : Form
     {
-        private string tmpInputStr;
+        private string inputStr;
 
         public int CallbackGUI()
         {
             InitializeComponent();
             ShowDialog();
-            return int.Parse(tmpInputStr);
+            return int.Parse(inputStr);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            tmpInputStr = txtLineAmount.Text;
-            tmpInputStr = (string.IsNullOrEmpty(tmpInputStr)) ? "0" : tmpInputStr;
+            inputStr = txtLineAmount.Text;
+            inputStr = (string.IsNullOrEmpty(inputStr)) ? "0" : inputStr;
             Close();
             //MessageBox.Show("Input: " + tmpInputStr);
         }

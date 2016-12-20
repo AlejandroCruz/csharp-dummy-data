@@ -57,7 +57,7 @@
             this.Controls.Add(this.txtLineAmount);
             this.Controls.Add(this.btnExeInputForm);
             this.Name = "FileReadWriteGUI";
-            this.Text = "FileReadWriteGUI";
+            this.Text = "Input Window";
             this.ResumeLayout(false);
             this.PerformLayout();
 
