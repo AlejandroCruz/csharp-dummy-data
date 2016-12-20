@@ -28,31 +28,13 @@ namespace FileReadWrite
         public List<string> StrList { get { return strList; } }
         public List<string[]> StrListArr { get { return strListArr; } }
 
-        public void ModifySingleLine(int[] indexes)
+        public void ModifySingleLine(List<int> indexes)
         {
-            try
-            {
-                if (indexes.Length > originStrList.Count)
-                {
-                    Console.WriteLine("Warning! index count: {0} greater than header elements: {1}", indexes.Length, originStrList.Count);
-                    Array.Resize(ref indexes, originStrList.Count);
-                    Console.WriteLine("\nIndex adjusted to maximum: {0}", indexes.Length);
-                }
-                else if (indexes.Length == 0)
-                {
-                    //Array.Resize(ref indexes, 1);
-                    //Console.WriteLine("Index adjusted to minimum: {0}", indexes.Length);
-                }
-            }
-
-            catch (ArgumentOutOfRangeException e)
-            { Console.WriteLine("\n>>> System message:\n" + e); }
-
             string tmpString;
             strList = new List<string>(originStrList);
             strListArr = new List<string[]>();
 
-            for (int i = 0; i < indexes.Length; i++)
+            for (int i = 0; i < indexes.Count; i++)
             {
                 strListIndex = indexes[i];
                 tmpString = IncrementDataValue(originStrList[strListIndex], strListIndex);
@@ -61,7 +43,7 @@ namespace FileReadWrite
             strListArr.Add(strList.ToArray());
         }
 
-        public void ModifyMultiLine(int[] elementInd)
+        public void ModifyMultiLine(List<int> elementInd)
         {
             string tmpString;
             strList = new List<string>(originStrList);
@@ -69,7 +51,7 @@ namespace FileReadWrite
 
             try
             {
-                for (int i = 0; i < elementInd.Length; i++)
+                for (int i = 0; i < elementInd.Count; i++)
                 {
                     tmpString = strList[elementInd[i]];
                 }
@@ -89,7 +71,7 @@ namespace FileReadWrite
 
                 if (lineCount > 0)
                 {
-                    for (int j = 0; j < elementInd.Length; j++)
+                    for (int j = 0; j < elementInd.Count; j++)
                     {
                         strListIndex = elementInd[j];
                         tmpString = IncrementDataValue(strList[strListIndex], strListIndex);

@@ -25,7 +25,7 @@ namespace FileReadWrite
             string showLineAmount = "Total lines: ";
             string showElementIndex = "Columns: ";
             string caption = "Confirm";
-            List<string> elementList = new List<string>();
+            List<string> elementList;
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result;
 
@@ -40,11 +40,13 @@ namespace FileReadWrite
             if (result == DialogResult.OK)
             {
                 lineAmount = int.Parse(inLineAmount);
-                elementList = ProcessLines.SplitValues(inElementIndex, ',');
+                elementIndex = new List<int>();
+                elementList = new List<string>(ProcessLines.SplitValues(inElementIndex, ','));
 
                 for (int i = 0; i < elementList.Count; i++)
                 {
-                    elementIndex.Add( int.Parse(elementList[i]) );
+                    var tmp = int.Parse(elementList[i]);
+                    elementIndex.Add( tmp );
                 }
                 Close();
             }

@@ -48,12 +48,10 @@ namespace FileReadWrite
             inputFromGUI.CallbackGUI();
 
             // Header edit
-            int[] elementIndex = new int[] {};
             UpdateLine updateHead = new UpdateLine(headList);
-            updateHead.ModifySingleLine(elementIndex);
+            updateHead.ModifySingleLine(inputFromGUI.ElementIndex);
 
             // Row edit
-            elementIndex = new int[] { inputFromGUI.ElementIndex };
             UpdateLine updateLine = new UpdateLine(recordList, inputFromGUI.LineAmount);
             if (inputFromGUI.LineAmount < 2)
             {
@@ -61,7 +59,7 @@ namespace FileReadWrite
             }
             else
             {
-                updateLine.ModifyMultiLine(elementIndex);
+                updateLine.ModifyMultiLine(inputFromGUI.ElementIndex);
             }
 
             // Longest field indexes for column padding
