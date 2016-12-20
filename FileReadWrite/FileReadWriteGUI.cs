@@ -10,7 +10,7 @@ namespace FileReadWrite
         public FileReadWriteGUI()
         {}
 
-        public int CallbackGUI()
+        public async Task<int> CallbackGUI()
         {
             InitializeComponent();
             return int.Parse(tmpInputStr);
