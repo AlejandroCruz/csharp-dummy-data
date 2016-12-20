@@ -53,11 +53,11 @@ namespace FileReadWrite
             updateHead.ModifySingleLine(elementIndex);
 
             // Row edit
-            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
+            elementIndex = new int[] { inputFromGUI.ElementIndex };
             UpdateLine updateLine = new UpdateLine(recordList, inputFromGUI.LineAmount);
             if (inputFromGUI.LineAmount < 2)
             {
-                updateLine.ModifySingleLine(elementIndex);
+                updateLine.ModifySingleLine(inputFromGUI.ElementIndex);
             }
             else
             {
