@@ -5,7 +5,7 @@ namespace FileReadWrite
 {
     class UpdateLine
     {
-        private int strListIndex;
+        private int listIndex;
         private int totalOfLines;
         private List<string> originStrList;
         private List<string> strList;
@@ -16,6 +16,7 @@ namespace FileReadWrite
         {
             originStrList = new List<string>(dataList);
             totalOfLines = 1;
+            rgxObj = new RegexHandler(originStrList);
         }
         public UpdateLine(List<string> dataList, int inTotalOfLines)
         {
@@ -28,17 +29,17 @@ namespace FileReadWrite
         public List<string> StrList { get { return strList; } }
         public List<string[]> StrListArr { get { return strListArr; } }
 
-        public void ModifySingleLine(List<int> indexes)
+        public void ModifySingleLine(List<int> elementInd)
         {
             string tmpString;
             strList = new List<string>(originStrList);
             strListArr = new List<string[]>();
 
-            for (int i = 0; i < indexes.Count; i++)
+            for (int i = 0; i < elementInd.Count; i++)
             {
-                strListIndex = indexes[i];
-                tmpString = IncrementDataValue(originStrList[strListIndex], strListIndex);
-                strList[strListIndex] = tmpString;
+                listIndex = elementInd[i];
+                tmpString = IncrementDataValue(originStrList[listIndex], listIndex);
+                strList[listIndex] = tmpString;
             }
             strListArr.Add(strList.ToArray());
         }
@@ -58,7 +59,7 @@ namespace FileReadWrite
             }
             catch(ArgumentOutOfRangeException e)
             {
-                Console.WriteLine("Array element out of range surfaced at: #{0}", strListIndex);
+                Console.WriteLine("Array element out of range surfaced at: #{0}", listIndex);
                 Console.WriteLine("\n>>> System message:\n" + e);
                 Console.WriteLine("\n>>> Press any key to exit.");
                 Console.ReadKey();
@@ -73,9 +74,9 @@ namespace FileReadWrite
                 {
                     for (int j = 0; j < elementInd.Count; j++)
                     {
-                        strListIndex = elementInd[j];
-                        tmpString = IncrementDataValue(strList[strListIndex], strListIndex);
-                        strList[strListIndex] = tmpString;
+                        listIndex = elementInd[j];
+                        tmpString = IncrementDataValue(strList[listIndex], listIndex);
+                        strList[listIndex] = tmpString;
                     }
                     strListArr.Add(strList.ToArray());
                 }
@@ -86,21 +87,21 @@ namespace FileReadWrite
             }
         }
 
-        private string IncrementDataValue(string inStringList, int elementListIndex)
+        private string IncrementDataValue(string inCharSequence, int elementListIndex)
         {
-            string newStrList = inStringList;
+            string newCharSequence = inCharSequence;
             DateTime tmpDt;
 
-            if (!DateTime.TryParse(inStringList, out tmpDt))
+            if (!DateTime.TryParse(inCharSequence, out tmpDt))
             {
-                newStrList = rgxObj.RegexCharHandler(newStrList, elementListIndex);
+                newCharSequence = rgxObj.RegexCharHandler(newCharSequence, elementListIndex);
             }
-            else if (DateTime.TryParse(inStringList, out tmpDt))
+            else if (DateTime.TryParse(inCharSequence, out tmpDt))
             {
-                newStrList = rgxObj.RegexDateHandler(tmpDt);
+                newCharSequence = rgxObj.RegexDateHandler(tmpDt);
             }
 
-            return newStrList;
+            return newCharSequence;
         }
     }
 }
