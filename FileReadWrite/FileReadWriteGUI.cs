@@ -40,7 +40,7 @@ namespace FileReadWrite
 
             result = MessageBox.Show(showEditHeaders + inEditHeaders + "\n" +
                 showLineAmount + inLineAmount + "\n" +
-                showElementIndex + inElementIndex, caption, buttons);
+                showElementIndex + inElementIndex, caption, buttons, MessageBoxIcon.Information);
 
             if (result == DialogResult.OK)
             {
