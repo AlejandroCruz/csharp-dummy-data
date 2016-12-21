@@ -17,6 +17,7 @@ namespace FileReadWrite
             originStrList = new List<string>(dataList);
             totalOfLines = 1;
             rgxObj = new RegexHandler(originStrList);
+            strList = new List<string>(originStrList);
         }
         public UpdateLine(List<string> dataList, int inTotalOfLines)
         {
@@ -35,11 +36,14 @@ namespace FileReadWrite
             strList = new List<string>(originStrList);
             strListArr = new List<string[]>();
 
-            for (int i = 0; i < elementInd.Count; i++)
+            if (totalOfLines > 0)
             {
-                listIndex = elementInd[i];
-                tmpString = IncrementDataValue(originStrList[listIndex], listIndex);
-                strList[listIndex] = tmpString;
+                for (int i = 0; i < elementInd.Count; i++)
+                {
+                    listIndex = elementInd[i];
+                    tmpString = IncrementDataValue(originStrList[listIndex], listIndex);
+                    strList[listIndex] = tmpString;
+                }
             }
             strListArr.Add(strList.ToArray());
         }

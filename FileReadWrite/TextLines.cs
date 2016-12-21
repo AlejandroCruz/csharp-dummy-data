@@ -49,8 +49,10 @@ namespace FileReadWrite
 
             // Header edit
             UpdateLine updateHead = new UpdateLine(headList);
-            updateHead.ModifySingleLine(inputFromGUI.ElementIndex);
-
+            if (inputFromGUI.EditHeaders)
+            {
+                updateHead.ModifySingleLine(inputFromGUI.ElementIndex);
+            }
             // Row edit
             UpdateLine updateLine = new UpdateLine(recordList, inputFromGUI.LineAmount);
             if (inputFromGUI.LineAmount < 2)

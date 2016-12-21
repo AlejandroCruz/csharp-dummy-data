@@ -6,11 +6,13 @@ namespace FileReadWrite
 {
     public partial class FileReadWriteGUI : Form
     {
+        private bool inEditHeaders;
         private string inLineAmount;
-        private int lineAmount;
         private string inElementIndex;
+        private int lineAmount;
         private List<int> elementIndex;
 
+        public bool EditHeaders { get { return inEditHeaders; } }
         public int LineAmount { get { return lineAmount; } }
         public List<int> ElementIndex { get { return elementIndex; } }
 
@@ -22,6 +24,7 @@ namespace FileReadWrite
 
         private void btnExeInputForm_Click(object sender, EventArgs e)
         {
+            string showEditHeaders = "Edit Headers: ";
             string showLineAmount = "Total lines: ";
             string showElementIndex = "Columns: ";
             string caption = "Confirm";
@@ -29,13 +32,15 @@ namespace FileReadWrite
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result;
 
+            inEditHeaders = radioEditHeaders.Checked;
             inLineAmount = txtLineAmount.Text;
             inElementIndex = txtElementIndex.Text;
             inLineAmount = (string.IsNullOrEmpty(inLineAmount)) ? "0" : inLineAmount;
             inElementIndex = (string.IsNullOrEmpty(inElementIndex)) ? "0" : inElementIndex;
 
-            result = MessageBox.Show(showLineAmount + inLineAmount +
-                    showElementIndex + inElementIndex, caption, buttons);
+            result = MessageBox.Show(showEditHeaders + inEditHeaders + "\n" +
+                showLineAmount + inLineAmount + "\n" +
+                showElementIndex + inElementIndex, caption, buttons);
 
             if (result == DialogResult.OK)
             {
@@ -48,6 +53,7 @@ namespace FileReadWrite
                     var tmp = int.Parse(elementList[i]);
                     elementIndex.Add( tmp );
                 }
+
                 Close();
             }
         }

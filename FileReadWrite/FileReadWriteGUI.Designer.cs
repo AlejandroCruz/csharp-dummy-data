@@ -33,6 +33,7 @@
             this.lblLineAmount = new System.Windows.Forms.Label();
             this.lblElementIndex = new System.Windows.Forms.Label();
             this.txtElementIndex = new System.Windows.Forms.TextBox();
+            this.radioEditHeaders = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // btnExeInputForm
@@ -49,7 +50,7 @@
             // 
             // txtLineAmount
             // 
-            this.txtLineAmount.Location = new System.Drawing.Point(126, 53);
+            this.txtLineAmount.Location = new System.Drawing.Point(130, 103);
             this.txtLineAmount.Name = "txtLineAmount";
             this.txtLineAmount.Size = new System.Drawing.Size(100, 20);
             this.txtLineAmount.TabIndex = 0;
@@ -57,7 +58,7 @@
             // lblLineAmount
             // 
             this.lblLineAmount.AutoSize = true;
-            this.lblLineAmount.Location = new System.Drawing.Point(65, 57);
+            this.lblLineAmount.Location = new System.Drawing.Point(69, 107);
             this.lblLineAmount.Name = "lblLineAmount";
             this.lblLineAmount.Size = new System.Drawing.Size(55, 13);
             this.lblLineAmount.TabIndex = 2;
@@ -66,7 +67,7 @@
             // lblElementIndex
             // 
             this.lblElementIndex.AutoSize = true;
-            this.lblElementIndex.Location = new System.Drawing.Point(65, 106);
+            this.lblElementIndex.Location = new System.Drawing.Point(69, 132);
             this.lblElementIndex.Name = "lblElementIndex";
             this.lblElementIndex.Size = new System.Drawing.Size(47, 13);
             this.lblElementIndex.TabIndex = 3;
@@ -74,16 +75,29 @@
             // 
             // txtElementIndex
             // 
-            this.txtElementIndex.Location = new System.Drawing.Point(126, 103);
+            this.txtElementIndex.Location = new System.Drawing.Point(130, 128);
             this.txtElementIndex.Name = "txtElementIndex";
             this.txtElementIndex.Size = new System.Drawing.Size(100, 20);
             this.txtElementIndex.TabIndex = 1;
+            // 
+            // radioEditHeaders
+            // 
+            this.radioEditHeaders.AutoSize = true;
+            this.radioEditHeaders.CausesValidation = false;
+            this.radioEditHeaders.Location = new System.Drawing.Point(69, 64);
+            this.radioEditHeaders.Name = "radioEditHeaders";
+            this.radioEditHeaders.Size = new System.Drawing.Size(86, 17);
+            this.radioEditHeaders.TabIndex = 5;
+            this.radioEditHeaders.TabStop = true;
+            this.radioEditHeaders.Text = "Edit Headers";
+            this.radioEditHeaders.UseVisualStyleBackColor = true;
             // 
             // FileReadWriteGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.radioEditHeaders);
             this.Controls.Add(this.txtElementIndex);
             this.Controls.Add(this.lblElementIndex);
             this.Controls.Add(this.lblLineAmount);
@@ -103,5 +117,6 @@
         private System.Windows.Forms.Label lblLineAmount;
         private System.Windows.Forms.Label lblElementIndex;
         private System.Windows.Forms.TextBox txtElementIndex;
+        private System.Windows.Forms.RadioButton radioEditHeaders;
     }
 }
