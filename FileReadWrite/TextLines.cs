@@ -13,13 +13,19 @@ namespace FileReadWrite
 {
     class TextLines
     {
+        private static string oldFilePath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\"; //@"C:\Users\FileReadWrite\";
+        public static string OldFilePath
+        {
+            get { return oldFilePath; }
+            set { oldFilePath = value; }
+        }
+
         public static void Main(string[] args)
         {
             string csvRawFile = "rawData.csv";
             string newFileName = "newData.csv";
-            string oldFilePath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\"; //@"C:\Users\FileReadWrite\";
-            string newFilePath = oldFilePath;
-            string[] rawLines = System.IO.File.ReadAllLines(oldFilePath + csvRawFile);
+            string newFilePath = OldFilePath;
+            string[] rawLines = System.IO.File.ReadAllLines(OldFilePath + csvRawFile);
 
             // Display original quoted lines
             Console.WriteLine(">>> Input file: {0}\n", csvRawFile);

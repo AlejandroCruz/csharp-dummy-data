@@ -9,6 +9,7 @@ namespace FileReadWrite
         private bool inEditHeaders;
         private string inLineAmount;
         private string inElementIndex;
+        private string inOldFilePath;
         private int lineAmount;
         private List<int> elementIndex;
 
@@ -24,10 +25,11 @@ namespace FileReadWrite
 
         private void btnExeInputForm_Click(object sender, EventArgs e)
         {
+            string caption = "Confirm";
             string showEditHeaders = "Edit Headers: ";
             string showLineAmount = "Total lines: ";
             string showElementIndex = "Columns: ";
-            string caption = "Confirm";
+            string showOldFilePath = "File from: ";
             List<string> elementList;
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result;
@@ -35,12 +37,15 @@ namespace FileReadWrite
             inEditHeaders = radioEditHeaders.Checked;
             inLineAmount = txtLineAmount.Text;
             inElementIndex = txtElementIndex.Text;
+            inOldFilePath = txtOldFilePath.Text;
             inLineAmount = (string.IsNullOrEmpty(inLineAmount)) ? "0" : inLineAmount;
             inElementIndex = (string.IsNullOrEmpty(inElementIndex)) ? "0" : inElementIndex;
+            inOldFilePath = (string.IsNullOrEmpty(inElementIndex)) ? TextLines.OldFilePath : inOldFilePath;
 
             result = MessageBox.Show(showEditHeaders + inEditHeaders + "\n" +
                 showLineAmount + inLineAmount + "\n" +
-                showElementIndex + inElementIndex, caption, buttons, MessageBoxIcon.Information);
+                showElementIndex + inElementIndex + "\n" +
+                showOldFilePath + inOldFilePath, caption, buttons, MessageBoxIcon.Information);
 
             if (result == DialogResult.OK)
             {
@@ -50,8 +55,7 @@ namespace FileReadWrite
 
                 for (int i = 0; i < elementList.Count; i++)
                 {
-                    var tmp = int.Parse(elementList[i]);
-                    elementIndex.Add( tmp );
+                    elementIndex.Add( int.Parse(elementList[i]) );
                 }
 
                 Close();
