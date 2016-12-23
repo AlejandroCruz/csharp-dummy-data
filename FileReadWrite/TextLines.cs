@@ -12,23 +12,17 @@ namespace FileReadWrite
 {
     class TextLines
     {
-        private static string oldFilePath;// = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\"; //@"C:\Users\FileReadWrite\";
-        public static string OldFilePath
-        {
-            get { return oldFilePath; }
-            set { oldFilePath = value; }
-        }
-
         [STAThread]
         public static void Main(string[] args)
         {
-            string csvRawFile = "rawData.csv";
-            string newFileName = "newData.csv";
-            string newFilePath = OldFilePath;
-            string[] rawLines = File.ReadAllLines(OldFilePath + csvRawFile);
+            // GUI
+            UXEnhancements delay = new UXEnhancements(500);
+            FileReadWriteGUI inputFromGUI = new FileReadWriteGUI();
+            inputFromGUI.CallbackGUI();
 
             // Display original quoted lines
-            Console.WriteLine(">>> Input file: {0}\n", csvRawFile);
+            string[] rawLines = File.ReadAllLines(inputFromGUI.OldFilePath + inputFromGUI.OldFileName);
+            Console.WriteLine(">>> Input file: {0}\n", inputFromGUI.OldFilePath);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
             {
@@ -47,11 +41,6 @@ namespace FileReadWrite
             List<string> recordList = new List<string>();
             headList = ProcessLines.SplitValues(headLine, valueDelimiter);
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
-
-            // GUI
-            UXEnhancements delay = new UXEnhancements(500);
-            FileReadWriteGUI inputFromGUI = new FileReadWriteGUI();
-            inputFromGUI.CallbackGUI();
 
             // Header edit
             UpdateLine updateHead = new UpdateLine(headList);

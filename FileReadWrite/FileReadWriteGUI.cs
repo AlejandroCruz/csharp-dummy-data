@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace FileReadWrite
 {
     public partial class FileReadWriteGUI : Form
     {
-        private bool inEditHeaders;
-        private string inLineAmount;
-        private string inElementIndex;
-        private string inOldFilePath;
+
+        private bool inputEditHeaders;
         private int lineAmount;
+        private string inputLineAmount;
+        private string inputElementIndex;
+        private string inputOldFilePath;
         private List<int> elementIndex;
 
-        public bool EditHeaders { get { return inEditHeaders; } }
+        public string OldFilePath { get; set; }
+        public string NewFilePath { get; set; }
+        public string OldFileName { get; } // = "rawData.csv";
+        public string NewFileName { get; } // = "newData.csv";
+        public bool EditHeaders { get { return inputEditHeaders; } }
         public int LineAmount { get { return lineAmount; } }
         public List<int> ElementIndex { get { return elementIndex; } }
 
@@ -34,24 +40,24 @@ namespace FileReadWrite
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result;
 
-            inEditHeaders = radioEditHeaders.Checked;
-            inLineAmount = txtLineAmount.Text;
-            inElementIndex = txtElementIndex.Text;
-            inOldFilePath = txtOldFilePath.Text;
-            inLineAmount = (string.IsNullOrEmpty(inLineAmount)) ? "0" : inLineAmount;
-            inElementIndex = (string.IsNullOrEmpty(inElementIndex)) ? "0" : inElementIndex;
-            inOldFilePath = (string.IsNullOrEmpty(inElementIndex)) ? TextLines.OldFilePath : inOldFilePath;
+            inputEditHeaders = radioEditHeaders.Checked;
+            inputLineAmount = txtLineAmount.Text;
+            inputElementIndex = txtElementIndex.Text;
+            OldFilePath = txtOldFilePath.Text;
+            inputLineAmount = (string.IsNullOrEmpty(inputLineAmount)) ? "0" : inputLineAmount;
+            inputElementIndex = (string.IsNullOrEmpty(inputElementIndex)) ? "0" : inputElementIndex;
+            inputOldFilePath = (string.IsNullOrEmpty(inputElementIndex)) ? @"C:\" : OldFilePath;
 
-            result = MessageBox.Show(showEditHeaders + inEditHeaders + "\n" +
-                showLineAmount + inLineAmount + "\n" +
-                showElementIndex + inElementIndex + "\n" +
-                showOldFilePath + inOldFilePath, caption, buttons, MessageBoxIcon.Information);
+            result = MessageBox.Show(showEditHeaders + inputEditHeaders + "\n" +
+                showLineAmount + inputLineAmount + "\n" +
+                showElementIndex + inputElementIndex + "\n" +
+                showOldFilePath + inputOldFilePath, caption, buttons, MessageBoxIcon.Information);
 
             if (result == DialogResult.OK)
             {
-                lineAmount = int.Parse(inLineAmount);
+                lineAmount = int.Parse(inputLineAmount);
                 elementIndex = new List<int>();
-                elementList = new List<string>(ProcessLines.SplitValues(inElementIndex, ','));
+                elementList = new List<string>(ProcessLines.SplitValues(inputElementIndex, ','));
 
                 for (int i = 0; i < elementList.Count; i++)
                 {
@@ -67,7 +73,9 @@ namespace FileReadWrite
             DialogResult openFileResult = openFileDialog1.ShowDialog();
             if (openFileResult == DialogResult.OK)
             {
-                inOldFilePath = openFileDialog1.ToString();
+                txtOldFilePath.AppendText(openFileDialog1.ToString());
+                //txtOldFilePath.Paste();
+                inputOldFilePath = openFileDialog1.ToString();
             }
         }
     }
