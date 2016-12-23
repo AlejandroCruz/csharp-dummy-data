@@ -61,5 +61,14 @@ namespace FileReadWrite
                 Close();
             }
         }
+
+        private void btnOldFilePath_Click(object sender, EventArgs e)
+        {
+            DialogResult openFileResult = openFileDialog1.ShowDialog();
+            if (openFileResult == DialogResult.OK)
+            {
+                inOldFilePath = openFileDialog1.ToString();
+            }
+        }
     }
 }

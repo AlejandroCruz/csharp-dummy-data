@@ -36,7 +36,8 @@
             this.radioEditHeaders = new System.Windows.Forms.RadioButton();
             this.lblOldFilePath = new System.Windows.Forms.Label();
             this.txtOldFilePath = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnOldFilePath = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // btnExeInputForm
@@ -112,21 +113,26 @@
             this.txtOldFilePath.Size = new System.Drawing.Size(100, 20);
             this.txtOldFilePath.TabIndex = 3;
             // 
-            // button1
+            // btnOldFilePath
             // 
-            this.button1.Location = new System.Drawing.Point(204, 148);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Browse";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnOldFilePath.Location = new System.Drawing.Point(204, 148);
+            this.btnOldFilePath.Name = "btnOldFilePath";
+            this.btnOldFilePath.Size = new System.Drawing.Size(52, 23);
+            this.btnOldFilePath.TabIndex = 6;
+            this.btnOldFilePath.Text = "Browse";
+            this.btnOldFilePath.UseVisualStyleBackColor = true;
+            this.btnOldFilePath.Click += new System.EventHandler(this.btnOldFilePath_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // FileReadWriteGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnOldFilePath);
             this.Controls.Add(this.txtOldFilePath);
             this.Controls.Add(this.lblOldFilePath);
             this.Controls.Add(this.radioEditHeaders);
@@ -152,6 +158,7 @@
         private System.Windows.Forms.RadioButton radioEditHeaders;
         private System.Windows.Forms.Label lblOldFilePath;
         private System.Windows.Forms.TextBox txtOldFilePath;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnOldFilePath;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
