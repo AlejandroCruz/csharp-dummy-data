@@ -21,8 +21,8 @@ namespace FileReadWrite
             inputFromGUI.CallbackGUI();
 
             // Display original quoted lines
-            string[] rawLines = File.ReadAllLines(inputFromGUI.OldFilePath + inputFromGUI.OldFileName);
-            Console.WriteLine(">>> Input file: {0}\n", inputFromGUI.OldFilePath);
+            string[] rawLines = File.ReadAllLines(inputFromGUI.InputOldFilePath + inputFromGUI.InputOldFileName);
+            Console.WriteLine(">>> Input file path: {0}\n", inputFromGUI.InputOldFilePath);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
             {
@@ -44,7 +44,7 @@ namespace FileReadWrite
 
             // Header edit
             UpdateLine updateHead = new UpdateLine(headList);
-            if (inputFromGUI.EditHeaders)
+            if (inputFromGUI.InputEditHeaders)
             {
                 updateHead.ModifySingleLine(inputFromGUI.ElementIndex);
             }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 
 namespace FileReadWrite
@@ -13,13 +12,14 @@ namespace FileReadWrite
         private string inputLineAmount;
         private string inputElementIndex;
         private string inputOldFilePath;
+        private string inputOldFileName;
         private List<int> elementIndex;
 
-        public string OldFilePath { get; set; }
+        public string InputOldFilePath { get; set; }
         public string NewFilePath { get; set; }
-        public string OldFileName { get; } // = "rawData.csv";
+        public string InputOldFileName { get; } // = "rawData.csv";
         public string NewFileName { get; } // = "newData.csv";
-        public bool EditHeaders { get { return inputEditHeaders; } }
+        public bool InputEditHeaders { get { return inputEditHeaders; } }
         public int LineAmount { get { return lineAmount; } }
         public List<int> ElementIndex { get { return elementIndex; } }
 
@@ -43,10 +43,10 @@ namespace FileReadWrite
             inputEditHeaders = radioEditHeaders.Checked;
             inputLineAmount = txtLineAmount.Text;
             inputElementIndex = txtElementIndex.Text;
-            OldFilePath = txtOldFilePath.Text;
+            InputOldFilePath = txtOldFilePath.Text;
             inputLineAmount = (string.IsNullOrEmpty(inputLineAmount)) ? "0" : inputLineAmount;
             inputElementIndex = (string.IsNullOrEmpty(inputElementIndex)) ? "0" : inputElementIndex;
-            inputOldFilePath = (string.IsNullOrEmpty(inputElementIndex)) ? @"C:\" : OldFilePath;
+            inputOldFilePath = (string.IsNullOrEmpty(inputElementIndex)) ? @"C:\" : InputOldFilePath;
 
             result = MessageBox.Show(showEditHeaders + inputEditHeaders + "\n" +
                 showLineAmount + inputLineAmount + "\n" +
@@ -73,7 +73,7 @@ namespace FileReadWrite
             DialogResult openFileResult = openFileDialog1.ShowDialog();
             if (openFileResult == DialogResult.OK)
             {
-                txtOldFilePath.AppendText(openFileDialog1.ToString());
+                txtOldFilePath.Text = openFileDialog1.FileName;
                 //txtOldFilePath.Paste();
                 inputOldFilePath = openFileDialog1.ToString();
             }
