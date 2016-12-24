@@ -69,7 +69,7 @@ namespace FileReadWrite
 
             // Write data to new file
             bool overwrite = true;
-            CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
+            CreateTextFile objNewTxtFile = new CreateTextFile(inputFromGUI.InputNewFilePath, inputFromGUI.InputNewFileName);
             objNewTxtFile.CreateFile(dataSet, overwrite);
 
             // Results

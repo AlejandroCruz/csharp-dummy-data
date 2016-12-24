@@ -19,10 +19,10 @@ namespace FileReadWrite
 
         public bool InputEditHeaders { get; } // { return inputEditHeaders; } }
         public int LineAmount { get; } // { return lineAmount; } }
-        public string InputNewFileName { get; } // = "newData.csv";
-        public string InputNewFilePath { get; }
-        public string InputOldFileName { get; } // = "rawData.csv";
-        public string InputOldFilePath { get; }
+        public string InputNewFileName { get; set; } = "newData.csv";
+        public string InputNewFilePath { get { return inputNewFilePath; } }
+        public string InputOldFileName { get; set; } = "rawData.csv";
+        public string InputOldFilePath { get { return inputOldFilePath; } }
         public List<int> ElementIndex { get { return elementIndex; } }
 
         public void CallbackGUI()
@@ -82,9 +82,8 @@ namespace FileReadWrite
             if (openFileResult == DialogResult.OK)
             {
                 txtOldFilePath.Clear();
-                txtOldFilePath.Text = openFileDialog1.FileName;
-                //txtOldFilePath.Paste();
-                inputOldFilePath = openFileDialog1.ToString();
+                inputOldFilePath = openFileDialog1.FileName;
+                txtOldFilePath.Text = inputOldFilePath;
             }
             else if(openFileResult == DialogResult.Cancel)
             {
@@ -98,8 +97,8 @@ namespace FileReadWrite
             if (openFileResult == DialogResult.OK)
             {
                 txtNewFilePath.Clear();
-                txtNewFilePath.Text = saveFileDialog1.FileName;
-                inputNewFilePath = saveFileDialog1.ToString();
+                inputNewFilePath = saveFileDialog1.FileName;
+                txtNewFilePath.Text = inputNewFilePath;
             }
             else if (openFileResult == DialogResult.Cancel)
             {
