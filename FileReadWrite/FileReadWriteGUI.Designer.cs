@@ -158,6 +158,11 @@
             this.btnNewFileBrowse.UseVisualStyleBackColor = true;
             this.btnNewFileBrowse.Click += new System.EventHandler(this.btnNewFileBrowse_Click);
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "csv";
+            this.saveFileDialog1.Filter = "CSV files (*.csv)|*.csv|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            // 
             // FileReadWriteGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

@@ -82,7 +82,7 @@ namespace FileReadWrite
             if (openFileResult == DialogResult.OK)
             {
                 txtOldFilePath.Clear();
-                inputOldFilePath = openFileDialog1.FileName;
+                inputOldFilePath = openFileDialog1.SafeFileName;
                 txtOldFilePath.Text = inputOldFilePath;
             }
             else if(openFileResult == DialogResult.Cancel)
@@ -97,7 +97,7 @@ namespace FileReadWrite
             if (openFileResult == DialogResult.OK)
             {
                 txtNewFilePath.Clear();
-                inputNewFilePath = saveFileDialog1.FileName;
+                inputNewFilePath = ;
                 txtNewFilePath.Text = inputNewFilePath;
             }
             else if (openFileResult == DialogResult.Cancel)
