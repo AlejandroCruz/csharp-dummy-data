@@ -12,18 +12,21 @@ namespace FileReadWrite
         private int lineAmount;
         private string inputElementIndex;
         private string inputLineAmount;
-        private string inputNewFileName;
-        private string inputNewFilePath;
-        private string inputOldFileName;
-        private string inputOldFilePath;
+        private string fileName;
+        private string filePath;
+        private string fileSource;
+        private string oldFilePath;
+        private string oldFileName;
+        private string newFilePath;
+        private string newFileName;
         private List<int> elementIndex;
 
         public bool InputEditHeaders { get { return inputEditHeaders; } }
         public int LineAmount { get { return lineAmount; } }
-        public string InputNewFileName { get { return inputNewFileName; } } //; set; } = "newData.csv";
-        public string InputNewFilePath { get { return inputNewFilePath; } }
-        public string InputOldFileName { get { return inputOldFileName; } } //; set; } = "rawData.csv";
-        public string InputOldFilePath { get { return inputOldFilePath; } }
+        public string NewFileName { get { return newFileName; } }
+        public string NewFilePath { get { return newFilePath; } }
+        public string OldFileName { get { return oldFileName; } }
+        public string OldFilePath { get { return oldFilePath; } }
         public List<int> ElementIndex { get { return elementIndex; } }
 
         public void CallbackGUI()
@@ -37,8 +40,10 @@ namespace FileReadWrite
             DialogResult openFileResult = openFileDialog1.ShowDialog();
             if (openFileResult == DialogResult.OK)
             {
-                inputOldFilePath = openFileDialog1.FileName;
-                inputOldFileName = ExtractFileName(inputOldFilePath);
+                fileSource = openFileDialog1.FileName;
+                ExtractFileName(fileSource);
+                oldFileName = fileName;
+                oldFilePath = filePath;
             }
         }
 
@@ -47,8 +52,10 @@ namespace FileReadWrite
             DialogResult openFileResult = saveFileDialog1.ShowDialog();
             if (openFileResult == DialogResult.OK)
             {
-                inputNewFilePath = saveFileDialog1.FileName;
-                inputNewFileName = ExtractFileName(inputNewFilePath);
+                fileSource = saveFileDialog1.FileName;
+                ExtractFileName(fileSource);
+                newFileName = fileName;
+                newFilePath = filePath;
             }
         }
 
@@ -74,8 +81,8 @@ namespace FileReadWrite
                 showEditHeaders + inputEditHeaders + "\n" +
                 showLineAmount + inputLineAmount + "\n" +
                 showElementIndex + inputElementIndex+ "\n" +
-                showOldFilePath + inputOldFilePath + "\n" +
-                showNewFilePath + inputNewFilePath,
+                showOldFilePath + oldFilePath + "\n" +
+                showNewFilePath + newFilePath,
                 caption, buttons, MessageBoxIcon.Information
                 );
 
@@ -94,40 +101,12 @@ namespace FileReadWrite
             }
         }
 
-        private string ExtractFileName(string filePath)
+        private void ExtractFileName(string inPath)
         {
-            // If path ends with a "\", it's a path only so return String.Empty.
-            if (filePath.Trim().EndsWith(@"\"))
-            {
-                return string.Empty;
-            }
+            int position = inPath.LastIndexOf('\\');
 
-            int position = filePath.LastIndexOf('\\');
-            if (position == -1)
-            {
-                // Determine whether file exists in the current directory.
-                if (File.Exists(Environment.CurrentDirectory + Path.DirectorySeparatorChar + filePath))
-                {
-                    return filePath;
-                }
-                else
-                {
-                    return String.Empty;
-                }
-            }
-            else
-            {
-                // Determine whether file exists using filepath.
-                if (File.Exists(filePath))
-                {
-                    // Return filename without file path.
-                    return filePath.Substring(position + 1);
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
+            fileName = inPath.Substring(position + 1);
+            filePath = inPath.Substring(0, (inPath.Length - fileName.Length));
         }
     }
 }

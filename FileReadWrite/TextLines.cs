@@ -21,8 +21,8 @@ namespace FileReadWrite
             inputFromGUI.CallbackGUI();
 
             // Display original quoted lines
-            string[] rawLines = File.ReadAllLines(inputFromGUI.InputOldFilePath);
-            Console.WriteLine(">>> Input file path: {0}\n", inputFromGUI.InputOldFilePath);
+            string[] rawLines = File.ReadAllLines(inputFromGUI.OldFilePath + inputFromGUI.OldFileName);
+            Console.WriteLine(">>> Input file: {0}\n", inputFromGUI.OldFileName);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
             {
@@ -69,7 +69,7 @@ namespace FileReadWrite
 
             // Write data to new file
             bool overwrite = true;
-            CreateTextFile objNewTxtFile = new CreateTextFile(inputFromGUI.InputNewFilePath, inputFromGUI.InputNewFileName);
+            CreateTextFile objNewTxtFile = new CreateTextFile(inputFromGUI.NewFilePath, inputFromGUI.NewFileName);
             objNewTxtFile.CreateFile(dataSet, overwrite);
 
             // Results
