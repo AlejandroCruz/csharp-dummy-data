@@ -9,18 +9,20 @@ namespace FileReadWrite
 
         private bool inputEditHeaders;
         private int lineAmount;
-        private string inputLineAmount;
         private string inputElementIndex;
-        private string inputOldFilePath;
+        private string inputLineAmount;
+        private string inputNewFileName;
+        private string inputNewFilePath;
         private string inputOldFileName;
+        private string inputOldFilePath;
         private List<int> elementIndex;
 
-        public string InputOldFilePath { get; set; }
-        public string NewFilePath { get; set; }
+        public bool InputEditHeaders { get; } // { return inputEditHeaders; } }
+        public int LineAmount { get; } // { return lineAmount; } }
+        public string InputNewFileName { get; } // = "newData.csv";
+        public string InputNewFilePath { get; }
         public string InputOldFileName { get; } // = "rawData.csv";
-        public string NewFileName { get; } // = "newData.csv";
-        public bool InputEditHeaders { get { return inputEditHeaders; } }
-        public int LineAmount { get { return lineAmount; } }
+        public string InputOldFilePath { get; }
         public List<int> ElementIndex { get { return elementIndex; } }
 
         public void CallbackGUI()
@@ -33,25 +35,31 @@ namespace FileReadWrite
         {
             string caption = "Confirm";
             string showEditHeaders = "Edit Headers: ";
-            string showLineAmount = "Total lines: ";
             string showElementIndex = "Columns: ";
+            string showLineAmount = "Total lines: ";
+            string showNewFilePath = "Save to: ";
             string showOldFilePath = "File from: ";
             List<string> elementList;
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result;
 
+
             inputEditHeaders = radioEditHeaders.Checked;
             inputLineAmount = txtLineAmount.Text;
             inputElementIndex = txtElementIndex.Text;
-            InputOldFilePath = txtOldFilePath.Text;
+            inputOldFilePath = txtOldFilePath.Text;
             inputLineAmount = (string.IsNullOrEmpty(inputLineAmount)) ? "0" : inputLineAmount;
             inputElementIndex = (string.IsNullOrEmpty(inputElementIndex)) ? "0" : inputElementIndex;
-            inputOldFilePath = (string.IsNullOrEmpty(inputElementIndex)) ? @"C:\" : InputOldFilePath;
+            inputOldFilePath = (string.IsNullOrEmpty(inputElementIndex)) ? @"C:\" : inputOldFilePath;
 
-            result = MessageBox.Show(showEditHeaders + inputEditHeaders + "\n" +
+            result = MessageBox.Show(
+                showOldFilePath + inputOldFilePath + "\n" +
+                showNewFilePath + inputNewFilePath + "\n" +
+                showEditHeaders + inputEditHeaders + "\n" +
                 showLineAmount + inputLineAmount + "\n" +
-                showElementIndex + inputElementIndex + "\n" +
-                showOldFilePath + inputOldFilePath, caption, buttons, MessageBoxIcon.Information);
+                showElementIndex + inputElementIndex,
+                caption, buttons, MessageBoxIcon.Information
+                );
 
             if (result == DialogResult.OK)
             {
@@ -81,6 +89,21 @@ namespace FileReadWrite
             else if(openFileResult == DialogResult.Cancel)
             {
                 txtOldFilePath.Clear();
+            }
+        }
+
+        private void btnNewFileBrowse_Click(object sender, EventArgs e)
+        {
+            DialogResult openFileResult = saveFileDialog1.ShowDialog();
+            if (openFileResult == DialogResult.OK)
+            {
+                txtNewFilePath.Clear();
+                txtNewFilePath.Text = saveFileDialog1.FileName;
+                inputNewFilePath = saveFileDialog1.ToString();
+            }
+            else if (openFileResult == DialogResult.Cancel)
+            {
+                txtNewFilePath.Clear();
             }
         }
     }

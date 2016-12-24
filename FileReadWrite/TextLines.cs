@@ -68,9 +68,9 @@ namespace FileReadWrite
             dataSet = ProcessLines.AppendValues(updateHead, updateLine);
 
             // Write data to new file
-            //bool overwrite = true;
-            //CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
-            //objNewTxtFile.CreateFile(dataSet, overwrite);
+            bool overwrite = true;
+            CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
+            objNewTxtFile.CreateFile(dataSet, overwrite);
 
             // Results
             delay.addDelay();
