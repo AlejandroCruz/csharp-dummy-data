@@ -21,7 +21,7 @@ namespace FileReadWrite
             inputFromGUI.CallbackGUI();
 
             // Display original quoted lines
-            string[] rawLines = File.ReadAllLines(inputFromGUI.InputOldFilePath + inputFromGUI.InputOldFileName);
+            string[] rawLines = File.ReadAllLines(inputFromGUI.InputOldFilePath);
             Console.WriteLine(">>> Input file path: {0}\n", inputFromGUI.InputOldFilePath);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
