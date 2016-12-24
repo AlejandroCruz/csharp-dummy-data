@@ -28,7 +28,7 @@
             - uiAccess
               Optional. Indicates whether the application requires access to protected user interface elements. Values are either true or false, and the default is false. Only signed applications should have a value of true.
         -->
-        <requestedExecutionLevel  level="asInvoker" uiAccess="true" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
       </requestedPrivileges>
       <applicationRequestMinimum>
         <defaultAssemblyRequest permissionSetReference="Custom" />
