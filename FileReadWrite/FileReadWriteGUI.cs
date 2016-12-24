@@ -68,14 +68,19 @@ namespace FileReadWrite
             }
         }
 
-        private void btnOldFilePath_Click(object sender, EventArgs e)
+        private void btnOldFileBrowse_Click(object sender, EventArgs e)
         {
             DialogResult openFileResult = openFileDialog1.ShowDialog();
             if (openFileResult == DialogResult.OK)
             {
+                txtOldFilePath.Clear();
                 txtOldFilePath.Text = openFileDialog1.FileName;
                 //txtOldFilePath.Paste();
                 inputOldFilePath = openFileDialog1.ToString();
+            }
+            else if(openFileResult == DialogResult.Cancel)
+            {
+                txtOldFilePath.Clear();
             }
         }
     }

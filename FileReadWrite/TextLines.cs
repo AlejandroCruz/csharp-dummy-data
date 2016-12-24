@@ -60,8 +60,8 @@ namespace FileReadWrite
             }
 
             // Longest field indexes for column padding
-            List<int> lenghtStrArr = new List<int>();
-            lenghtStrArr = ProcessLines.CompareFields(updateHead, updateLine);
+            List<int> longestColumnField = new List<int>();
+            longestColumnField = ProcessLines.CompareFields(updateHead, updateLine);
 
             // Concatenate Values
             string[] dataSet = new string[] {};
@@ -83,16 +83,16 @@ namespace FileReadWrite
                 totalStrLength += s.Length;
             }
 
-            for (int i = 0; i < lenghtStrArr.Count; i++)
+            for (int i = 0; i < longestColumnField.Count; i++)
             {
                 // Padding: 4 = amount of characters padding the column
-                rowDivider += int.Parse(lenghtStrArr[i].ToString()) + 4;
+                rowDivider += int.Parse(longestColumnField[i].ToString()) + 4;
             }
 
             foreach (string s in updateHead.StrList)
             {
                 // Padding: "| "
-                Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                Console.Write("| {0," + longestColumnField[counter] + "} |", s);
                 counter++;
             }
 
@@ -105,7 +105,7 @@ namespace FileReadWrite
 
                 foreach (string s in updateLine.StrList)
                 {
-                    Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                    Console.Write("| {0," + longestColumnField[counter] + "} |", s);
                     counter++;
                 }
                 Console.Write(Environment.NewLine);
@@ -120,7 +120,7 @@ namespace FileReadWrite
 
                     foreach (string s in updateLine.StrListArr[i])
                     {
-                        Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                        Console.Write("| {0," + longestColumnField[counter] + "} |", s);
                         counter++;
                     }
                     Console.Write(Environment.NewLine);
