@@ -123,8 +123,8 @@
             this.txtOldFilePath.Size = new System.Drawing.Size(178, 20);
             this.txtOldFilePath.TabIndex = 0;
             this.txtOldFilePath.TabStop = false;
-            this.txtOldFilePath.Text = " C:\\...";
             this.txtOldFilePath.Enter += new System.EventHandler(this.txtOldFilePath_Focus);
+            this.txtOldFilePath.Leave += new System.EventHandler(this.txtOldFilePath_Leave);
             // 
             // btnOldFileBrowse
             // 
@@ -153,6 +153,8 @@
             this.txtNewFilePath.Size = new System.Drawing.Size(178, 20);
             this.txtNewFilePath.TabIndex = 0;
             this.txtNewFilePath.TabStop = false;
+            this.txtNewFilePath.Enter += new System.EventHandler(this.txtNewFilePath_Focus);
+            this.txtNewFilePath.Leave += new System.EventHandler(this.txtNewFilePath_Leave);
             // 
             // btnNewFileBrowse
             // 

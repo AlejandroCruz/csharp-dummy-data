@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 
 namespace FileReadWrite
@@ -32,16 +31,25 @@ namespace FileReadWrite
         public void CallbackGUI()
         {
             InitializeComponent();
+            txtOldFilePath.Text = " C:\\";
+            txtNewFilePath.Text = " C:\\";
+            btnExeInputForm.Enabled = false;
             ShowDialog();
         }
 
         private void txtOldFilePath_Focus(object sender, EventArgs e)
         {
-            txtOldFilePath.Clear();
+            if (string.IsNullOrWhiteSpace(txtOldFilePath.Text))
+            {
+                txtOldFilePath.Clear();
+            }
         }
         private void txtOldFilePath_Leave(object sender, EventArgs e)
         {
-            txtOldFilePath.ResetText();
+            if (string.IsNullOrWhiteSpace(txtOldFilePath.Text))
+            {
+                txtOldFilePath.Text = "C:\\";
+            }
         }
         private void btnOldFileBrowse_Click(object sender, EventArgs e)
         {
@@ -49,18 +57,32 @@ namespace FileReadWrite
             if (openFileResult == DialogResult.OK)
             {
                 fileSource = openFileDialog1.FileName;
+                txtOldFilePath.Text = fileSource;
                 ExtractFileName(fileSource);
                 oldFileName = fileName;
                 oldFilePath = filePath;
             }
         }
 
+        private void txtNewFilePath_Focus(object sender, EventArgs e)
+        {
+            txtNewFilePath.Clear();
+        }
+
+        private void txtNewFilePath_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNewFilePath.Text))
+            {
+                txtNewFilePath.Text = "C:\\";
+            }
+        }
         private void btnNewFileBrowse_Click(object sender, EventArgs e)
         {
             DialogResult openFileResult = saveFileDialog1.ShowDialog();
             if (openFileResult == DialogResult.OK)
             {
                 fileSource = saveFileDialog1.FileName;
+                txtNewFilePath.Text = fileSource;
                 ExtractFileName(fileSource);
                 newFileName = fileName;
                 newFilePath = filePath;
