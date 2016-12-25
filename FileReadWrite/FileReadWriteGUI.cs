@@ -33,7 +33,6 @@ namespace FileReadWrite
             InitializeComponent();
             txtOldFilePath.Text = " C:\\";
             txtNewFilePath.Text = " C:\\";
-            btnExeInputForm.Enabled = false;
             ShowDialog();
         }
 
@@ -66,7 +65,10 @@ namespace FileReadWrite
 
         private void txtNewFilePath_Focus(object sender, EventArgs e)
         {
-            txtNewFilePath.Clear();
+            if (string.IsNullOrWhiteSpace(txtNewFilePath.Text))
+            {
+                txtNewFilePath.Clear();
+            }
         }
 
         private void txtNewFilePath_Leave(object sender, EventArgs e)
@@ -102,32 +104,39 @@ namespace FileReadWrite
             DialogResult result;
 
             inputEditHeaders = radioEditHeaders.Checked;
-            inputLineAmount = txtLineAmount.Text;
-            inputElementIndex = txtElementIndex.Text;
-            inputLineAmount = string.IsNullOrEmpty(inputLineAmount) ? "0" : inputLineAmount;
-            inputElementIndex = string.IsNullOrEmpty(inputElementIndex) ? "0" : inputElementIndex;
+            inputLineAmount = string.IsNullOrEmpty(txtLineAmount.Text) ? "0" : txtLineAmount.Text;
+            inputElementIndex = string.IsNullOrEmpty(txtElementIndex.Text) ? "0" : txtElementIndex.Text;
 
-            result = MessageBox.Show(
-                showEditHeaders + inputEditHeaders + "\n" +
-                showLineAmount + inputLineAmount + "\n" +
-                showElementIndex + inputElementIndex+ "\n" +
-                showOldFilePath + oldFilePath + "\n" +
-                showNewFilePath + newFilePath,
-                caption, buttons, MessageBoxIcon.Information
-                );
 
-            if (result == DialogResult.OK)
+
+            if (string.IsNullOrEmpty(txtOldFilePath.Text) || string.IsNullOrEmpty(txtNewFilePath.Text))
             {
-                lineAmount = int.Parse(inputLineAmount);
-                elementIndex = new List<int>();
-                elementList = new List<string>(ProcessLines.SplitValues(inputElementIndex, ','));
+                MessageBox.Show("Please add Read/Save file path.", caption, buttons, icon);
+            }
+            else if
+            {
+                result = MessageBox.Show(
+                                showOldFilePath + oldFilePath + "\n" +
+                                showNewFilePath + newFilePath + "\n" +
+                                showEditHeaders + inputEditHeaders + "\n" +
+                                showLineAmount + inputLineAmount + "\n" +
+                                showElementIndex + inputElementIndex,
+                                caption, buttons, MessageBoxIcon.Information
+                                );
 
-                for (int i = 0; i < elementList.Count; i++)
+                if (result == DialogResult.OK)
                 {
-                    elementIndex.Add( int.Parse(elementList[i]) );
-                }
+                    lineAmount = int.Parse(inputLineAmount);
+                    elementIndex = new List<int>();
+                    elementList = new List<string>(ProcessLines.SplitValues(inputElementIndex, ','));
 
-                Close();
+                    for (int i = 0; i < elementList.Count; i++)
+                    {
+                        elementIndex.Add(int.Parse(elementList[i]));
+                    }
+
+                    Close();
+                }
             }
         }
 
