@@ -35,6 +35,14 @@ namespace FileReadWrite
             ShowDialog();
         }
 
+        private void txtOldFilePath_Focus(object sender, EventArgs e)
+        {
+            txtOldFilePath.Clear();
+        }
+        private void txtOldFilePath_Leave(object sender, EventArgs e)
+        {
+            txtOldFilePath.ResetText();
+        }
         private void btnOldFileBrowse_Click(object sender, EventArgs e)
         {
             DialogResult openFileResult = openFileDialog1.ShowDialog();

@@ -108,7 +108,7 @@
             // 
             this.lblOldFilePath.AutoSize = true;
             this.lblOldFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOldFilePath.Location = new System.Drawing.Point(63, 46);
+            this.lblOldFilePath.Location = new System.Drawing.Point(37, 46);
             this.lblOldFilePath.Name = "lblOldFilePath";
             this.lblOldFilePath.Size = new System.Drawing.Size(59, 16);
             this.lblOldFilePath.TabIndex = 0;
@@ -116,15 +116,19 @@
             // 
             // txtOldFilePath
             // 
-            this.txtOldFilePath.Enabled = false;
-            this.txtOldFilePath.Location = new System.Drawing.Point(142, 44);
+            this.txtOldFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOldFilePath.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.txtOldFilePath.Location = new System.Drawing.Point(103, 44);
             this.txtOldFilePath.Name = "txtOldFilePath";
-            this.txtOldFilePath.Size = new System.Drawing.Size(100, 20);
-            this.txtOldFilePath.TabIndex = 3;
+            this.txtOldFilePath.Size = new System.Drawing.Size(178, 20);
+            this.txtOldFilePath.TabIndex = 0;
+            this.txtOldFilePath.TabStop = false;
+            this.txtOldFilePath.Text = " C:\\...";
+            this.txtOldFilePath.Enter += new System.EventHandler(this.txtOldFilePath_Focus);
             // 
             // btnOldFileBrowse
             // 
-            this.btnOldFileBrowse.Location = new System.Drawing.Point(262, 43);
+            this.btnOldFileBrowse.Location = new System.Drawing.Point(287, 43);
             this.btnOldFileBrowse.Name = "btnOldFileBrowse";
             this.btnOldFileBrowse.Size = new System.Drawing.Size(52, 23);
             this.btnOldFileBrowse.TabIndex = 6;
@@ -136,7 +140,7 @@
             // 
             this.lblNewFilePath.AutoSize = true;
             this.lblNewFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewFilePath.Location = new System.Drawing.Point(63, 78);
+            this.lblNewFilePath.Location = new System.Drawing.Point(37, 82);
             this.lblNewFilePath.Name = "lblNewFilePath";
             this.lblNewFilePath.Size = new System.Drawing.Size(54, 16);
             this.lblNewFilePath.TabIndex = 0;
@@ -144,15 +148,15 @@
             // 
             // txtNewFilePath
             // 
-            this.txtNewFilePath.Enabled = false;
-            this.txtNewFilePath.Location = new System.Drawing.Point(142, 76);
+            this.txtNewFilePath.Location = new System.Drawing.Point(103, 80);
             this.txtNewFilePath.Name = "txtNewFilePath";
-            this.txtNewFilePath.Size = new System.Drawing.Size(100, 20);
-            this.txtNewFilePath.TabIndex = 3;
+            this.txtNewFilePath.Size = new System.Drawing.Size(178, 20);
+            this.txtNewFilePath.TabIndex = 0;
+            this.txtNewFilePath.TabStop = false;
             // 
             // btnNewFileBrowse
             // 
-            this.btnNewFileBrowse.Location = new System.Drawing.Point(262, 75);
+            this.btnNewFileBrowse.Location = new System.Drawing.Point(287, 79);
             this.btnNewFileBrowse.Name = "btnNewFileBrowse";
             this.btnNewFileBrowse.Size = new System.Drawing.Size(52, 23);
             this.btnNewFileBrowse.TabIndex = 6;
