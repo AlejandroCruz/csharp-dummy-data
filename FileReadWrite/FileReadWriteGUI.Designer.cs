@@ -42,6 +42,7 @@
             this.txtNewFilePath = new System.Windows.Forms.TextBox();
             this.btnNewFileBrowse = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.lblFilePathInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnExeInputForm
@@ -108,7 +109,7 @@
             // 
             this.lblOldFilePath.AutoSize = true;
             this.lblOldFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOldFilePath.Location = new System.Drawing.Point(37, 46);
+            this.lblOldFilePath.Location = new System.Drawing.Point(37, 57);
             this.lblOldFilePath.Name = "lblOldFilePath";
             this.lblOldFilePath.Size = new System.Drawing.Size(59, 16);
             this.lblOldFilePath.TabIndex = 0;
@@ -118,17 +119,18 @@
             // 
             this.txtOldFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOldFilePath.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.txtOldFilePath.Location = new System.Drawing.Point(103, 44);
+            this.txtOldFilePath.Location = new System.Drawing.Point(103, 55);
             this.txtOldFilePath.Name = "txtOldFilePath";
             this.txtOldFilePath.Size = new System.Drawing.Size(178, 20);
             this.txtOldFilePath.TabIndex = 0;
             this.txtOldFilePath.TabStop = false;
+            this.txtOldFilePath.Text = " C:\\";
             this.txtOldFilePath.Enter += new System.EventHandler(this.txtOldFilePath_Focus);
             this.txtOldFilePath.Leave += new System.EventHandler(this.txtOldFilePath_Leave);
             // 
             // btnOldFileBrowse
             // 
-            this.btnOldFileBrowse.Location = new System.Drawing.Point(287, 43);
+            this.btnOldFileBrowse.Location = new System.Drawing.Point(287, 54);
             this.btnOldFileBrowse.Name = "btnOldFileBrowse";
             this.btnOldFileBrowse.Size = new System.Drawing.Size(52, 23);
             this.btnOldFileBrowse.TabIndex = 6;
@@ -140,7 +142,7 @@
             // 
             this.lblNewFilePath.AutoSize = true;
             this.lblNewFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewFilePath.Location = new System.Drawing.Point(37, 82);
+            this.lblNewFilePath.Location = new System.Drawing.Point(37, 88);
             this.lblNewFilePath.Name = "lblNewFilePath";
             this.lblNewFilePath.Size = new System.Drawing.Size(54, 16);
             this.lblNewFilePath.TabIndex = 0;
@@ -148,17 +150,18 @@
             // 
             // txtNewFilePath
             // 
-            this.txtNewFilePath.Location = new System.Drawing.Point(103, 80);
+            this.txtNewFilePath.Location = new System.Drawing.Point(103, 86);
             this.txtNewFilePath.Name = "txtNewFilePath";
             this.txtNewFilePath.Size = new System.Drawing.Size(178, 20);
             this.txtNewFilePath.TabIndex = 0;
             this.txtNewFilePath.TabStop = false;
+            this.txtNewFilePath.Text = " C:\\";
             this.txtNewFilePath.Enter += new System.EventHandler(this.txtNewFilePath_Focus);
             this.txtNewFilePath.Leave += new System.EventHandler(this.txtNewFilePath_Leave);
             // 
             // btnNewFileBrowse
             // 
-            this.btnNewFileBrowse.Location = new System.Drawing.Point(287, 79);
+            this.btnNewFileBrowse.Location = new System.Drawing.Point(287, 85);
             this.btnNewFileBrowse.Name = "btnNewFileBrowse";
             this.btnNewFileBrowse.Size = new System.Drawing.Size(52, 23);
             this.btnNewFileBrowse.TabIndex = 6;
@@ -172,11 +175,23 @@
             this.saveFileDialog1.Filter = "CSV files (*.csv)|*.csv|Text files (*.txt)|*.txt|All files (*.*)|*.*";
             this.saveFileDialog1.Title = "Create New File";
             // 
+            // lblFilePathInfo
+            // 
+            this.lblFilePathInfo.AutoSize = true;
+            this.lblFilePathInfo.CausesValidation = false;
+            this.lblFilePathInfo.Enabled = false;
+            this.lblFilePathInfo.Location = new System.Drawing.Point(37, 26);
+            this.lblFilePathInfo.Name = "lblFilePathInfo";
+            this.lblFilePathInfo.Size = new System.Drawing.Size(187, 13);
+            this.lblFilePathInfo.TabIndex = 0;
+            this.lblFilePathInfo.Text = "Include name of file in path or Browse:";
+            // 
             // FileReadWriteGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(377, 317);
+            this.Controls.Add(this.lblFilePathInfo);
             this.Controls.Add(this.btnNewFileBrowse);
             this.Controls.Add(this.txtNewFilePath);
             this.Controls.Add(this.btnOldFileBrowse);
@@ -212,5 +227,6 @@
         private System.Windows.Forms.TextBox txtNewFilePath;
         private System.Windows.Forms.Button btnNewFileBrowse;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Label lblFilePathInfo;
     }
 }
