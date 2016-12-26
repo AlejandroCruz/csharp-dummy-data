@@ -50,7 +50,9 @@ namespace FileReadWrite
             }
             else
             {
-                ExtractFileNameAndDirPath(txtNewFilePath.Text);
+                string[] tmp = ExtractFileNameAndDirPath(txtOldFilePath.Text);
+                oldFileName = tmp[0];
+                oldFilePath = tmp[1];
             }
         }
         private void btnOldFileBrowse_Click(object sender, EventArgs e)
@@ -81,7 +83,9 @@ namespace FileReadWrite
             }
             else
             {
-                ExtractFileNameAndDirPath(txtNewFilePath.Text);
+                string[] tmp = ExtractFileNameAndDirPath(txtNewFilePath.Text);
+                newFileName = tmp[0];
+                newFilePath = tmp[1];
             }
         }
         private void btnNewFileBrowse_Click(object sender, EventArgs e)
@@ -147,13 +151,13 @@ namespace FileReadWrite
             }
         }
 
-        private string[] ExtractFileNameAndDirPath(string validFilePath)
+        private string[] ExtractFileNameAndDirPath(string sourcePath)
         {
-            int position = validFilePath.LastIndexOf('\\');
+            int position = sourcePath.LastIndexOf('\\');
             string[]  fileNameAndDirPath = new string[2];
 
-            fileNameAndDirPath[0] = validFilePath.Substring(position + 1);
-            fileNameAndDirPath[1] = validFilePath.Substring(0, (validFilePath.Length - fileNameAndDirPath[0].Length));
+            fileNameAndDirPath[0] = sourcePath.Substring(position + 1);
+            fileNameAndDirPath[1] = sourcePath.Substring(0, (sourcePath.Length - fileNameAndDirPath[0].Length));
 
             return fileNameAndDirPath;
         }
