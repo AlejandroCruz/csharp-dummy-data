@@ -10,7 +10,7 @@ using System.IO;
 
 namespace FileReadWrite
 {
-    class TextLines
+    class FileReadWriteMain
     {
         [STAThread]
         public static void Main(string[] args)
