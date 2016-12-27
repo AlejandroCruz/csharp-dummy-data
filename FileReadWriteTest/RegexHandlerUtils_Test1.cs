@@ -3,7 +3,7 @@
 namespace FileReadWriteTest
 {
     [TestClass]
-    public class UnitTest1
+    public class RegexHandlerUtils_Test1
     {
         [TestMethod]
         public static void Main()
