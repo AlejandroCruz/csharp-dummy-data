@@ -3,13 +3,14 @@
 
 # My-Specific files
 Properties/
-FileReadWrite.sln
 App.config
 ClassDiagram1.cd
-FileReadWrite.csproj
-RegexHandlerUtils.txt
-FileReadWriteGUI.resx
 devNotes.txt
+FileReadWrite.sln
+FileReadWrite.csproj
+FileReadWriteGUI.resx
+RegexHandlerUtils.txt
+RegexHandlerUtils_Test1.csproj
 
 # User-specific files
 *.suo
