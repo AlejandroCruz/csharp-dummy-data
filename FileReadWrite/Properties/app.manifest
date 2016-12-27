@@ -15,8 +15,20 @@
             Specifying requestedExecutionLevel element will disable file and registry virtualization.
             Remove this element if your application requires this virtualization for backwards
             compatibility.
+
+            // My notes //
+            Optional. Identifies the security level at which the application requests to be executed. This element has no children and has the following attributes.
+            - Level
+              Required. Indicates the security level the application is requesting. Possible values are:
+              asInvoker, requesting no additional permissions. This level requires no additional trust prompts.
+              highestAvailable, requesting the highest permissions available to the parent process.
+              requireAdministrator, requesting full administrator permissions.
+              ClickOnce applications will only install with a value of asInvoker. Installing with any other value will fail.
+
+            - uiAccess
+              Optional. Indicates whether the application requires access to protected user interface elements. Values are either true or false, and the default is false. Only signed applications should have a value of true.
         -->
-        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
       </requestedPrivileges>
       <applicationRequestMinimum>
         <defaultAssemblyRequest permissionSetReference="Custom" />

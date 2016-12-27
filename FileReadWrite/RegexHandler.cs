@@ -7,29 +7,20 @@ namespace FileReadWrite
 {
     class RegexHandler
     {
-        private char addPrefixChar;
+        private const char DEFAULT_PREFIX = 'A';
         private const string NULLSTR = "NULL";
         private const string DATE_FORMAT = "yyyy-MM-dd";
-
         private string newString;
         private List<string> originalStr;
-        private DateTime tD;
 
         public RegexHandler(List<string> inOriginStrList)
         {
             originalStr = inOriginStrList;
-            addPrefixChar = 'A';
-        }
-
-        public char AddPrefixChar
-        {
-            get { return addPrefixChar; }
-            set { addPrefixChar = value; }
         }
 
         public string RegexCharHandler(string inString, int thisIndex)
         {
-            if (!Regex.IsMatch(inString, "[a-zA-Z]"))
+            if ( (!Regex.IsMatch(inString, "[a-zA-Z]")) && (!String.IsNullOrEmpty(inString)) )
             {
                 ProcessNoLetterSequence(inString);
             }
@@ -40,7 +31,14 @@ namespace FileReadWrite
             }
             else
             {
-                ProcessUnreadable();
+                if (String.IsNullOrEmpty(inString))
+                {
+                    ProcessWordPhrase(inString, thisIndex);
+                }
+                else
+                {
+                    ProcessUnreadable();
+                }
             }
 
             return newString;
@@ -48,8 +46,8 @@ namespace FileReadWrite
 
         public string RegexDateHandler(DateTime inTempDate)
         {
-            tD = inTempDate.AddDays(1);
-            newString = tD.ToString(DATE_FORMAT);
+            DateTime dateStr = inTempDate.AddDays(1);
+            newString = dateStr.ToString(DATE_FORMAT);
 
             return newString;
         }
@@ -143,26 +141,15 @@ namespace FileReadWrite
             string tmpOriginStr = wordPhrase.Substring((wordPhrase.Length - originalStr[thisIndex].Length), originalStr[thisIndex].Length);
             string tmpPrefixStr = wordPhrase.Substring(0, wordPhrase.Length - tmpOriginStr.Length);
 
-            if ((tmpPrefixStr.StartsWith("Z")) && (tmpPrefixStr.Length < 4))
+            if (String.IsNullOrEmpty(tmpPrefixStr))
             {
-                RegexHandlerUtils rgxUtil = new RegexHandlerUtils();
-
-                addPrefixChar = 'A';
-                tmpPrefixStr = rgxUtil.AddPrefixToSequence(tmpPrefixStr);
-                newString = addPrefixChar.ToString() + tmpPrefixStr + tmpOriginStr;
+                newString = DEFAULT_PREFIX.ToString() + tmpOriginStr;
             }
             else
             {
-                if (tmpPrefixStr.Length > 1)
-                {
-                    tmpPrefixStr = tmpPrefixStr.Remove(0, 1);
-
-                    newString = addPrefixChar.ToString() + tmpPrefixStr + tmpOriginStr;
-                }
-                else
-                {
-                    newString = addPrefixChar.ToString() + tmpOriginStr;
-                }
+                RegexHandlerUtils rgxUtil = new RegexHandlerUtils();
+                tmpPrefixStr = rgxUtil.ToName(1 + rgxUtil.ToNumber(tmpPrefixStr));
+                newString = tmpPrefixStr + tmpOriginStr;
             }
         }
 

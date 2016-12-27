@@ -1,40 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FileReadWrite
 {
-    class RegexHandlerUtils
+    public class RegexHandlerUtils
     {
-        private string outPrefix;
-        private char Z = 'Z';
-
-        public string AddPrefixToSequence(string prefixStr)
+        public int ToNumber(string prefixStr)
         {
-            List<char> prefixSequence = new List<char>();
-
-            foreach (var item in prefixStr)
+            int number = 0;
+            for (int i = 0; i < prefixStr.Length; i++)
             {
-                prefixSequence.Add(item);
+                number = number * 26 + (prefixStr[i] - ('A' - 1));
             }
 
-            if (prefixSequence.Count > 1)
+            return number;
+        }
+
+        public string ToName(int inNumber)
+        {
+            StringBuilder strBuild = new StringBuilder();
+
+            while (inNumber-- > 0)
             {
-                prefixSequence[0] = 'A';
-                char test = prefixSequence[1];
-                test++;
-                prefixSequence[1] = test;
-                outPrefix = prefixSequence[0].ToString() +
-                    prefixSequence[1].ToString();
-            }
-            else
-            {
-                outPrefix = "A";
+                strBuild.Append( (char)('A' + (inNumber % 26)) );
+                inNumber /= 26;
             }
 
-            return outPrefix;
+            string input = strBuild.ToString();
+            return new string(input.ToCharArray().Reverse().ToArray());
         }
     }
 }

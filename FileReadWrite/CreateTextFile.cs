@@ -5,10 +5,10 @@
         private string fileName;
         private string filePath;
 
-        public CreateTextFile(string inFile, string inPath)
+        public CreateTextFile(string inFilePath, string inFileName)
         {
-            fileName = inFile;
-            filePath = inPath;
+            fileName = inFileName;
+            filePath = inFilePath;
         }
 
         public void CreateFile(string[] inDataSet, bool inOverwrite)

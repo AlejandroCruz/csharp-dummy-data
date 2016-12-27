@@ -6,21 +6,23 @@
  */
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace FileReadWrite
 {
     class TextLines
     {
+        [STAThread]
         public static void Main(string[] args)
         {
-            string csvRawFile = "rawData.csv";
-            string newFileName = "newData.csv";
-            string oldFilePath = @"C:\Users\FISH-1\Documents\MS_Workspace\FileReadWrite\FileReadWrite\Assets\"; //@"C:\Users\FileReadWrite\";
-            string newFilePath = oldFilePath;
-            string[] rawLines = System.IO.File.ReadAllLines(oldFilePath + csvRawFile);
+            // GUI
+            UXEnhancements delay = new UXEnhancements(500);
+            FileReadWriteGUI inputFromGUI = new FileReadWriteGUI();
+            inputFromGUI.CallbackGUI();
 
             // Display original quoted lines
-            Console.WriteLine(">>> Input file: {0}\n", csvRawFile);
+            string[] rawLines = File.ReadAllLines(inputFromGUI.OldFilePath + inputFromGUI.OldFileName);
+            Console.WriteLine(">>> Input file: {0}\n", inputFromGUI.OldFileName);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
             {
@@ -41,38 +43,38 @@ namespace FileReadWrite
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
             // Header edit
-            int[] elementIndex = new int[] {};
             UpdateLine updateHead = new UpdateLine(headList);
-            updateHead.ModifySingleLine(elementIndex);
-
-            // Row edit
-            int totalLines = 200;
-            elementIndex = new int[] { 0,1,2,3,4,5,6,7,8 };
-            UpdateLine updateLine = new UpdateLine(recordList, totalLines);
-            if (totalLines < 2)
+            if (inputFromGUI.InputEditHeaders)
             {
-                updateLine.ModifySingleLine(elementIndex);
+                updateHead.ModifySingleLine(inputFromGUI.ElementIndex);
+            }
+            // Row edit
+            UpdateLine updateLine = new UpdateLine(recordList, inputFromGUI.LineAmount);
+            if (inputFromGUI.LineAmount < 2)
+            {
+                updateLine.ModifySingleLine(inputFromGUI.ElementIndex);
             }
             else
             {
-                updateLine.ModifyMultiLine(elementIndex);
+                updateLine.ModifyMultiLine(inputFromGUI.ElementIndex);
             }
 
             // Longest field indexes for column padding
-            List<int> lenghtStrArr = new List<int>();
-            lenghtStrArr = ProcessLines.CompareFields(updateHead, updateLine);
+            List<int> longestColumnField = new List<int>();
+            longestColumnField = ProcessLines.CompareFields(updateHead, updateLine);
 
             // Concatenate Values
             string[] dataSet = new string[] {};
             dataSet = ProcessLines.AppendValues(updateHead, updateLine);
 
             // Write data to new file
-            //bool overwrite = true;
-            //CreateTextFile objNewTxtFile = new CreateTextFile(newFileName, newFilePath);
-            //objNewTxtFile.CreateFile(dataSet, overwrite);
+            bool overwrite = true;
+            CreateTextFile objNewTxtFile = new CreateTextFile(inputFromGUI.NewFilePath, inputFromGUI.NewFileName);
+            objNewTxtFile.CreateFile(dataSet, overwrite);
 
             // Results
-            Console.WriteLine(">>> Begin unique tabular data:\n");
+            delay.addDelay();
+            Console.WriteLine("\n>>> Begin unique tabular data:\n");
             int counter = 0;
             int totalStrLength = 0;
             int rowDivider = 0;
@@ -81,29 +83,29 @@ namespace FileReadWrite
                 totalStrLength += s.Length;
             }
 
-            for (int i = 0; i < lenghtStrArr.Count; i++)
+            for (int i = 0; i < longestColumnField.Count; i++)
             {
                 // Padding: 4 = amount of characters padding the column
-                rowDivider += int.Parse(lenghtStrArr[i].ToString()) + 4;
+                rowDivider += int.Parse(longestColumnField[i].ToString()) + 4;
             }
 
             foreach (string s in updateHead.StrList)
             {
                 // Padding: "| "
-                Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                Console.Write("| {0," + longestColumnField[counter] + "} |", s);
                 counter++;
             }
 
             Console.Write(Environment.NewLine);
             Console.WriteLine(new String('-', rowDivider));
 
-            if (totalLines < 2)
+            if (inputFromGUI.LineAmount < 2)
             {
                 counter = 0;
 
                 foreach (string s in updateLine.StrList)
                 {
-                    Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                    Console.Write("| {0," + longestColumnField[counter] + "} |", s);
                     counter++;
                 }
                 Console.Write(Environment.NewLine);
@@ -118,7 +120,7 @@ namespace FileReadWrite
 
                     foreach (string s in updateLine.StrListArr[i])
                     {
-                        Console.Write("| {0," + lenghtStrArr[counter] + "} |", s);
+                        Console.Write("| {0," + longestColumnField[counter] + "} |", s);
                         counter++;
                     }
                     Console.Write(Environment.NewLine);
