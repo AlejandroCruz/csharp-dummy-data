@@ -29,5 +29,8 @@ namespace FileReadWrite
             string input = strBuild.ToString();
             return new string(input.ToCharArray().Reverse().ToArray());
         }
+
+        // Deprecated
+        //public string AddPrefixToSequence(string prefixStr){ }
     }
 }
