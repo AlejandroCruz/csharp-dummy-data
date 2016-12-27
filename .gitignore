@@ -10,7 +10,7 @@ FileReadWrite.sln
 FileReadWrite.csproj
 FileReadWriteGUI.resx
 RegexHandlerUtils.txt
-RegexHandlerUtils_Test1.csproj
+FileReadWriteTest/RegexHandlerUtils_Test1.csproj
 
 # User-specific files
 *.suo
