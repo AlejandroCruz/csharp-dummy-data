@@ -49,7 +49,7 @@
             // 
             this.btnExeInputForm.CausesValidation = false;
             this.btnExeInputForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExeInputForm.Location = new System.Drawing.Point(153, 261);
+            this.btnExeInputForm.Location = new System.Drawing.Point(149, 260);
             this.btnExeInputForm.Name = "btnExeInputForm";
             this.btnExeInputForm.Size = new System.Drawing.Size(75, 23);
             this.btnExeInputForm.TabIndex = 5;
@@ -59,7 +59,7 @@
             // 
             // txtLineAmount
             // 
-            this.txtLineAmount.Location = new System.Drawing.Point(144, 187);
+            this.txtLineAmount.Location = new System.Drawing.Point(138, 147);
             this.txtLineAmount.Name = "txtLineAmount";
             this.txtLineAmount.Size = new System.Drawing.Size(100, 20);
             this.txtLineAmount.TabIndex = 1;
@@ -68,7 +68,7 @@
             // 
             this.lblLineAmount.AutoSize = true;
             this.lblLineAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLineAmount.Location = new System.Drawing.Point(65, 189);
+            this.lblLineAmount.Location = new System.Drawing.Point(67, 149);
             this.lblLineAmount.Name = "lblLineAmount";
             this.lblLineAmount.Size = new System.Drawing.Size(70, 16);
             this.lblLineAmount.TabIndex = 0;
@@ -78,7 +78,7 @@
             // 
             this.lblElementIndex.AutoSize = true;
             this.lblElementIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblElementIndex.Location = new System.Drawing.Point(65, 214);
+            this.lblElementIndex.Location = new System.Drawing.Point(67, 174);
             this.lblElementIndex.Name = "lblElementIndex";
             this.lblElementIndex.Size = new System.Drawing.Size(60, 16);
             this.lblElementIndex.TabIndex = 0;
@@ -86,7 +86,7 @@
             // 
             // txtElementIndex
             // 
-            this.txtElementIndex.Location = new System.Drawing.Point(144, 212);
+            this.txtElementIndex.Location = new System.Drawing.Point(138, 172);
             this.txtElementIndex.Name = "txtElementIndex";
             this.txtElementIndex.Size = new System.Drawing.Size(100, 20);
             this.txtElementIndex.TabIndex = 2;
@@ -97,7 +97,7 @@
             this.radioEditHeaders.AutoSize = true;
             this.radioEditHeaders.CausesValidation = false;
             this.radioEditHeaders.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioEditHeaders.Location = new System.Drawing.Point(65, 146);
+            this.radioEditHeaders.Location = new System.Drawing.Point(70, 208);
             this.radioEditHeaders.Name = "radioEditHeaders";
             this.radioEditHeaders.Size = new System.Drawing.Size(105, 20);
             this.radioEditHeaders.TabIndex = 0;
@@ -150,6 +150,8 @@
             // 
             // txtNewFilePath
             // 
+            this.txtNewFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNewFilePath.ForeColor = System.Drawing.SystemColors.ButtonShadow;
             this.txtNewFilePath.Location = new System.Drawing.Point(103, 86);
             this.txtNewFilePath.Name = "txtNewFilePath";
             this.txtNewFilePath.Size = new System.Drawing.Size(178, 20);
