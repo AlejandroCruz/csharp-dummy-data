@@ -9,20 +9,27 @@ namespace FileReadWrite
         [STAThread]
         public static void Main(string[] args)
         {
-            // GUI
+            // Console splash
             UXEnhancements delay = new UXEnhancements(500);
-            FileReadWriteGUI inputFromGUI = new FileReadWriteGUI();
-            inputFromGUI.CallbackGUI();
+            Console.WriteLine("Console program for producing generic tabular data.");
+            Console.WriteLine("Select file to read from or create new:");
+            Console.Write("\n>>> Press any key to continue... ");
+            Console.ReadKey(true);
+
+            // GUI read data
+            FileReadGUI inputReadForm = new FileReadGUI();
 
             // Display original quoted lines
-            string[] rawLines = File.ReadAllLines(inputFromGUI.OldFilePath + inputFromGUI.OldFileName);
-            Console.WriteLine(">>> Input file: {0}\n", inputFromGUI.OldFileName);
+            string[] rawLines = File.ReadAllLines(inputReadForm.OldFilePath + inputReadForm.OldFileName);
+            Console.WriteLine(">>> Input file: {0}\n", inputReadForm.OldFileName);
             Console.WriteLine(">>> Raw lines:");
             for (int i = 0; i < rawLines.Length; i++)
             {
                 Console.WriteLine(rawLines[i]);
             }
             Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(">>> Press any key to continue...\n");
+            Console.ReadKey(true);
 
             // Remove quotation
             string strToRemove = "\"";
@@ -36,21 +43,25 @@ namespace FileReadWrite
             headList = ProcessLines.SplitValues(headLine, valueDelimiter);
             recordList = ProcessLines.SplitValues(recordLine, valueDelimiter);
 
+            // GUI edit and write data file
+            FileWriteGUI inputWriteForm = new FileWriteGUI();
+            inputWriteForm.CallbackGUI();
+
             // Header edit
             UpdateLine updateHead = new UpdateLine(headList);
-            if (inputFromGUI.InputEditHeaders)
+            if (inputWriteForm.InputEditHeaders)
             {
-                updateHead.ModifySingleLine(inputFromGUI.ElementIndex);
+                updateHead.ModifySingleLine(inputWriteForm.ElementIndex);
             }
             // Row edit
-            UpdateLine updateLine = new UpdateLine(recordList, inputFromGUI.LineAmount);
-            if (inputFromGUI.LineAmount < 2)
+            UpdateLine updateLine = new UpdateLine(recordList, inputWriteForm.LineAmount);
+            if (inputWriteForm.LineAmount < 2)
             {
-                updateLine.ModifySingleLine(inputFromGUI.ElementIndex);
+                updateLine.ModifySingleLine(inputWriteForm.ElementIndex);
             }
             else
             {
-                updateLine.ModifyMultiLine(inputFromGUI.ElementIndex);
+                updateLine.ModifyMultiLine(inputWriteForm.ElementIndex);
             }
 
             // Longest field indexes for column padding
@@ -63,7 +74,7 @@ namespace FileReadWrite
 
             // Write data to new file
             bool overwrite = true;
-            CreateTextFile objNewTxtFile = new CreateTextFile(inputFromGUI.NewFilePath, inputFromGUI.NewFileName);
+            CreateTextFile objNewTxtFile = new CreateTextFile(inputWriteForm.NewFilePath, inputWriteForm.NewFileName);
             objNewTxtFile.CreateFile(dataSet, overwrite);
 
             // Results
@@ -93,7 +104,7 @@ namespace FileReadWrite
             Console.Write(Environment.NewLine);
             Console.WriteLine(new String('-', rowDivider));
 
-            if (inputFromGUI.LineAmount < 2)
+            if (inputWriteForm.LineAmount < 2)
             {
                 counter = 0;
 
