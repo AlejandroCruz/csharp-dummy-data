@@ -7,10 +7,10 @@ namespace FileReadWrite
 {
     public partial class FileReadWriteGUI : Form
     {
+        private const string PATH_WATERMARK = "C:\\";
 
         private bool inputEditHeaders;
         private int lineAmount;
-        private string PATH_WATERMARK;
         private string inputElementIndex;
         private string inputLineAmount;
         private string fileSource;
@@ -31,7 +31,6 @@ namespace FileReadWrite
         public void CallbackGUI()
         {
             InitializeComponent();
-            PATH_WATERMARK = "C:\\";
             ShowDialog();
         }
 
@@ -51,8 +50,17 @@ namespace FileReadWrite
             else
             {
                 string[] tmp = ExtractFileNameAndDirPath(txtOldFilePath.Text);
-                oldFileName = tmp[0];
-                oldFilePath = tmp[1];
+
+                if (tmp[1].Equals("false"))
+                {
+                    txtOldFilePath.Text = PATH_WATERMARK;
+                    MessageBox.Show("Directory not found!", "Warning", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    oldFileName = tmp[0];
+                    oldFilePath = tmp[1];
+                }
             }
         }
         private void btnOldFileBrowse_Click(object sender, EventArgs e)
@@ -103,37 +111,20 @@ namespace FileReadWrite
 
         private void btnExeInputForm_Click(object sender, EventArgs e)
         {
-            string caption;
-            string showEditHeaders;
-            string showElementIndex;
-            string showLineAmount;
-            string showOldFilePath;
-            string showNewFilePath;
             List<string> elementList;
-            MessageBoxButtons buttons;
-            MessageBoxIcon icon;
             DialogResult result;
 
             inputEditHeaders = radioEditHeaders.Checked;
             inputLineAmount = string.IsNullOrEmpty(txtLineAmount.Text) ? "0" : txtLineAmount.Text;
             inputElementIndex = string.IsNullOrEmpty(txtElementIndex.Text) ? "0" : txtElementIndex.Text;
 
-            caption = "Confirm";
-            showEditHeaders = "Edit Headers: ";
-            showElementIndex = "Columns: ";
-            showLineAmount = "Total lines: ";
-            showOldFilePath = "File from: ";
-            showNewFilePath = "Save to: ";
-            buttons = MessageBoxButtons.OKCancel;
-            icon = MessageBoxIcon.Information;
-
             result = MessageBox.Show(
-                            showOldFilePath + oldFilePath + "\n" +
-                            showNewFilePath + newFilePath + "\n" +
-                            showEditHeaders + inputEditHeaders + "\n" +
-                            showLineAmount + inputLineAmount + "\n" +
-                            showElementIndex + inputElementIndex,
-                            caption, buttons, icon
+                            "File from: " + oldFilePath + "\n" +
+                            "Save to: " + newFilePath + "\n" +
+                            "Edit Headers: " + inputEditHeaders + "\n" +
+                            "Total lines: " + inputLineAmount + "\n" +
+                            "Columns: " + inputElementIndex,
+                            "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Information
                             );
 
             if (result == DialogResult.OK)
@@ -151,16 +142,20 @@ namespace FileReadWrite
             }
         }
 
-        private string[] ExtractFileNameAndDirPath(string sourcePath)
+        public string[] ExtractFileNameAndDirPath(string sourcePath)
         {
             int position = sourcePath.LastIndexOf('\\');
-            string[]  fileNameAndDirPath = new string[2];
+            string[] fileNameAndDirPath = new string[2];
 
             fileNameAndDirPath[0] = sourcePath.Substring(position + 1);
             fileNameAndDirPath[1] = sourcePath.Substring(0, (sourcePath.Length - fileNameAndDirPath[0].Length));
 
+            if (string.IsNullOrWhiteSpace(fileNameAndDirPath[1]))
+            {
+                fileNameAndDirPath[1] = "false";
+            }
+
             return fileNameAndDirPath;
         }
-
     }
 }

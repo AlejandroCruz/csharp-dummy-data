@@ -1,10 +1,4 @@
-﻿/* Console application: FileReadWrite
- * Description:
- *  Read tabular data from CSV file in specified dir. and display to console.
- *  Delete special characters and rewrite to new file.
- *  Optional delay functions @UXEnhancements are for end user experience.
- */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -64,7 +58,7 @@ namespace FileReadWrite
             longestColumnField = ProcessLines.CompareFields(updateHead, updateLine);
 
             // Concatenate Values
-            string[] dataSet = new string[] {};
+            string[] dataSet = new string[] { };
             dataSet = ProcessLines.AppendValues(updateHead, updateLine);
 
             // Write data to new file

@@ -49,7 +49,7 @@
             // 
             this.btnExeInputForm.CausesValidation = false;
             this.btnExeInputForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExeInputForm.Location = new System.Drawing.Point(149, 260);
+            this.btnExeInputForm.Location = new System.Drawing.Point(151, 248);
             this.btnExeInputForm.Name = "btnExeInputForm";
             this.btnExeInputForm.Size = new System.Drawing.Size(75, 23);
             this.btnExeInputForm.TabIndex = 5;
@@ -59,7 +59,7 @@
             // 
             // txtLineAmount
             // 
-            this.txtLineAmount.Location = new System.Drawing.Point(138, 147);
+            this.txtLineAmount.Location = new System.Drawing.Point(138, 145);
             this.txtLineAmount.Name = "txtLineAmount";
             this.txtLineAmount.Size = new System.Drawing.Size(100, 20);
             this.txtLineAmount.TabIndex = 1;
@@ -68,7 +68,7 @@
             // 
             this.lblLineAmount.AutoSize = true;
             this.lblLineAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLineAmount.Location = new System.Drawing.Point(67, 149);
+            this.lblLineAmount.Location = new System.Drawing.Point(60, 147);
             this.lblLineAmount.Name = "lblLineAmount";
             this.lblLineAmount.Size = new System.Drawing.Size(70, 16);
             this.lblLineAmount.TabIndex = 0;
@@ -78,7 +78,7 @@
             // 
             this.lblElementIndex.AutoSize = true;
             this.lblElementIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblElementIndex.Location = new System.Drawing.Point(67, 174);
+            this.lblElementIndex.Location = new System.Drawing.Point(60, 172);
             this.lblElementIndex.Name = "lblElementIndex";
             this.lblElementIndex.Size = new System.Drawing.Size(60, 16);
             this.lblElementIndex.TabIndex = 0;
@@ -86,7 +86,7 @@
             // 
             // txtElementIndex
             // 
-            this.txtElementIndex.Location = new System.Drawing.Point(138, 172);
+            this.txtElementIndex.Location = new System.Drawing.Point(138, 170);
             this.txtElementIndex.Name = "txtElementIndex";
             this.txtElementIndex.Size = new System.Drawing.Size(100, 20);
             this.txtElementIndex.TabIndex = 2;
@@ -97,7 +97,7 @@
             this.radioEditHeaders.AutoSize = true;
             this.radioEditHeaders.CausesValidation = false;
             this.radioEditHeaders.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioEditHeaders.Location = new System.Drawing.Point(70, 208);
+            this.radioEditHeaders.Location = new System.Drawing.Point(63, 196);
             this.radioEditHeaders.Name = "radioEditHeaders";
             this.radioEditHeaders.Size = new System.Drawing.Size(105, 20);
             this.radioEditHeaders.TabIndex = 0;
@@ -192,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 317);
+            this.ClientSize = new System.Drawing.Size(377, 300);
             this.Controls.Add(this.lblFilePathInfo);
             this.Controls.Add(this.btnNewFileBrowse);
             this.Controls.Add(this.txtNewFilePath);
