@@ -1,17 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FileReadWrite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileReadWrite.FileReadWriteGUI_Test
 {
     [TestClass()]
     public class ExtractFileNameAndDirPathTest
     {
-        string txtPath = "ale";
+        string txtPath = "valid";
         string expected = "false";
         string[] actual = new string[]{};
 
