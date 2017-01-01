@@ -54,6 +54,7 @@ namespace FileReadWrite
             {
                 updateHead.ModifySingleLine(inputWriteForm.ElementIndex);
             }
+
             // Row edit
             UpdateLine updateLine = new UpdateLine(recordList, inputWriteForm.LineAmount);
             if (inputWriteForm.LineAmount < 2)

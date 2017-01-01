@@ -18,7 +18,6 @@ namespace FileReadWrite
         public int LineAmount { get { return lineAmount; } }
         public string NewFileName { get { return newFileName; } }
         public string NewFilePath { get { return newFilePath; } }
-
         public List<int> ElementIndex { get { return elementIndex; } }
 
         public void CallbackGUI()
@@ -34,6 +33,7 @@ namespace FileReadWrite
                 txtNewFilePath.Clear();
             }
         }
+
         private void txtNewFilePath_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNewFilePath.Text))
@@ -47,6 +47,7 @@ namespace FileReadWrite
                 newFilePath = tmp[1];
             }
         }
+
         private void btnNewFileBrowse_Click(object sender, EventArgs e)
         {
             DialogResult openFileResult = saveFileDialog1.ShowDialog();

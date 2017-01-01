@@ -24,6 +24,7 @@ namespace FileReadWrite
                 txtOldFilePath.Clear();
             }
         }
+
         private void txtOldFilePath_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtOldFilePath.Text))
@@ -37,6 +38,7 @@ namespace FileReadWrite
                 oldFilePath = tmp[1];
             }
         }
+
         private void btnOldFileBrowse_Click(object sender, EventArgs e)
         {
             DialogResult openFileResult = openFileDialog1.ShowDialog();
@@ -51,5 +53,6 @@ namespace FileReadWrite
                 Close();
             }
         }
+
     }
 }

@@ -63,7 +63,7 @@ namespace FileReadWrite
             }
             catch(ArgumentOutOfRangeException e)
             {
-                Console.WriteLine("Array element out of range surfaced at: #{0}", listIndex);
+                Console.WriteLine("Array element out of range with index #: {0}", listIndex);
                 Console.WriteLine("\n>>> System message:\n" + e);
                 Console.WriteLine("\n>>> Press any key to exit.");
                 Console.ReadKey();
