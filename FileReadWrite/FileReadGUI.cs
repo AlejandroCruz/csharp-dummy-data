@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace FileReadWrite
 {
-    public partial class FileReadGUI : FileWriteGUI
+    partial class FileReadGUI : FileReadWriteGUI
     {
         private string oldFileName;
         private string oldFilePath;

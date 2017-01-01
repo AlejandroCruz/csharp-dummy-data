@@ -10,10 +10,11 @@ namespace FileReadWrite
         public static void Main(string[] args)
         {
             // Console splash
-            UXEnhancements delay = new UXEnhancements(500);
+            Console.SetWindowSize(145, 30);
+            Console.SetWindowPosition(0, 0);
             Console.WriteLine("Console program for producing generic tabular data.");
-            Console.WriteLine("Select file to read from or create new:");
-            Console.Write("\n>>> Press any key to continue... ");
+            Console.WriteLine("\nSelect file to read from or create new:");
+            Console.Write(">>> Press any key to continue...");
             Console.ReadKey(true);
 
             // GUI read data
@@ -78,7 +79,6 @@ namespace FileReadWrite
             objNewTxtFile.CreateFile(dataSet, overwrite);
 
             // Results
-            delay.addDelay();
             Console.WriteLine("\n>>> Begin unique tabular data:\n");
             int counter = 0;
             int totalStrLength = 0;

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace FileReadWrite
 {
-    public partial class FileWriteGUI : Form
+    partial class FileWriteGUI : FileReadWriteGUI
     {
         private bool inputEditHeaders;
         private int lineAmount;
@@ -13,9 +13,6 @@ namespace FileReadWrite
         private string newFileName;
         private string newFilePath;
         private List<int> elementIndex;
-
-        protected const string PATH_WATERMARK = "C:\\";
-        protected string fileSource;
 
         public bool InputEditHeaders { get { return inputEditHeaders; } }
         public int LineAmount { get { return lineAmount; } }
@@ -69,7 +66,6 @@ namespace FileReadWrite
             string showEditHeaders;
             string showElementIndex;
             string showLineAmount;
-//            string showOldFilePath;
             string showNewFilePath;
             List<string> elementList;
             MessageBoxButtons buttons;
@@ -84,7 +80,6 @@ namespace FileReadWrite
             showEditHeaders = "Edit Headers: ";
             showElementIndex = "Columns: ";
             showLineAmount = "Total lines: ";
-//            showOldFilePath = "File from: ";
             showNewFilePath = "Save to: ";
             buttons = MessageBoxButtons.OKCancel;
             icon = MessageBoxIcon.Information;
@@ -112,20 +107,9 @@ namespace FileReadWrite
             }
         }
 
-        protected string[] ExtractFileNameAndDirPath(string sourcePath)
-        {
-            int position = sourcePath.LastIndexOf('\\');
-            string[] fileNameAndDirPath = new string[2];
-
-            fileNameAndDirPath[0] = sourcePath.Substring(position + 1);
-            fileNameAndDirPath[1] = sourcePath.Substring(0, (sourcePath.Length - fileNameAndDirPath[0].Length));
-
-            return fileNameAndDirPath;
-        }
-
         private void txtLineAmount_TextChanged(object sender, EventArgs e)
         {
-
+            // Validate only numbers
         }
     }
 }
