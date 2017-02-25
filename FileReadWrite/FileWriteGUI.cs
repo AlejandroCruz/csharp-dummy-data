@@ -63,29 +63,20 @@ namespace FileReadWrite
 
         private void btnExeInputForm_Click(object sender, EventArgs e)
         {
-            string caption;
-            string showEditHeaders;
-            string showElementIndex;
-            string showLineAmount;
-            string showNewFilePath;
+            string caption = "Confirm";
+            string showEditHeaders = "Edit Headers: ";
+            string showElementIndex = "Columns: ";
+            string showLineAmount = "Total lines: ";
+            string showNewFilePath = "Save to: ";
+            var buttons = MessageBoxButtons.OKCancel;
+            var icon = MessageBoxIcon.Information;
             List<string> elementList;
-            MessageBoxButtons buttons;
-            MessageBoxIcon icon;
-            DialogResult result;
 
             inputEditHeaders = radioEditHeaders.Checked;
             inputLineAmount = string.IsNullOrEmpty(txtLineAmount.Text) ? "0" : txtLineAmount.Text;
             inputElementIndex = string.IsNullOrEmpty(txtElementIndex.Text) ? "0" : txtElementIndex.Text;
 
-            caption = "Confirm";
-            showEditHeaders = "Edit Headers: ";
-            showElementIndex = "Columns: ";
-            showLineAmount = "Total lines: ";
-            showNewFilePath = "Save to: ";
-            buttons = MessageBoxButtons.OKCancel;
-            icon = MessageBoxIcon.Information;
-
-            result = MessageBox.Show(
+            DialogResult result = MessageBox.Show(
                             showNewFilePath + newFilePath + "\n" +
                             showEditHeaders + inputEditHeaders + "\n" +
                             showLineAmount + inputLineAmount + "\n" +
